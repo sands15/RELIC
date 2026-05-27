@@ -23,7 +23,7 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, 제가 AI와 개�
 ## 2. Education
 
 - **School:** 조선대학교
-- **Department:** Artificial Intelligence Engineering
+- **Department:** 인공지능공학과
 - **Year:** 2학년 재학중
 - **Period:** 추후 업데이트
 - **Relevant Coursework:** Machine Learning, Deep Learning, Data Structures, Web Programming, Database, Software Engineering
