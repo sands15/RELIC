@@ -1,5 +1,7 @@
 # RELIC
 
+**손정훈**
+
 RELIC은 결과만 모아두는 포트폴리오가 아니라, 제가 AI와 개발을 공부하면서 무엇을 만들었고, 어디서 막혔고, 다음에 무엇을 배울지 기록하는 성장일기입니다.
 
 지금은 음성 AI, LLM application, AI agent를 중심으로 공부하고 있습니다. 빠르게 답하는 프로그램보다 사용자가 실제로 쓰고 싶어지는 AI를 만드는 데 관심이 있고, 음성 입력, 언어 모델, 음성 출력, 행동 실행이 하나의 흐름으로 이어지는 시스템을 직접 실험하고 있습니다.
@@ -20,9 +22,9 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, 제가 AI와 개�
 
 ## 2. Education
 
-- **School:** 추후 업데이트
+- **School:** 조선대학교
 - **Department:** Artificial Intelligence Engineering
-- **Year:** 추후 업데이트
+- **Year:** 2학년 재학중
 - **Period:** 추후 업데이트
 - **Relevant Coursework:** Machine Learning, Deep Learning, Data Structures, Web Programming, Database, Software Engineering
 
@@ -175,7 +177,7 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, 제가 AI와 개�
 
 ## 7. Contact
 
-- **Email:** 추후 업데이트
+- **Email:** sands12@naver.com
 - **GitHub:** <https://github.com/sands15>
 - **LinkedIn:** Optional
 - **Blog / Notion:** Optional
