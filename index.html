@@ -14,6 +14,31 @@
       href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      window.addEventListener("beforeunload", () => {
+        window.scrollTo(0, 0);
+      });
+
+      const keepPageAtTopOnEntry = (event) => {
+        const [navigation] = performance.getEntriesByType("navigation");
+        const shouldResetScroll =
+          event?.persisted || !location.hash || navigation?.type === "reload";
+
+        if (shouldResetScroll) {
+          const resetScroll = () => window.scrollTo(0, 0);
+          requestAnimationFrame(resetScroll);
+          setTimeout(resetScroll, 0);
+          setTimeout(resetScroll, 120);
+        }
+      };
+
+      window.addEventListener("pageshow", keepPageAtTopOnEntry);
+      window.addEventListener("load", keepPageAtTopOnEntry);
+    </script>
     <style>
       :root {
         --navy: #12104e;
@@ -26,6 +51,7 @@
         --teal: #30a8a5;
         --coral: #e9695b;
         --shadow: 0 24px 70px rgba(18, 16, 78, 0.14);
+        --relic-visual-y: clamp(10px, 1.4vh, 14px);
       }
 
       * {
@@ -44,15 +70,94 @@
         line-height: 1.75;
       }
 
+      .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        overflow: hidden;
+        padding: 80px 24px 70px;
+        background:
+          linear-gradient(135deg, rgba(237, 179, 82, 0.12), transparent 36%),
+          var(--navy);
+        color: var(--gold);
+        text-align: center;
+        pointer-events: none;
+        animation: intro-exit 0.72s ease 2.48s forwards;
+      }
+
+      .intro__inner {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .intro__word {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(100% - 40px, 920px);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(4rem, 13vw, 9.5rem);
+        font-weight: 400;
+        line-height: 0.95;
+        transform: translate(-50%, calc(-50% + var(--relic-visual-y)));
+      }
+
+      .intro__word span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(42px) scale(0.92);
+        animation: intro-letter 0.58s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      .intro__word span:nth-child(1) {
+        animation-delay: 0.12s;
+      }
+
+      .intro__word span:nth-child(2) {
+        animation-delay: 0.28s;
+      }
+
+      .intro__word span:nth-child(3) {
+        animation-delay: 0.44s;
+      }
+
+      .intro__word span:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+
+      .intro__word span:nth-child(5) {
+        animation-delay: 0.76s;
+      }
+
+      .intro__label {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + var(--relic-visual-y) + clamp(84px, 10vw, 122px));
+        width: min(100% - 40px, 760px);
+        margin: 0;
+        color: rgba(255, 255, 255, 0.74);
+        font-size: clamp(0.82rem, 2.1vw, 1rem);
+        font-weight: 900;
+        letter-spacing: 0;
+        opacity: 0;
+        transform: translate(-50%, 12px);
+        animation: intro-label 0.5s ease 1.08s forwards;
+      }
+
       a {
         color: inherit;
         text-decoration: none;
       }
 
       .hero {
-        min-height: 48vh;
-        display: grid;
-        place-items: center;
+        min-height: 100vh;
+        min-height: 100svh;
+        position: relative;
         padding: 80px 24px 70px;
         background:
           linear-gradient(135deg, rgba(237, 179, 82, 0.12), transparent 36%),
@@ -61,20 +166,76 @@
         text-align: center;
       }
 
+      .hero__inner {
+        position: absolute;
+        inset: 0;
+      }
+
       .hero__mark {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(100% - 40px, 920px);
         color: var(--gold);
         font-family: "Black Han Sans", Impact, sans-serif;
         font-size: clamp(4rem, 13vw, 9.5rem);
         font-weight: 400;
         line-height: 0.95;
         margin: 0;
+        transform: translate(-50%, calc(-50% + var(--relic-visual-y)));
       }
 
       .hero__sub {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + var(--relic-visual-y) + clamp(84px, 10vw, 122px));
+        width: min(100% - 40px, 760px);
         max-width: 760px;
-        margin: 26px auto 0;
+        margin: 0;
         font-size: clamp(1rem, 2.3vw, 1.25rem);
         color: rgba(255, 255, 255, 0.84);
+        transform: translateX(-50%);
+        animation: hero-copy-in 0.55s ease 2.72s both;
+      }
+
+      @keyframes intro-letter {
+        0% {
+          opacity: 0;
+          transform: translateY(42px) scale(0.92);
+        }
+        70% {
+          opacity: 1;
+          transform: translateY(-4px) scale(1.02);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes intro-label {
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      @keyframes intro-exit {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      @keyframes hero-copy-in {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 18px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
       }
 
       .nav {
@@ -363,8 +524,8 @@
 
       .skills-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 34px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(28px, 5vw, 82px);
         margin-left: clamp(0px, 8vw, 96px);
       }
 
@@ -386,6 +547,18 @@
         gap: 14px;
         min-height: 62px;
         margin-bottom: 12px;
+      }
+
+      .skill-name {
+        display: grid;
+        gap: 2px;
+        line-height: 1.35;
+      }
+
+      .skill-level {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
       }
 
       .skill-icon {
@@ -470,6 +643,47 @@
         color: #34343f;
       }
 
+      .project-detail {
+        display: grid;
+        gap: 13px;
+        margin: 24px 0 0;
+      }
+
+      .project-detail__item {
+        display: grid;
+        grid-template-columns: 104px minmax(0, 1fr);
+        gap: 18px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid rgba(18, 16, 78, 0.12);
+      }
+
+      .project-detail__item:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .project-detail__label {
+        color: var(--gold);
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .project-detail p {
+        margin: 0;
+        color: #34343f;
+        font-weight: 700;
+      }
+
+      .project-detail ul {
+        display: grid;
+        gap: 5px;
+        margin: 0;
+        padding-left: 18px;
+        color: #34343f;
+        font-weight: 700;
+      }
+
       .project-points {
         display: grid;
         gap: 9px;
@@ -497,47 +711,61 @@
 
       .metrics {
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 26px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin-top: 10px;
+        border: 1px solid rgba(18, 16, 78, 0.14);
+        border-top: 2px solid var(--navy);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .metric-title {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
       }
 
       .metric {
-        min-height: 92px;
-        padding: 14px 12px;
-        border-top: 3px solid var(--navy);
-        background: white;
-        box-shadow: 0 10px 24px rgba(18, 16, 78, 0.08);
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 5px;
+        align-items: start;
+        min-height: 0;
+        padding: 14px 16px;
+        border-left: 1px solid rgba(18, 16, 78, 0.1);
+      }
+
+      .metric:first-child {
+        border-left: 0;
       }
 
       .metric b {
-        display: block;
         color: var(--gold);
-        font-size: 1.35rem;
+        font-size: 1.26rem;
         line-height: 1.1;
+        white-space: nowrap;
       }
 
       .metric span {
-        display: block;
-        margin-top: 7px;
         color: var(--navy);
-        font-size: 0.78rem;
+        font-size: 0.86rem;
         font-weight: 900;
         line-height: 1.3;
       }
 
       .metric small {
-        display: block;
-        margin-top: 4px;
         color: var(--muted);
-        font-size: 0.72rem;
+        font-size: 0.78rem;
         line-height: 1.3;
       }
 
       .metric-note {
-        margin: 10px 0 0;
+        margin: 8px 0 0;
         color: var(--muted);
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         line-height: 1.5;
       }
 
@@ -755,6 +983,10 @@
         color: #34343f;
       }
 
+      .content-card p + ul {
+        margin-top: 10px;
+      }
+
       .content-card li + li {
         margin-top: 6px;
       }
@@ -818,7 +1050,7 @@
         }
 
         .metrics {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .resume-band {
@@ -827,9 +1059,25 @@
       }
 
       @media (max-width: 620px) {
-        .hero {
-          min-height: 44vh;
+        .intro {
           padding: 62px 20px 54px;
+        }
+
+        .intro__word {
+          font-size: clamp(4rem, 13vw, 9.5rem);
+          width: min(100% - 28px, 920px);
+        }
+
+        .hero {
+          min-height: 100vh;
+          min-height: 100svh;
+          padding: 62px 20px 54px;
+        }
+
+        .hero__mark,
+        .hero__sub,
+        .intro__label {
+          width: min(100% - 28px, 920px);
         }
 
         .nav__inner,
@@ -858,6 +1106,11 @@
           margin-top: 6px;
         }
 
+        .project-detail__item {
+          grid-template-columns: 1fr;
+          gap: 5px;
+        }
+
         .browser-card {
           box-shadow: 10px 10px 0 var(--gold);
         }
@@ -874,10 +1127,45 @@
         .metrics {
           grid-template-columns: 1fr;
         }
+
+        .metric {
+          grid-template-columns: 1fr;
+          gap: 5px;
+          border-left: 0;
+          border-top: 1px solid rgba(18, 16, 78, 0.1);
+        }
+
+        .metric:first-child {
+          border-top: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .intro {
+          display: none;
+        }
+
+        .hero__mark,
+        .hero__sub {
+          animation: none;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="intro" aria-hidden="true">
+      <div class="intro__inner">
+        <div class="intro__word">
+          <span>R</span>
+          <span>E</span>
+          <span>L</span>
+          <span>I</span>
+          <span>C</span>
+        </div>
+        <p class="intro__label">SON JUNGHOON PORTFOLIO</p>
+      </div>
+    </div>
+
     <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
       <symbol id="icon-llm" viewBox="0 0 24 24">
         <path d="M12 3a7 7 0 0 0-7 7c0 3.1 2 5.7 4.8 6.6V21h4.4v-4.4A7 7 0 0 0 12 3Z" />
@@ -945,11 +1233,10 @@
     </svg>
 
     <header class="hero" id="top">
-      <div>
+      <div class="hero__inner">
         <h1 class="hero__mark">RELIC</h1>
         <p class="hero__sub">
-          결과만 모아두는 포트폴리오가 아니라, AI와 개발을 공부하며 만든 것과
-          막힌 지점, 다음 목표를 함께 기록하는 성장일기입니다.
+          아이디어를 실제로 동작하는 AI 서비스로 만드는 과정을 기록합니다.
         </p>
       </div>
     </header>
@@ -988,10 +1275,10 @@
           </div>
 
           <div class="profile__copy">
-            <h2>사용자가 실제로 쓰고 싶어지는 AI를 만드는 개발자</h2>
+            <h2>아이디어를 작동하는 AI 시스템으로 구현하는 개발자</h2>
             <p>
-              저는 AI 모델 자체보다, 모델이 실제 사용자의 입력을 받고 응답하고
-              행동하는 전체 시스템에 관심이 있습니다.
+              입력, 판단, 응답, 실행이 이어지는 흐름을 직접 연결하며
+              AI 시스템을 이해하고 있습니다.
             </p>
             <p>
               현재는 LLM application, 음성 AI, AI agent, 웹 인터페이스를 중심으로
@@ -1000,7 +1287,7 @@
             <ul class="info-list">
               <li><span class="dot">01</span><span><b>전공</b><br />인공지능공학</span></li>
               <li><span class="dot">02</span><span><b>관심 분야</b><br />Voice AI, LLM Application, AI Agent</span></li>
-              <li><span class="dot">03</span><span><b>진로 목표</b><br />실제 사용자가 쓸 수 있는 AI 서비스를 만드는 개발자</span></li>
+              <li><span class="dot">03</span><span><b>진로 목표</b><br />아이디어를 작동하는 AI 시스템으로 구현하는 개발자</span></li>
               <li><span class="dot">04</span><span><b>현재 학습 중인 기술</b><br />Python, JavaScript, STT/TTS Pipeline, LLM Routing</span></li>
               <li><span class="dot">05</span><span><b>AI 분야 관심 주제</b><br />음성 인터페이스, 캐릭터형 AI, autonomous agent</span></li>
             </ul>
@@ -1023,7 +1310,7 @@
               <dt>Year</dt>
               <dd>2nd year</dd>
               <dt>Period</dt>
-              <dd>2025.03 - Present</dd>
+              <dd>2023.03 - Present</dd>
             </dl>
           </div>
 
@@ -1047,30 +1334,36 @@
 
         <div class="skills-grid">
           <div class="skill-column">
-            <h3>Familiar</h3>
+            <h3>Programming</h3>
             <ul>
-              <li><span class="skill-icon teal"><svg><use href="#icon-llm" /></svg></span>LLM Application</li>
-              <li><span class="skill-icon gold"><svg><use href="#icon-audio" /></svg></span>STT / TTS Pipeline</li>
-              <li><span class="skill-icon coral"><svg><use href="#icon-agent" /></svg></span>AI Agent</li>
-              <li><span class="skill-icon"><svg><use href="#icon-git" /></svg></span>Git / GitHub</li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-python" /></svg></span><span class="skill-name">Python<small class="skill-level">Intermediate</small></span></li>
+              <li><span class="skill-icon teal"><svg><use href="#icon-js" /></svg></span><span class="skill-name">JavaScript<small class="skill-level">Basic</small></span></li>
+              <li><span class="skill-icon coral"><svg><use href="#icon-cpp" /></svg></span><span class="skill-name">C / C++<small class="skill-level">Basic</small></span></li>
             </ul>
           </div>
 
           <div class="skill-column">
-            <h3>Tried</h3>
+            <h3>AI / LLM</h3>
             <ul>
-              <li><span class="skill-icon teal"><svg><use href="#icon-js" /></svg></span>JavaScript</li>
-              <li><span class="skill-icon gold"><svg><use href="#icon-html" /></svg></span>HTML</li>
-              <li><span class="skill-icon coral"><svg><use href="#icon-css" /></svg></span>CSS</li>
-              <li><span class="skill-icon"><svg><use href="#icon-docker" /></svg></span>Docker</li>
+              <li><span class="skill-icon teal"><svg><use href="#icon-llm" /></svg></span><span class="skill-name">LLM Application<small class="skill-level">Basic - Intermediate</small></span></li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-audio" /></svg></span><span class="skill-name">STT / TTS Pipeline<small class="skill-level">Basic - Intermediate</small></span></li>
+              <li><span class="skill-icon coral"><svg><use href="#icon-agent" /></svg></span><span class="skill-name">AI Agent Structure<small class="skill-level">Basic</small></span></li>
             </ul>
           </div>
 
           <div class="skill-column">
-            <h3>Language</h3>
+            <h3>Web</h3>
             <ul>
-              <li><span class="skill-icon coral"><svg><use href="#icon-cpp" /></svg></span>C / C++</li>
-              <li><span class="skill-icon gold"><svg><use href="#icon-python" /></svg></span>Python</li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-html" /></svg></span><span class="skill-name">HTML<small class="skill-level">Basic</small></span></li>
+              <li><span class="skill-icon coral"><svg><use href="#icon-css" /></svg></span><span class="skill-name">CSS<small class="skill-level">Basic</small></span></li>
+            </ul>
+          </div>
+
+          <div class="skill-column">
+            <h3>Tools</h3>
+            <ul>
+              <li><span class="skill-icon"><svg><use href="#icon-git" /></svg></span><span class="skill-name">Git / GitHub<small class="skill-level">Basic</small></span></li>
+              <li><span class="skill-icon"><svg><use href="#icon-docker" /></svg></span><span class="skill-name">Docker<small class="skill-level">Basic</small></span></li>
             </ul>
           </div>
         </div>
@@ -1105,11 +1398,29 @@
                 <h3>Evelyn Voice AI Assistant</h3>
                 <span>2026.04 - Present</span>
               </div>
-              <p>
-                Discord 기반 한국어 음성 AI 캐릭터를 목표로 한 대표 프로젝트입니다.
-                STT, LLM, TTS, playback, memory, agent 구조를 연결해 실시간 대화
-                시스템을 실험하고 있습니다.
-              </p>
+              <div class="project-detail">
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Summary</b>
+                  <p>Discord 기반 한국어 음성 AI 캐릭터 프로젝트입니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Role</b>
+                  <p>STT, LLM, TTS, memory 흐름을 연결하고 개선했습니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Key Features</b>
+                  <ul>
+                    <li>실시간 음성 입출력</li>
+                    <li>LLM routing과 캐릭터 응답</li>
+                    <li>turn_trace 기반 지연 로그 점검</li>
+                  </ul>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Results</b>
+                  <p>음성 턴 43개로 지연 구간과 개선 기준선을 정리했습니다.</p>
+                </div>
+              </div>
+              <p class="metric-title">Performance Baseline</p>
               <div class="metrics" aria-label="Evelyn latency metrics">
                 <div class="metric">
                   <b>1.5s</b>
@@ -1128,16 +1439,13 @@
                 </div>
               </div>
               <p class="metric-note">
-                로컬 turn_trace 로그의 voice turn 43개 기준입니다. 수치는 각 단계의
-                독립 처리 시간이 아니라 음성 턴 시작 시점부터의 누적 지연입니다.
+                로컬 turn_trace voice turn 43개 기준이며, 수치는 음성 턴 시작 시점부터의 누적 지연입니다.
               </p>
               <div class="tag-row">
                 <span class="tag">Python</span>
-                <span class="tag">JavaScript</span>
                 <span class="tag">Discord Bot</span>
                 <span class="tag">STT / TTS</span>
                 <span class="tag">LLM Routing</span>
-                <span class="tag">AI Agent</span>
               </div>
               <div class="project__links">
                 <a href="https://github.com/sands15/Evelyn_Bot">GitHub</a>
@@ -1154,8 +1462,8 @@
                   <span class="browser-card__dot"></span>
                 </div>
                 <div class="browser-card__screen">
-                  <span class="screen-kicker">PORTFOLIO WEBSITE</span>
-                  <p class="screen-title">RELIC</p>
+                  <span class="screen-kicker">LLM MEMORY</span>
+                  <p class="screen-title">OBSIDIAN</p>
                   <div class="screen-lines">
                     <span></span><span></span><span></span>
                   </div>
@@ -1164,22 +1472,36 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>RELIC Portfolio Website</h3>
-                <span>2026.05 - Present</span>
+                <h3>Obsidian LLM Memory</h3>
+                <span>2026.06 - Present</span>
               </div>
-              <p>
-                AI와 개발을 공부하며 만든 것, 막힌 지점, 다음 목표를 정리하는
-                개인 포트폴리오 웹사이트입니다.
-              </p>
-              <p>
-                GitHub Pages에서 정적 페이지로 동작하도록 구성했고, 프로젝트 설명과
-                성능 지표, 성장 기록을 한 화면에서 읽을 수 있게 정리했습니다.
-              </p>
+              <div class="project-detail">
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Summary</b>
+                  <p>LLM 기억력을 높이기 위한 Obsidian식 노트 구조 실험입니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Role</b>
+                  <p>기억을 노트, 링크, 요약 단위로 나누는 구조를 설계했습니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Key Features</b>
+                  <ul>
+                    <li>프로젝트와 작업 기록 분리</li>
+                    <li>관련 기억 링크 연결</li>
+                    <li>장기 기억과 일일 기록 분리</li>
+                  </ul>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Results</b>
+                  <p>반복 작업에서 필요한 맥락을 빠르게 찾는 방향을 정리했습니다.</p>
+                </div>
+              </div>
               <div class="tag-row">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">GitHub Pages</span>
-                <span class="tag">Portfolio</span>
+                <span class="tag">Obsidian</span>
+                <span class="tag">LLM Memory</span>
+                <span class="tag">Markdown</span>
+                <span class="tag">Knowledge Base</span>
               </div>
             </div>
           </article>
@@ -1203,17 +1525,31 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>Voice AI Pipeline Experiment</h3>
+                <h3>Voice AI Pipeline</h3>
                 <span>2026.05 - Present</span>
               </div>
-              <p>
-                STT, LLM routing, TTS, playback을 하나의 흐름으로 연결하고, 각 단계의
-                지연과 실패 지점을 로그로 남기는 음성 AI 파이프라인 실험입니다.
-              </p>
-              <p>
-                고정 응답은 cached audio fast path로 처리하고, 일반 응답은 문장 단위
-                TTS와 playback 흐름을 조정해 체감 지연을 줄이는 방향으로 개선하고 있습니다.
-              </p>
+              <div class="project-detail">
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Summary</b>
+                  <p>STT, LLM routing, TTS, playback을 연결한 음성 파이프라인입니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Role</b>
+                  <p>단계별 지연과 실패 지점을 기록하고 개선 방향을 점검했습니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Key Features</b>
+                  <ul>
+                    <li>음성 입력부터 재생까지 연결</li>
+                    <li>단계별 latency log 기록</li>
+                    <li>cached audio와 문장 단위 TTS</li>
+                  </ul>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Results</b>
+                  <p>체감 지연을 나누어 보고 우선 개선 구간을 정리했습니다.</p>
+                </div>
+              </div>
               <div class="tag-row">
                 <span class="tag">STT</span>
                 <span class="tag">LLM Routing</span>
@@ -1243,17 +1579,31 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>Minecraft AI Agent Study</h3>
+                <h3>Minecraft AI Agent</h3>
                 <span>2026.05 - Present</span>
               </div>
-              <p>
-                Minecraft 환경에서 목표를 이해하고 행동을 실행하는 AI agent 구조를
-                이블린 프로젝트와 연결하는 실험입니다.
-              </p>
-              <p>
-                inventory, recipe, action result 같은 상태 정보를 기반으로 계획을
-                세우고, 실행 결과를 다시 다음 판단에 연결하는 구조를 정리하고 있습니다.
-              </p>
+              <div class="project-detail">
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Summary</b>
+                  <p>Minecraft 환경에서 AI agent 구조를 학습한 프로젝트입니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Role</b>
+                  <p>상태 정보를 바탕으로 계획과 실행 흐름을 정리했습니다.</p>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Key Features</b>
+                  <ul>
+                    <li>목표를 행동 단위로 분해</li>
+                    <li>환경 상태 기반 판단</li>
+                    <li>실행 결과 feedback 연결</li>
+                  </ul>
+                </div>
+                <div class="project-detail__item">
+                  <b class="project-detail__label">Results</b>
+                  <p>AI agent의 계획, 실행, 회복 구조를 실제 예시로 이해했습니다.</p>
+                </div>
+              </div>
               <div class="tag-row">
                 <span class="tag">Minecraft</span>
                 <span class="tag">Voyager</span>
@@ -1274,19 +1624,35 @@
         <div class="content-grid">
           <div class="content-card">
             <h3>Personal AI Bot Development</h3>
-            <p>Evelyn 음성 AI 비서 개발과 대화 흐름 개선을 중심으로 실험하고 있습니다.</p>
+            <p>Evelyn 음성 AI 비서의 대화 흐름을 직접 설계하고 개선했습니다.</p>
+            <ul>
+              <li>음성 입력, LLM 응답, TTS 출력 흐름 연결</li>
+              <li>캐릭터 응답과 memory 흐름 점검</li>
+            </ul>
           </div>
           <div class="content-card">
-            <h3>Voice AI Pipeline Experiment</h3>
-            <p>STT, LLM routing, TTS, playback latency를 하나의 파이프라인으로 연결해 점검합니다.</p>
+            <h3>Voice AI Pipeline</h3>
+            <p>음성 대화의 지연 구간을 나누어 측정하고 개선 방향을 정리했습니다.</p>
+            <ul>
+              <li>STT, LLM routing, TTS, playback 단계 분리</li>
+              <li>turn_trace 기반 latency baseline 정리</li>
+            </ul>
           </div>
           <div class="content-card">
-            <h3>AI Agent Structure Experiment</h3>
-            <p>planning, action execution, recovery 흐름을 이블린의 agent 구조 확장 방향으로 실험합니다.</p>
+            <h3>AI Agent Structure</h3>
+            <p>목표를 행동으로 바꾸는 agent 흐름을 프로젝트에 연결해 실험했습니다.</p>
+            <ul>
+              <li>planning, action, recovery 구조 학습</li>
+              <li>Minecraft agent 사례를 Evelyn 확장 방향과 연결</li>
+            </ul>
           </div>
           <div class="content-card">
             <h3>Technical Documentation</h3>
-            <p>프로젝트 구조, 실험 결과, 개선 방향을 README와 문서로 정리합니다.</p>
+            <p>실험 결과와 개선 기준을 문서화해 다음 작업으로 이어지게 정리했습니다.</p>
+            <ul>
+              <li>README와 portfolio 문서 구조 관리</li>
+              <li>성능 수치와 프로젝트 설명 정리</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -1313,7 +1679,7 @@
         <div class="content-grid">
           <div class="content-card">
             <h3>AI Service Developer</h3>
-            <p>사용자가 실제로 쓸 수 있는 AI 서비스를 설계하고 구현하는 개발자를 목표로 합니다.</p>
+            <p>아이디어를 작동하는 AI 시스템으로 구현하는 개발자를 목표로 합니다.</p>
           </div>
           <div class="content-card">
             <h3>Voice AI / Conversational AI</h3>
@@ -1341,9 +1707,9 @@
             <b>Evelyn Repository</b>
             <small>github.com/sands15/Evelyn_Bot</small>
           </a>
-          <a href="https://github.com/sands15/RELIC">
-            <b>RELIC Repository</b>
-            <small>github.com/sands15/RELIC</small>
+          <a href="https://github.com/sands15">
+            <b>GitHub Profile</b>
+            <small>github.com/sands15</small>
           </a>
           <a href="./resume.pdf">
             <b>Resume PDF</b>

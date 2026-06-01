@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>손정훈 Resume</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      :root {
+        --navy: #12104e;
+        --gold: #d7972c;
+        --ink: #191921;
+        --muted: #666678;
+        --line: #dadae6;
+        --paper: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.52;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+
+      ul {
+        padding-left: 16px;
+      }
+
+      li + li {
+        margin-top: 2px;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: end;
+        padding-bottom: 14px;
+        border-bottom: 3px solid var(--navy);
+      }
+
+      h1 {
+        color: var(--navy);
+        font-size: 25pt;
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .headline {
+        margin-top: 7px;
+        color: var(--ink);
+        font-size: 11.5pt;
+        font-weight: 800;
+      }
+
+      .contacts {
+        display: grid;
+        gap: 3px;
+        color: var(--muted);
+        font-size: 8.8pt;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .summary {
+        margin-top: 12px;
+        color: #30303a;
+        font-size: 10.4pt;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1.35fr;
+        gap: 18px;
+        margin-top: 15px;
+      }
+
+      .section + .section {
+        margin-top: 15px;
+      }
+
+      h2 {
+        margin-bottom: 7px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--line);
+        color: var(--navy);
+        font-size: 11pt;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      h3 {
+        color: var(--navy);
+        font-size: 10.2pt;
+        line-height: 1.35;
+      }
+
+      .meta {
+        color: var(--gold);
+        font-size: 8.6pt;
+        font-weight: 800;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .item + .item {
+        margin-top: 9px;
+      }
+
+      .skill-group + .skill-group {
+        margin-top: 8px;
+      }
+
+      .skill-group b {
+        color: var(--navy);
+      }
+
+      .skill-list {
+        display: grid;
+        gap: 2px;
+        margin-top: 3px;
+      }
+
+      .project {
+        padding-bottom: 9px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .project:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .project-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .project p {
+        margin-top: 3px;
+      }
+
+      .project ul {
+        margin-top: 4px;
+      }
+
+      .tags {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 8.6pt;
+        font-weight: 700;
+      }
+
+      .experience li {
+        margin-top: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div>
+          <h1>손정훈</h1>
+          <p class="headline">아이디어를 작동하는 AI 시스템으로 구현하는 개발자</p>
+        </div>
+        <div class="contacts">
+          <span>sands12@naver.com</span>
+          <span>github.com/sands15</span>
+          <span>github.com/sands15/RELIC</span>
+        </div>
+      </header>
+
+      <p class="summary">
+        AI 모델 자체보다 입력, 판단, 응답, 실행이 이어지는 전체 시스템에 관심이 있습니다.
+        Voice AI, LLM application, AI agent 흐름을 직접 연결하며 실제로 동작하는 AI 서비스를 만드는 방향으로 학습하고 있습니다.
+      </p>
+
+      <div class="layout">
+        <aside>
+          <section class="section">
+            <h2>Education</h2>
+            <h3>Chosun University</h3>
+            <p>Artificial Intelligence Engineering</p>
+            <p class="muted">2nd year · 2023.03 - Present</p>
+            <p class="meta">Relevant Coursework</p>
+            <p>Data Structures, Web Programming, C/C++ Programming, Artificial Intelligence Basics</p>
+          </section>
+
+          <section class="section">
+            <h2>Skills</h2>
+            <div class="skill-group">
+              <b>Programming</b>
+              <div class="skill-list">
+                <span>Python · Intermediate</span>
+                <span>JavaScript · Basic</span>
+                <span>C / C++ · Basic</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <b>AI / LLM</b>
+              <div class="skill-list">
+                <span>LLM Application · Basic - Intermediate</span>
+                <span>STT / TTS Pipeline · Basic - Intermediate</span>
+                <span>AI Agent Structure · Basic</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <b>Web / Tools</b>
+              <div class="skill-list">
+                <span>HTML, CSS · Basic</span>
+                <span>Git / GitHub · Basic</span>
+                <span>Docker · Basic</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Experience</h2>
+            <div class="item experience">
+              <h3>AI Bot Development</h3>
+              <ul>
+                <li>Evelyn 음성 AI 비서의 대화 흐름 설계와 개선</li>
+                <li>음성 입력, LLM 응답, TTS 출력 흐름 연결</li>
+              </ul>
+            </div>
+            <div class="item experience">
+              <h3>Voice AI Pipeline</h3>
+              <ul>
+                <li>STT, LLM routing, TTS, playback 단계 분리</li>
+                <li>turn_trace 기반 latency baseline 정리</li>
+              </ul>
+            </div>
+            <div class="item experience">
+              <h3>Documentation</h3>
+              <ul>
+                <li>README와 portfolio 문서 구조 관리</li>
+                <li>성능 수치와 프로젝트 설명 정리</li>
+              </ul>
+            </div>
+          </section>
+        </aside>
+
+        <section>
+          <h2>Projects</h2>
+
+          <article class="project item">
+            <div class="project-head">
+              <h3>Evelyn Voice AI Assistant</h3>
+              <span class="meta">2026.04 - Present</span>
+            </div>
+            <p>Discord 기반 한국어 음성 AI 캐릭터 프로젝트입니다.</p>
+            <ul>
+              <li>STT, LLM, TTS, memory 흐름을 연결하고 개선</li>
+              <li>음성 턴 43개 기준으로 지연 구간과 개선 기준선 정리</li>
+              <li>실시간 음성 입출력, LLM routing, 캐릭터 응답 흐름 점검</li>
+            </ul>
+            <p class="tags">Python · Discord Bot · STT / TTS · LLM Routing</p>
+          </article>
+
+          <article class="project item">
+            <div class="project-head">
+              <h3>Voice AI Pipeline</h3>
+              <span class="meta">2026.05 - Present</span>
+            </div>
+            <p>STT, LLM routing, TTS, playback을 연결한 음성 파이프라인 실험입니다.</p>
+            <ul>
+              <li>음성 입력부터 재생까지 이어지는 단계별 latency log 기록</li>
+              <li>cached audio와 문장 단위 TTS로 체감 지연 개선 방향 정리</li>
+            </ul>
+            <p class="tags">STT · LLM Routing · TTS · Playback · Latency Log</p>
+          </article>
+
+          <article class="project item">
+            <div class="project-head">
+              <h3>Obsidian LLM Memory</h3>
+              <span class="meta">2026.06 - Present</span>
+            </div>
+            <p>LLM 기억력을 높이기 위한 Obsidian식 노트 구조 실험입니다.</p>
+            <ul>
+              <li>프로젝트와 작업 기록을 분리하고 관련 기억을 링크로 연결</li>
+              <li>장기 기억과 일일 기록을 나누어 반복 작업 맥락을 빠르게 참조</li>
+            </ul>
+            <p class="tags">Obsidian · Markdown · LLM Memory · Knowledge Base</p>
+          </article>
+
+          <article class="project item">
+            <div class="project-head">
+              <h3>Minecraft AI Agent</h3>
+              <span class="meta">2026.05 - Present</span>
+            </div>
+            <p>Minecraft 환경에서 AI agent 구조를 학습한 프로젝트입니다.</p>
+            <ul>
+              <li>목표를 행동 단위로 분해하고 환경 상태 기반 판단 흐름 정리</li>
+              <li>planning, action, recovery 구조를 Evelyn 확장 방향과 연결</li>
+            </ul>
+            <p class="tags">Minecraft · Voyager · Mineflayer · Planning</p>
+          </article>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
