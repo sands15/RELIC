@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="손정훈의 AI, Voice AI, LLM application, AI agent 성장 포트폴리오 RELIC"
+    />
+    <title>RELIC | 손정훈 Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #12104e;
+        --gold: #edb352;
+        --ink: #191921;
+        --muted: #6a6a77;
+        --line: #dedee8;
+        --paper: #fbfbfd;
+        --soft-gold: #fff5d8;
+        --teal: #30a8a5;
+        --coral: #e9695b;
+        --shadow: 0 24px 70px rgba(18, 16, 78, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Noto Sans KR", Arial, sans-serif;
+        line-height: 1.75;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .hero {
+        min-height: 48vh;
+        display: grid;
+        place-items: center;
+        padding: 80px 24px 70px;
+        background:
+          linear-gradient(135deg, rgba(237, 179, 82, 0.12), transparent 36%),
+          var(--navy);
+        color: white;
+        text-align: center;
+      }
+
+      .hero__mark {
+        color: var(--gold);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(4rem, 13vw, 9.5rem);
+        font-weight: 400;
+        line-height: 0.95;
+        margin: 0;
+      }
+
+      .hero__sub {
+        max-width: 760px;
+        margin: 26px auto 0;
+        font-size: clamp(1rem, 2.3vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.84);
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid rgba(18, 16, 78, 0.08);
+        background: rgba(251, 251, 253, 0.92);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav__inner {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 68px;
+      }
+
+      .brand {
+        color: var(--navy);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: 1.45rem;
+      }
+
+      .nav__links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .nav__links a:hover {
+        color: var(--navy);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      .section {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 112px 0 0;
+      }
+
+      .section-title {
+        position: relative;
+        margin-bottom: 46px;
+      }
+
+      .section-title__front {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: var(--gold);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(2.25rem, 7vw, 4.3rem);
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .section-title__back {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        margin: 0;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(237, 179, 82, 0.7);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(2.25rem, 7vw, 4.3rem);
+        line-height: 1;
+        opacity: 0.7;
+      }
+
+      .profile {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 58px;
+        align-items: center;
+      }
+
+      .portrait {
+        position: relative;
+        min-height: 430px;
+      }
+
+      .portrait::before {
+        content: "";
+        position: absolute;
+        inset: 18px 0 0 34px;
+        border: 2px solid var(--navy);
+      }
+
+      .portrait__panel {
+        position: relative;
+        width: min(320px, 100%);
+        min-height: 390px;
+        padding: 34px 28px;
+        background:
+          radial-gradient(circle at 26% 22%, rgba(237, 179, 82, 0.95), transparent 18%),
+          radial-gradient(circle at 72% 72%, rgba(48, 168, 165, 0.55), transparent 25%),
+          linear-gradient(145deg, #1c1968, #111044 68%);
+        box-shadow: var(--shadow);
+        color: white;
+      }
+
+      .portrait__panel::after {
+        content: "AI";
+        position: absolute;
+        right: 22px;
+        bottom: 0;
+        color: rgba(255, 255, 255, 0.08);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: 10rem;
+        line-height: 0.9;
+      }
+
+      .portrait__label {
+        display: inline-block;
+        margin: 0 0 118px;
+        padding: 7px 12px;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+      }
+
+      .portrait__name {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: 2.1rem;
+        font-weight: 900;
+      }
+
+      .portrait__role {
+        position: relative;
+        z-index: 1;
+        margin: 8px 0 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .profile__copy h2 {
+        margin: 0;
+        color: var(--navy);
+        font-size: clamp(1.8rem, 3.2vw, 3rem);
+        line-height: 1.25;
+      }
+
+      .profile__copy p {
+        margin: 22px 0 0;
+        color: #34343f;
+        font-size: 1.05rem;
+      }
+
+      .info-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin: 30px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .info-list li {
+        display: flex;
+        min-height: 58px;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .info-list b {
+        color: var(--navy);
+      }
+
+      .education-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+        gap: 58px;
+        align-items: start;
+        margin-left: clamp(0px, 8vw, 96px);
+      }
+
+      .education-main,
+      .coursework {
+        border-top: 3px solid var(--navy);
+        background: white;
+        padding: 26px 24px;
+        box-shadow: 0 12px 28px rgba(18, 16, 78, 0.08);
+      }
+
+      .education-main h3,
+      .coursework h3 {
+        margin: 0 0 18px;
+        color: var(--navy);
+        font-size: 1.35rem;
+        line-height: 1.3;
+      }
+
+      .education-main dl {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 10px 16px;
+        margin: 0;
+      }
+
+      .education-main dt {
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .education-main dd {
+        margin: 0;
+        color: #34343f;
+        font-weight: 700;
+      }
+
+      .course-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .course-list li {
+        border: 1px solid rgba(18, 16, 78, 0.16);
+        padding: 6px 10px;
+        color: var(--navy);
+        font-size: 0.92rem;
+        font-weight: 800;
+      }
+
+      .dot {
+        width: 34px;
+        height: 34px;
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 34px;
+        border-radius: 10px;
+        background: var(--soft-gold);
+        color: var(--navy);
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .intro-title {
+        position: relative;
+        margin: 0 0 34px;
+        color: white;
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 400;
+        line-height: 1.12;
+        text-shadow:
+          -1px 0 var(--navy),
+          0 1px var(--navy),
+          1px 0 var(--navy),
+          0 -1px var(--navy),
+          7px 7px 0 var(--navy);
+      }
+
+      .intro-copy {
+        max-width: 900px;
+        margin-left: clamp(0px, 8vw, 96px);
+        color: #33333c;
+        font-size: 1.06rem;
+      }
+
+      .inline-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 28px;
+        border-bottom: 2px solid var(--navy);
+        color: var(--navy);
+        font-weight: 900;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 34px;
+        margin-left: clamp(0px, 8vw, 96px);
+      }
+
+      .skill-column h3 {
+        margin: 0 0 20px;
+        color: var(--navy);
+        font-size: 1.05rem;
+      }
+
+      .skill-column ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .skill-column li {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 62px;
+        margin-bottom: 12px;
+      }
+
+      .skill-icon {
+        width: 46px;
+        height: 46px;
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 46px;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 9px 24px rgba(18, 16, 78, 0.12);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 0.82rem;
+      }
+
+      .skill-icon svg {
+        width: 25px;
+        height: 25px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .skill-icon.gold {
+        color: #9a6b00;
+      }
+
+      .skill-icon.teal {
+        color: var(--teal);
+      }
+
+      .skill-icon.coral {
+        color: var(--coral);
+      }
+
+      .project-list {
+        display: grid;
+        gap: 92px;
+      }
+
+      .project {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+        gap: 64px;
+        align-items: center;
+      }
+
+      .project:nth-child(even) .project__visual {
+        order: 2;
+      }
+
+      .project__meta {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .project__meta h3 {
+        margin: 0;
+        color: var(--navy);
+        font-size: clamp(1.35rem, 2.8vw, 2.05rem);
+        line-height: 1.25;
+      }
+
+      .project__meta span {
+        color: var(--muted);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .project__body {
+        margin-top: 24px;
+      }
+
+      .project__body p {
+        margin: 0 0 18px;
+        color: #34343f;
+      }
+
+      .project-points {
+        display: grid;
+        gap: 9px;
+        margin: 24px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .project-points li {
+        position: relative;
+        padding-left: 20px;
+        color: #34343f;
+        font-weight: 700;
+      }
+
+      .project-points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.78em;
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .metric {
+        min-height: 92px;
+        padding: 14px 12px;
+        border-top: 3px solid var(--navy);
+        background: white;
+        box-shadow: 0 10px 24px rgba(18, 16, 78, 0.08);
+      }
+
+      .metric b {
+        display: block;
+        color: var(--gold);
+        font-size: 1.35rem;
+        line-height: 1.1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 7px;
+        color: var(--navy);
+        font-size: 0.78rem;
+        font-weight: 900;
+        line-height: 1.3;
+      }
+
+      .metric small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        line-height: 1.3;
+      }
+
+      .metric-note {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 22px 0 0;
+      }
+
+      .tag {
+        border: 1px solid rgba(18, 16, 78, 0.16);
+        padding: 5px 10px;
+        color: var(--navy);
+        background: white;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .project__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 28px;
+        font-weight: 900;
+      }
+
+      .project__links a {
+        border-bottom: 2px solid var(--navy);
+        color: var(--navy);
+      }
+
+      .project__visual {
+        position: relative;
+      }
+
+      .browser-card {
+        position: relative;
+        border: 2px solid var(--ink);
+        background: white;
+        box-shadow: 18px 18px 0 var(--gold);
+      }
+
+      .browser-card__top {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        height: 36px;
+        padding: 0 14px;
+        border-bottom: 2px solid var(--ink);
+        background: #f5f5f7;
+      }
+
+      .browser-card__dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--coral);
+      }
+
+      .browser-card__dot:nth-child(2) {
+        background: var(--gold);
+      }
+
+      .browser-card__dot:nth-child(3) {
+        background: var(--teal);
+      }
+
+      .browser-card__screen {
+        min-height: 230px;
+        padding: 24px;
+        background:
+          linear-gradient(90deg, rgba(18, 16, 78, 0.06) 1px, transparent 1px),
+          linear-gradient(rgba(18, 16, 78, 0.06) 1px, transparent 1px),
+          white;
+        background-size: 26px 26px;
+      }
+
+      .screen-kicker {
+        display: inline-block;
+        padding: 4px 9px;
+        background: var(--navy);
+        color: white;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .screen-title {
+        margin: 18px 0 10px;
+        color: var(--navy);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: 2.4rem;
+        line-height: 1;
+      }
+
+      .screen-lines {
+        display: grid;
+        gap: 9px;
+        margin-top: 22px;
+      }
+
+      .screen-lines span {
+        display: block;
+        height: 12px;
+        background: rgba(18, 16, 78, 0.14);
+      }
+
+      .screen-lines span:nth-child(2) {
+        width: 78%;
+        background: rgba(48, 168, 165, 0.28);
+      }
+
+      .screen-lines span:nth-child(3) {
+        width: 58%;
+        background: rgba(237, 179, 82, 0.55);
+      }
+
+      .resume-band {
+        margin-top: 118px;
+        padding: 48px;
+        background: var(--navy);
+        color: white;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .resume-band h2 {
+        margin: 0 0 10px;
+        color: var(--gold);
+        font-family: "Black Han Sans", Impact, sans-serif;
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .resume-band p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 10px 18px;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .contact {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 112px;
+      }
+
+      .contact a,
+      .contact span {
+        min-height: 92px;
+        padding: 22px;
+        border-top: 3px solid var(--navy);
+        background: white;
+        box-shadow: 0 12px 28px rgba(18, 16, 78, 0.08);
+      }
+
+      .contact b {
+        display: block;
+        color: var(--gold);
+        font-size: 0.9rem;
+      }
+
+      .contact small {
+        display: block;
+        margin-top: 5px;
+        color: var(--navy);
+        font-size: 1rem;
+        font-weight: 900;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-left: clamp(0px, 8vw, 96px);
+      }
+
+      .content-card {
+        min-height: 116px;
+        padding: 24px;
+        border-top: 3px solid var(--navy);
+        background: white;
+        box-shadow: 0 12px 28px rgba(18, 16, 78, 0.08);
+      }
+
+      .content-card h3 {
+        margin: 0 0 10px;
+        color: var(--navy);
+        font-size: 1.1rem;
+        line-height: 1.35;
+      }
+
+      .content-card p {
+        margin: 0;
+        color: #34343f;
+      }
+
+      .content-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #34343f;
+      }
+
+      .content-card li + li {
+        margin-top: 6px;
+      }
+
+      footer {
+        padding: 20px;
+        background: var(--gold);
+        color: var(--navy);
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .nav__inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        .nav__links {
+          justify-content: flex-start;
+        }
+
+        .section {
+          padding-top: 78px;
+        }
+
+        .profile,
+        .project,
+        .resume-band,
+        .contact,
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .portrait {
+          min-height: auto;
+        }
+
+        .portrait__panel {
+          width: 100%;
+          min-height: 330px;
+        }
+
+        .project:nth-child(even) .project__visual {
+          order: 0;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .education-layout {
+          grid-template-columns: 1fr;
+          margin-left: 0;
+        }
+
+        .content-grid {
+          margin-left: 0;
+        }
+
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .resume-band {
+          padding: 34px 24px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .hero {
+          min-height: 44vh;
+          padding: 62px 20px 54px;
+        }
+
+        .nav__inner,
+        .section {
+          width: min(100% - 28px, 1120px);
+        }
+
+        .info-list {
+          grid-template-columns: 1fr;
+        }
+
+        .education-main dl {
+          grid-template-columns: 1fr;
+        }
+
+        .project {
+          gap: 28px;
+        }
+
+        .project__meta {
+          display: block;
+        }
+
+        .project__meta span {
+          display: block;
+          margin-top: 6px;
+        }
+
+        .browser-card {
+          box-shadow: 10px 10px 0 var(--gold);
+        }
+
+        .browser-card__screen {
+          min-height: 210px;
+          padding: 20px;
+        }
+
+        .screen-title {
+          font-size: 2rem;
+        }
+
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
+      <symbol id="icon-llm" viewBox="0 0 24 24">
+        <path d="M12 3a7 7 0 0 0-7 7c0 3.1 2 5.7 4.8 6.6V21h4.4v-4.4A7 7 0 0 0 12 3Z" />
+        <path d="M8.5 10h7" />
+        <path d="M9.5 13h5" />
+        <path d="M10 7.8h4" />
+      </symbol>
+      <symbol id="icon-audio" viewBox="0 0 24 24">
+        <path d="M4 12h2" />
+        <path d="M8 8v8" />
+        <path d="M12 5v14" />
+        <path d="M16 8v8" />
+        <path d="M20 12h-2" />
+      </symbol>
+      <symbol id="icon-agent" viewBox="0 0 24 24">
+        <path d="M12 3v3" />
+        <path d="M7 6h10a3 3 0 0 1 3 3v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9a3 3 0 0 1 3-3Z" />
+        <path d="M9 12h.01" />
+        <path d="M15 12h.01" />
+        <path d="M9.5 15h5" />
+      </symbol>
+      <symbol id="icon-git" viewBox="0 0 24 24">
+        <path d="M7 7v10" />
+        <path d="M7 12h5a4 4 0 0 1 4 4v1" />
+        <circle cx="7" cy="7" r="2.5" />
+        <circle cx="7" cy="17" r="2.5" />
+        <circle cx="17" cy="17" r="2.5" />
+      </symbol>
+      <symbol id="icon-js" viewBox="0 0 24 24">
+        <path d="M5 4h14v16H5z" />
+        <path d="M9 15c0 1.4.7 2 1.9 2S13 16.2 13 15v-5" />
+        <path d="M16 17c1.3 0 2-.6 2-1.5 0-2-3.5-1.2-3.5-3.5 0-.9.8-1.5 1.9-1.5.8 0 1.4.2 1.9.7" />
+      </symbol>
+      <symbol id="icon-html" viewBox="0 0 24 24">
+        <path d="M5 4h14l-1.2 14L12 20l-5.8-2L5 4Z" />
+        <path d="M9 8h6" />
+        <path d="M9.5 12h5L14 16l-2 .7-2-.7" />
+      </symbol>
+      <symbol id="icon-css" viewBox="0 0 24 24">
+        <path d="M5 4h14l-1.2 14L12 20l-5.8-2L5 4Z" />
+        <path d="M9 8h6l-.4 4H10" />
+        <path d="M14.3 12l-.4 4-1.9.7-2-.7" />
+      </symbol>
+      <symbol id="icon-docker" viewBox="0 0 24 24">
+        <path d="M4 13h15l-1 4.2A4 4 0 0 1 14.1 20H8a4 4 0 0 1-4-4v-3Z" />
+        <path d="M7 10h3v3H7z" />
+        <path d="M10 10h3v3h-3z" />
+        <path d="M10 7h3v3h-3z" />
+        <path d="M13 10h3v3h-3z" />
+        <path d="M19 10c.8-.9 1.8-1 3-.7" />
+      </symbol>
+      <symbol id="icon-cpp" viewBox="0 0 24 24">
+        <path d="M12 3 4.5 7.3v8.4L12 20l7.5-4.3V7.3L12 3Z" />
+        <path d="M13.5 9.5a4 4 0 1 0 0 5" />
+        <path d="M16 10v4" />
+        <path d="M18 10v4" />
+        <path d="M15 12h4" />
+      </symbol>
+      <symbol id="icon-python" viewBox="0 0 24 24">
+        <path d="M8 12H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2H9a3 3 0 0 0-3 3Z" />
+        <path d="M16 12h2a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3v-2h6a3 3 0 0 0 3-3Z" />
+        <path d="M8 7h.01" />
+        <path d="M16 17h.01" />
+      </symbol>
+    </svg>
+
+    <header class="hero" id="top">
+      <div>
+        <h1 class="hero__mark">RELIC</h1>
+        <p class="hero__sub">
+          결과만 모아두는 포트폴리오가 아니라, AI와 개발을 공부하며 만든 것과
+          막힌 지점, 다음 목표를 함께 기록하는 성장일기입니다.
+        </p>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="주요 섹션">
+      <div class="nav__inner">
+        <a class="brand" href="#top">RELIC</a>
+        <div class="nav__links">
+          <a href="#about">About</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#resume">CV</a>
+          <a href="#career">Career</a>
+          <a href="#references">References</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="section" id="about">
+        <div class="section-title">
+          <p class="section-title__front">ABOUT ME</p>
+          <p class="section-title__back" aria-hidden="true">ABOUT ME</p>
+        </div>
+
+        <div class="profile">
+          <div class="portrait" aria-hidden="true">
+            <div class="portrait__panel">
+              <p class="portrait__label">AI ENGINEERING</p>
+              <p class="portrait__name">손정훈</p>
+              <p class="portrait__role">Voice AI / LLM Application / AI Agent</p>
+            </div>
+          </div>
+
+          <div class="profile__copy">
+            <h2>사용자가 실제로 쓰고 싶어지는 AI를 만드는 개발자</h2>
+            <p>
+              저는 AI 모델 자체보다, 모델이 실제 사용자의 입력을 받고 응답하고
+              행동하는 전체 시스템에 관심이 있습니다.
+            </p>
+            <p>
+              현재는 LLM application, 음성 AI, AI agent, 웹 인터페이스를 중심으로
+              작은 실험들을 쌓아가고 있으며, 그중 가장 큰 프로젝트가 Evelyn입니다.
+            </p>
+            <ul class="info-list">
+              <li><span class="dot">01</span><span><b>전공</b><br />인공지능공학</span></li>
+              <li><span class="dot">02</span><span><b>관심 분야</b><br />Voice AI, LLM Application, AI Agent</span></li>
+              <li><span class="dot">03</span><span><b>진로 목표</b><br />실제 사용자가 쓸 수 있는 AI 서비스를 만드는 개발자</span></li>
+              <li><span class="dot">04</span><span><b>현재 학습 중인 기술</b><br />Python, JavaScript, STT/TTS Pipeline, LLM Routing</span></li>
+              <li><span class="dot">05</span><span><b>AI 분야 관심 주제</b><br />음성 인터페이스, 캐릭터형 AI, autonomous agent</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <div class="section-title">
+          <p class="section-title__front">EDUCATION</p>
+          <p class="section-title__back" aria-hidden="true">EDUCATION</p>
+        </div>
+
+        <div class="education-layout">
+          <div class="education-main">
+            <h3>Chosun University</h3>
+            <dl>
+              <dt>Department</dt>
+              <dd>Artificial Intelligence Engineering</dd>
+              <dt>Year</dt>
+              <dd>2nd year</dd>
+              <dt>Period</dt>
+              <dd>2025.03 - Present</dd>
+            </dl>
+          </div>
+
+          <div class="coursework">
+            <h3>Relevant Coursework</h3>
+            <ul class="course-list">
+              <li>Data Structures</li>
+              <li>Web Programming</li>
+              <li>C/C++ Programming</li>
+              <li>Artificial Intelligence Basics</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-title">
+          <p class="section-title__front">SKILLS</p>
+          <p class="section-title__back" aria-hidden="true">SKILLS</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-column">
+            <h3>Familiar</h3>
+            <ul>
+              <li><span class="skill-icon teal"><svg><use href="#icon-llm" /></svg></span>LLM Application</li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-audio" /></svg></span>STT / TTS Pipeline</li>
+              <li><span class="skill-icon coral"><svg><use href="#icon-agent" /></svg></span>AI Agent</li>
+              <li><span class="skill-icon"><svg><use href="#icon-git" /></svg></span>Git / GitHub</li>
+            </ul>
+          </div>
+
+          <div class="skill-column">
+            <h3>Tried</h3>
+            <ul>
+              <li><span class="skill-icon teal"><svg><use href="#icon-js" /></svg></span>JavaScript</li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-html" /></svg></span>HTML</li>
+              <li><span class="skill-icon coral"><svg><use href="#icon-css" /></svg></span>CSS</li>
+              <li><span class="skill-icon"><svg><use href="#icon-docker" /></svg></span>Docker</li>
+            </ul>
+          </div>
+
+          <div class="skill-column">
+            <h3>Language</h3>
+            <ul>
+              <li><span class="skill-icon coral"><svg><use href="#icon-cpp" /></svg></span>C / C++</li>
+              <li><span class="skill-icon gold"><svg><use href="#icon-python" /></svg></span>Python</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-title">
+          <p class="section-title__front">PROJECT</p>
+          <p class="section-title__back" aria-hidden="true">PROJECT</p>
+        </div>
+
+        <div class="project-list">
+          <article class="project">
+            <div class="project__visual">
+              <div class="browser-card" aria-hidden="true">
+                <div class="browser-card__top">
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                </div>
+                <div class="browser-card__screen">
+                  <span class="screen-kicker">VOICE AI ASSISTANT</span>
+                  <p class="screen-title">EVELYN</p>
+                  <div class="screen-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="project__meta">
+                <h3>Evelyn Voice AI Assistant</h3>
+                <span>2026.04 - Present</span>
+              </div>
+              <p>
+                Discord 기반 한국어 음성 AI 캐릭터를 목표로 한 대표 프로젝트입니다.
+                STT, LLM, TTS, playback, memory, agent 구조를 연결해 실시간 대화
+                시스템을 실험하고 있습니다.
+              </p>
+              <div class="metrics" aria-label="Evelyn latency metrics">
+                <div class="metric">
+                  <b>1.5s</b>
+                  <span>STT 완료 보통</span>
+                  <small>대부분 3.2s 이내</small>
+                </div>
+                <div class="metric">
+                  <b>8.8s</b>
+                  <span>첫 음성 출력 보통</span>
+                  <small>대부분 21.1s 이내</small>
+                </div>
+                <div class="metric">
+                  <b>13.4s</b>
+                  <span>전체 턴 보통</span>
+                  <small>대부분 23.3s 이내</small>
+                </div>
+              </div>
+              <p class="metric-note">
+                로컬 turn_trace 로그의 voice turn 43개 기준입니다. 수치는 각 단계의
+                독립 처리 시간이 아니라 음성 턴 시작 시점부터의 누적 지연입니다.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Python</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Discord Bot</span>
+                <span class="tag">STT / TTS</span>
+                <span class="tag">LLM Routing</span>
+                <span class="tag">AI Agent</span>
+              </div>
+              <div class="project__links">
+                <a href="https://github.com/sands15/Evelyn_Bot">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project__visual">
+              <div class="browser-card" aria-hidden="true">
+                <div class="browser-card__top">
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                </div>
+                <div class="browser-card__screen">
+                  <span class="screen-kicker">PORTFOLIO WEBSITE</span>
+                  <p class="screen-title">RELIC</p>
+                  <div class="screen-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="project__meta">
+                <h3>RELIC Portfolio Website</h3>
+                <span>2026.05 - Present</span>
+              </div>
+              <p>
+                AI와 개발을 공부하며 만든 것, 막힌 지점, 다음 목표를 정리하는
+                개인 포트폴리오 웹사이트입니다.
+              </p>
+              <p>
+                GitHub Pages에서 정적 페이지로 동작하도록 구성했고, 프로젝트 설명과
+                성능 지표, 성장 기록을 한 화면에서 읽을 수 있게 정리했습니다.
+              </p>
+              <div class="tag-row">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">GitHub Pages</span>
+                <span class="tag">Portfolio</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project__visual">
+              <div class="browser-card" aria-hidden="true">
+                <div class="browser-card__top">
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                </div>
+                <div class="browser-card__screen">
+                  <span class="screen-kicker">VOICE PIPELINE</span>
+                  <p class="screen-title">PIPELINE</p>
+                  <div class="screen-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="project__meta">
+                <h3>Voice AI Pipeline Experiment</h3>
+                <span>2026.05 - Present</span>
+              </div>
+              <p>
+                STT, LLM routing, TTS, playback을 하나의 흐름으로 연결하고, 각 단계의
+                지연과 실패 지점을 로그로 남기는 음성 AI 파이프라인 실험입니다.
+              </p>
+              <p>
+                고정 응답은 cached audio fast path로 처리하고, 일반 응답은 문장 단위
+                TTS와 playback 흐름을 조정해 체감 지연을 줄이는 방향으로 개선하고 있습니다.
+              </p>
+              <div class="tag-row">
+                <span class="tag">STT</span>
+                <span class="tag">LLM Routing</span>
+                <span class="tag">TTS</span>
+                <span class="tag">Playback</span>
+                <span class="tag">Latency Log</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project__visual">
+              <div class="browser-card" aria-hidden="true">
+                <div class="browser-card__top">
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                  <span class="browser-card__dot"></span>
+                </div>
+                <div class="browser-card__screen">
+                  <span class="screen-kicker">AGENT STUDY</span>
+                  <p class="screen-title">MINECRAFT</p>
+                  <div class="screen-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project__body">
+              <div class="project__meta">
+                <h3>Minecraft AI Agent Study</h3>
+                <span>2026.05 - Present</span>
+              </div>
+              <p>
+                Minecraft 환경에서 목표를 이해하고 행동을 실행하는 AI agent 구조를
+                이블린 프로젝트와 연결하는 실험입니다.
+              </p>
+              <p>
+                inventory, recipe, action result 같은 상태 정보를 기반으로 계획을
+                세우고, 실행 결과를 다시 다음 판단에 연결하는 구조를 정리하고 있습니다.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Minecraft</span>
+                <span class="tag">Voyager</span>
+                <span class="tag">Mineflayer</span>
+                <span class="tag">Planning</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-title">
+          <p class="section-title__front">EXPERIENCE</p>
+          <p class="section-title__back" aria-hidden="true">EXPERIENCE</p>
+        </div>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>Personal AI Bot Development</h3>
+            <p>Evelyn 음성 AI 비서 개발과 대화 흐름 개선을 중심으로 실험하고 있습니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>Voice AI Pipeline Experiment</h3>
+            <p>STT, LLM routing, TTS, playback latency를 하나의 파이프라인으로 연결해 점검합니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>AI Agent Structure Experiment</h3>
+            <p>planning, action execution, recovery 흐름을 이블린의 agent 구조 확장 방향으로 실험합니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>Technical Documentation</h3>
+            <p>프로젝트 구조, 실험 결과, 개선 방향을 README와 문서로 정리합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="resume">
+        <div class="resume-band">
+          <div>
+            <h2>CV / RESUME</h2>
+            <p>
+              Education, Skills, Projects 요약과 앞으로의 커리어 목표를 한 페이지로
+              정리하는 문서입니다.
+            </p>
+          </div>
+          <a class="button" href="./resume.pdf">Download PDF</a>
+        </div>
+      </section>
+
+      <section class="section" id="career">
+        <div class="section-title">
+          <p class="section-title__front">CAREER GOAL</p>
+          <p class="section-title__back" aria-hidden="true">CAREER GOAL</p>
+        </div>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>AI Service Developer</h3>
+            <p>사용자가 실제로 쓸 수 있는 AI 서비스를 설계하고 구현하는 개발자를 목표로 합니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>Voice AI / Conversational AI</h3>
+            <p>STT, LLM, TTS를 연결해 자연스러운 대화 경험을 만드는 방향에 집중합니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>AI Agent Engineer</h3>
+            <p>목표 분해, planning, action execution을 다루는 AI agent 시스템을 더 깊게 다루고 싶습니다.</p>
+          </div>
+          <div class="content-card">
+            <h3>Long-Term Focus</h3>
+            <p>음성, 언어 모델, 행동 실행이 자연스럽게 이어지는 로컬 AI 캐릭터 시스템을 만들고 싶습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="references">
+        <div class="section-title">
+          <p class="section-title__front">REFERENCES</p>
+          <p class="section-title__back" aria-hidden="true">REFERENCES</p>
+        </div>
+
+        <div class="contact">
+          <a href="https://github.com/sands15/Evelyn_Bot">
+            <b>Evelyn Repository</b>
+            <small>github.com/sands15/Evelyn_Bot</small>
+          </a>
+          <a href="https://github.com/sands15/RELIC">
+            <b>RELIC Repository</b>
+            <small>github.com/sands15/RELIC</small>
+          </a>
+          <a href="./resume.pdf">
+            <b>Resume PDF</b>
+            <small>resume.pdf</small>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-title">
+          <p class="section-title__front">CONTACT</p>
+          <p class="section-title__back" aria-hidden="true">CONTACT</p>
+        </div>
+
+        <div class="contact">
+          <a href="mailto:sands12@naver.com">
+            <b>Email</b>
+            <small>sands12@naver.com</small>
+          </a>
+          <a href="https://github.com/sands15">
+            <b>GitHub</b>
+            <small>github.com/sands15</small>
+          </a>
+          <span>
+            <b>Career Goal</b>
+            <small>AI Service Developer</small>
+          </span>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 RELIC. Portfolio by 손정훈.</footer>
+  </body>
+</html>
