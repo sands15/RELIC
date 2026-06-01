@@ -81,6 +81,7 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 - **Period:** 2026.04 - Present
 - **Tech Stack:** Python, JavaScript, Discord Bot, STT / TTS, LLM Routing, AI Agent
 - **GitHub:** <https://github.com/sands15/Evelyn_Bot>
+- **Story:** [Evelyn Project Story](./evelyn-story.html)
 - **Summary:** Discord 기반 한국어 음성 AI 캐릭터 프로젝트
 - **Role:** STT, LLM, TTS, memory 흐름을 연결하고 개선
 - **Key Features:** 실시간 음성 입출력, LLM routing, 캐릭터 응답, turn_trace 지연 로그
