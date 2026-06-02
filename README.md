@@ -93,7 +93,7 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 
 - **첫 토큰:** EXAONE 31ms
 - **첫 PCM:** OmniVoice 618ms
-- **STT 후 TTS 출력:** LLM 응답 완료 + TTS 첫 PCM 1.18s
+- **STT 후 TTS 출력:** 1.18s
 
 ### Obsidian LLM Memory
 
