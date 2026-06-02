@@ -1417,7 +1417,7 @@
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>첫 토큰과 첫 PCM 기준으로 체감 반응 지연을 다시 측정했습니다.</p>
+                  <p>첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 체감 지연을 다시 측정했습니다.</p>
                 </div>
               </div>
               <p class="metric-title">Performance Baseline</p>
@@ -1425,21 +1425,20 @@
                 <div class="metric">
                   <b>31ms</b>
                   <span>첫 토큰 보통</span>
-                  <small>EXAONE 10회 중앙값</small>
                 </div>
                 <div class="metric">
                   <b>618ms</b>
                   <span>첫 PCM 보통</span>
-                  <small>OmniVoice 10회 중앙값</small>
                 </div>
                 <div class="metric">
-                  <b>65.8x</b>
-                  <span>Main LLM 개선</span>
-                  <small>Gemma E4B 2.04s -> EXAONE 31ms</small>
+                  <b>1.18s</b>
+                  <span>STT 후 TTS 출력</span>
+                  <small>LLM 응답 + 첫 PCM 10회 중앙값</small>
                 </div>
               </div>
               <p class="metric-note">
-                첫 토큰은 streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
+                첫 토큰은 EXAONE streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
+                STT 후 TTS 출력은 STT가 끝난 뒤 Main LLM 응답이 완료되고 TTS 첫 PCM이 나올 때까지입니다.
               </p>
               <div class="tag-row">
                 <span class="tag">Python</span>

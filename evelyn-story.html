@@ -411,28 +411,27 @@
           <h2>성능 기준선</h2>
           <p>
             기존의 STT 완료, 첫 음성 출력, 전체 턴 기준선 대신 실제 체감 시작점인
-            첫 토큰과 첫 PCM 기준으로 다시 정리했습니다.
+            첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 지연으로 다시 정리했습니다.
           </p>
           <div class="metrics">
             <div class="metric">
               <b>31ms</b>
               <span>첫 토큰 보통</span>
-              <small>EXAONE 10회 중앙값</small>
             </div>
             <div class="metric">
               <b>618ms</b>
               <span>첫 PCM 보통</span>
-              <small>OmniVoice 10회 중앙값</small>
             </div>
             <div class="metric">
-              <b>65.8x</b>
-              <span>Main LLM 개선</span>
-              <small>Gemma E4B 2.04s -> EXAONE 31ms</small>
+              <b>1.18s</b>
+              <span>STT 후 TTS 출력</span>
+              <small>LLM 응답 + 첫 PCM 10회 중앙값</small>
             </div>
           </div>
           <p class="note">
             EXAONE은 streaming SSE의 첫 non-empty token까지, TTS는 OmniVoice streaming PCM의
-            첫 audio chunk까지를 측정했습니다. STT와 Discord playback 지연은 이 블록의 수치에 포함하지 않았습니다.
+            첫 audio chunk까지를 측정했습니다. STT 후 TTS 출력은 STT가 끝난 뒤 Main LLM 응답이 완료되고
+            TTS 첫 PCM이 나올 때까지입니다.
           </p>
           <div class="tag-row">
             <span class="tag">Python</span>

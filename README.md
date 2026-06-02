@@ -85,15 +85,15 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 - **Summary:** Discord 기반 한국어 음성 AI 캐릭터 프로젝트
 - **Role:** STT, LLM, TTS, memory 흐름을 연결하고 개선
 - **Key Features:** 실시간 음성 입출력, LLM routing, 캐릭터 응답, turn_trace 지연 로그
-- **Results:** 첫 토큰과 첫 PCM 기준으로 체감 반응 지연을 재측정
+- **Results:** 첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 체감 지연을 재측정
 
 #### Performance Baseline
 
-현재 기준선은 첫 토큰과 첫 PCM의 10회 실측 중앙값입니다. 첫 토큰은 streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
+현재 기준선은 첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 10회 실측 중앙값입니다. 첫 토큰은 streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
 
 - **첫 토큰:** EXAONE 31ms
 - **첫 PCM:** OmniVoice 618ms
-- **Main LLM 개선:** Gemma E4B 2.04s -> EXAONE 31ms, 65.8x
+- **STT 후 TTS 출력:** LLM 응답 완료 + TTS 첫 PCM 1.18s
 
 ### Obsidian LLM Memory
 
