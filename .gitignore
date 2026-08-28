@@ -1,0 +1,13 @@
+# Developer Vault publishes Markdown and stable Obsidian settings only.
+developer-vault/**
+!developer-vault/**/
+!developer-vault/*.md
+!developer-vault/**/*.md
+developer-vault/.trash/**
+developer-vault/.obsidian/**
+!developer-vault/.obsidian/app.json
+!developer-vault/.obsidian/appearance.json
+!developer-vault/.obsidian/community-plugins.json
+!developer-vault/.obsidian/core-plugins.json
+!developer-vault/.obsidian/daily-notes.json
+!developer-vault/.obsidian/templates.json
