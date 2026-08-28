@@ -101,7 +101,7 @@ function Enter-Mutex {
 }
 
 function Get-BlockedRule {
-    param([Parameter(Mandatory)][string]$Text)
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Text)
 
     foreach ($entry in $script:BlockedPatterns.GetEnumerator()) {
         if ($Text -match $entry.Value) {
@@ -146,7 +146,7 @@ function Test-PublicVault {
 
     foreach ($file in $markdownFiles) {
         $relative = $file.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
-        $content = Get-Content -LiteralPath $file.FullName -Raw
+        $content = [string](Get-Content -LiteralPath $file.FullName -Raw)
         if ($relative -ne 'AGENTS.md' -and $content -notmatch '(?m)^visibility:\s*public\s*$') {
             $errors.Add("${relative}: missing visibility public")
         }
@@ -283,6 +283,9 @@ function Invoke-VaultSync {
 }
 
 if ($SelfTest) {
+    if (Get-BlockedRule -Text '') {
+        throw 'Empty Markdown was blocked.'
+    }
     if (Get-BlockedRule -Text 'safe project-relative source: docs/worklog/2026-08-28.md') {
         throw 'Safe sample was blocked.'
     }
