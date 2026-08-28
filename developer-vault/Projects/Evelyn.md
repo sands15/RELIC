@@ -20,6 +20,11 @@ tags:
 
 ## 대표 이정표
 
+- 2026-07-15 — 복구·보안·회귀 기준선을 고정하고 실제 Control Page 요청 경계와 950개 회귀를 검증했다. Discord 음성·Minecraft E2E는 범위 밖이다. [[Daily/2026-07-15|기록]]
+- 2026-07-18 — `main.py`의 상태·판정·실행 책임을 typed owner로 분리하고 8,793줄을 2,402줄로 축소한 뒤 1,289개 회귀를 통과했다. 외부 runtime은 재시작하지 않았다. [[Daily/2026-07-18|기록]]
+- 2026-07-29 — Voice P0 검증 프레임워크와 기억 provenance·삭제 계약의 초기 기반을 구현했다. 실제 음성 E2E 성공 근거는 아니다. [[Daily/2026-07-29|기록]]
+- 2026-07-30 — 파생 기억까지 포함한 crash-safe 삭제, 자율행동·world lease와 세션 한정 마이크 동의 경계를 구현·검증했다. [[Daily/2026-07-30|기록]]
+- 2026-07-31 — 내구적 대화 연속성, 기능 readiness와 기억 evidence lifecycle을 source/offline 중심으로 검증했다. [[Daily/2026-07-31|기록]]
 - 2026-08-08 — 실제 Evelyn TTS 요청에서 OmniVoice PCM과 로컬 런타임 준비를 확인했다. 장치 E2E와 사용자 청취 검증은 범위 밖이다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-08)
 - 2026-08-16 — 격리된 fresh world에서 Minecraft shelter·두 번의 밤낮 주기·정상 재시작·경험 복구를 완주했다. 운영 환경 검증은 아니다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-16)
 - 2026-08-21 — 제한된 읽기와 1회성 정확 승인에 묶인 LLM 작업 루프를 구현하고 로컬 read/create E2E를 확인했다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-21)
@@ -28,9 +33,16 @@ tags:
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
 
+## 소급 주간 회고
+
+- [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]]
+
 ## 재사용 가능한 배움
 
-- 아직 독립 Learning으로 승격한 항목 없음
+- [[Learnings/Semantic boundaries over line count]]
+- [[Learnings/Evidence scope is part of the result]]
+- [[Learnings/External effects need exact ownership and receipts]]
+- [[Learnings/Killable owners for long-running I-O]]
 
 ## 개인 결정
 
