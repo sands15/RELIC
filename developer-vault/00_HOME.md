@@ -17,7 +17,7 @@ tags:
 - [[01_INBOX|빠른 수집]]
 - [[Projects/Evelyn]]
 - [[Projects/Toss Trading Bot]]
-- [[Daily/2026-08-28|최근 Daily]]
+- [[Daily/2026-08-29|최근 Daily]]
 - [[Reviews/2026-W35|현재 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
@@ -27,7 +27,7 @@ tags:
 ## 2026년 7월부터의 개발 이력
 
 - 7월: [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
-- 8월: [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]]
+- 8월: [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]]
 
 검증 가능한 저장소 활동이 있는 날짜와 주만 소급했다. 7월 1~14일과 빈 주는 기록을 만들지 않았다.
 
