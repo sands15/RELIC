@@ -232,7 +232,7 @@ function Get-VaultStatus {
 }
 
 function Get-MarkdownFingerprint {
-    $markdownStatus = @(Get-VaultStatus) | Where-Object { $_ -match '\.md"?$' }
+    $markdownStatus = @(@(Get-VaultStatus) | Where-Object { $_ -match '\.md"?$' })
     if ($markdownStatus.Count -eq 0) { return $null }
 
     $stamps = @(Get-ChildItem -LiteralPath $script:VaultRoot -Recurse -File -Filter '*.md' | Where-Object {
