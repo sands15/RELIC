@@ -1,6 +1,7 @@
 ---
 type: development-log
 date: "{{date:YYYY-MM-DD}}"
+visibility: public
 projects: []
 tags:
   - dev/daily

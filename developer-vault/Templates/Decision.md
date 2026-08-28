@@ -1,6 +1,7 @@
 ---
 type: personal-decision
 date: "{{date:YYYY-MM-DD}}"
+visibility: public
 status: proposed
 tags:
   - dev/decision

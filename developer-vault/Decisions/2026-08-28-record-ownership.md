@@ -1,6 +1,7 @@
 ---
 type: personal-decision
 date: 2026-08-28
+visibility: public
 status: approved
 tags:
   - dev/decision

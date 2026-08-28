@@ -1,6 +1,7 @@
 ---
 type: learning
 created: "{{date:YYYY-MM-DD}}"
+visibility: public
 projects: []
 tags:
   - dev/learning

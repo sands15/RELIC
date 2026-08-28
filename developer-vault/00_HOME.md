@@ -1,6 +1,7 @@
 ---
 type: home
 scope: personal-development
+visibility: public
 last_reviewed: 2026-08-28
 tags:
   - dev/home

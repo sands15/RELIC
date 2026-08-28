@@ -1,6 +1,7 @@
 ---
 type: project-hub
 status: active
+visibility: public
 project: Evelyn
 last_reviewed: 2026-08-28
 tags:

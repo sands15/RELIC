@@ -2,6 +2,7 @@
 type: weekly-review
 week: "{{date:GGGG-[W]WW}}"
 reviewed: "{{date:YYYY-MM-DD}}"
+visibility: public
 tags:
   - dev/review
 ---

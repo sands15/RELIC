@@ -6,11 +6,14 @@ param(
     [ValidateRange(2, 60)]
     [int]$PollSeconds = 2,
     [ValidateRange(4, 120)]
-    [int]$DebounceSeconds = 8
+    [int]$DebounceSeconds = 8,
+    [string]$ExpectedRemote = 'https://github.com/sands15/RELIC.git'
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$env:GIT_TERMINAL_PROMPT = '0'
+$env:GCM_INTERACTIVE = 'Never'
 
 $script:RepoRoot = Split-Path -Parent $PSScriptRoot
 $script:VaultRoot = Join-Path $script:RepoRoot 'developer-vault'
@@ -42,11 +45,59 @@ $script:AllowedSettings = @(
 function Invoke-Git {
     param([Parameter(Mandatory)][string[]]$Arguments)
 
-    $output = @(& git -C $script:RepoRoot @Arguments 2>&1)
-    if ($LASTEXITCODE -ne 0) {
-        throw "git $($Arguments -join ' ') failed:`n$($output -join [Environment]::NewLine)"
+    $previousErrorAction = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $rawOutput = @(& git -C $script:RepoRoot @Arguments 2>&1)
+        $exitCode = $LASTEXITCODE
     }
-    return $output
+    finally {
+        $ErrorActionPreference = $previousErrorAction
+    }
+    $stdout = @($rawOutput | Where-Object { $_ -isnot [System.Management.Automation.ErrorRecord] } | ForEach-Object { $_.ToString() })
+    $stderr = @($rawOutput | Where-Object { $_ -is [System.Management.Automation.ErrorRecord] } | ForEach-Object { $_.ToString() })
+    if ($exitCode -ne 0) {
+        throw "git $($Arguments -join ' ') failed:`n$(($stdout + $stderr) -join [Environment]::NewLine)"
+    }
+    return $stdout
+}
+
+function Test-GitContext {
+    $branch = @(Invoke-Git -Arguments @('symbolic-ref', '--quiet', '--short', 'HEAD'))
+    $upstream = @(Invoke-Git -Arguments @('rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{upstream}'))
+    $remote = @(Invoke-Git -Arguments @('remote', 'get-url', 'origin'))
+    if ($branch[0] -ne 'main' -or $upstream[0] -ne 'origin/main' -or $remote[0] -ne $ExpectedRemote) {
+        throw "Unexpected Git context. Expected main, origin/main, and $ExpectedRemote."
+    }
+
+    $gitDirOutput = @(Invoke-Git -Arguments @('rev-parse', '--git-dir'))
+    $gitDir = $gitDirOutput[0]
+    if (-not [System.IO.Path]::IsPathRooted($gitDir)) {
+        $gitDir = Join-Path $script:RepoRoot $gitDir
+    }
+    foreach ($stateName in @('MERGE_HEAD', 'rebase-merge', 'rebase-apply', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'BISECT_LOG')) {
+        if (Test-Path -LiteralPath (Join-Path $gitDir $stateName)) {
+            throw "Git operation in progress: $stateName"
+        }
+    }
+    $conflicts = @(Invoke-Git -Arguments @('diff', '--name-only', '--diff-filter=U'))
+    if ($conflicts.Count -gt 0) {
+        throw 'Unresolved Git conflicts block Developer Vault sync.'
+    }
+}
+
+function Enter-Mutex {
+    param(
+        [Parameter(Mandatory)][System.Threading.Mutex]$Mutex,
+        [Parameter(Mandatory)][int]$TimeoutMilliseconds
+    )
+
+    try {
+        return $Mutex.WaitOne($TimeoutMilliseconds)
+    }
+    catch [System.Threading.AbandonedMutexException] {
+        return $true
+    }
 }
 
 function Get-BlockedRule {
@@ -96,6 +147,9 @@ function Test-PublicVault {
     foreach ($file in $markdownFiles) {
         $relative = $file.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
         $content = Get-Content -LiteralPath $file.FullName -Raw
+        if ($relative -ne 'AGENTS.md' -and $content -notmatch '(?m)^visibility:\s*public\s*$') {
+            $errors.Add("${relative}: missing visibility public")
+        }
         $blockedRule = Get-BlockedRule -Text $content
         if ($blockedRule) {
             $errors.Add("${relative}: blocked $blockedRule")
@@ -134,10 +188,7 @@ function Test-StagedVault {
         if (-not (Test-AllowedTrackedPath -Path $path)) {
             throw "Staged path is outside the public allowlist: $path"
         }
-        $content = (@(& git -C $script:RepoRoot show ":$path" 2>&1) -join "`n")
-        if ($LASTEXITCODE -ne 0) {
-            throw "Could not inspect staged file: $path"
-        }
+        $content = (@(Invoke-Git -Arguments @('show', ":$path")) -join "`n")
         $blockedRule = Get-BlockedRule -Text $content
         if ($blockedRule) {
             throw "Staged file has blocked ${blockedRule}: $path"
@@ -167,10 +218,7 @@ function Test-OutgoingVault {
                 throw "Outgoing commit $commit contains a symlink: $path"
             }
 
-            $content = (@(& git -C $script:RepoRoot show $objectName 2>&1) -join "`n")
-            if ($LASTEXITCODE -ne 0) {
-                throw "Could not inspect outgoing file: $objectName"
-            }
+            $content = (@(Invoke-Git -Arguments @('show', $objectName)) -join "`n")
             $blockedRule = Get-BlockedRule -Text $content
             if ($blockedRule) {
                 throw "Outgoing commit $commit has blocked $blockedRule in $path"
@@ -198,20 +246,21 @@ function Get-MarkdownFingerprint {
 function Invoke-VaultSync {
     param([Parameter(Mandatory)][string]$Reason)
 
-    $syncMutex = [System.Threading.Mutex]::new($false, 'Local\RELICDeveloperVaultSync')
-    if (-not $syncMutex.WaitOne(0)) {
+    $syncMutex = [System.Threading.Mutex]::new($false, 'Global\RELICDeveloperVaultSync')
+    if (-not (Enter-Mutex -Mutex $syncMutex -TimeoutMilliseconds 60000)) {
         $syncMutex.Dispose()
-        return
+        throw 'Timed out waiting for another Developer Vault sync.'
     }
 
     try {
+        Test-GitContext
         Test-PublicVault
         [void](Invoke-Git -Arguments (@('add', '-A', '--') + $script:MarkdownPathspecs))
         Test-PublicVault
         Test-StagedVault
         $pathspecs = $script:MarkdownPathspecs
-        & git -C $script:RepoRoot diff --quiet -- @pathspecs
-        if ($LASTEXITCODE -ne 0) {
+        $unstagedAfterCheck = @(Invoke-Git -Arguments (@('diff', '--name-only', '--') + $pathspecs))
+        if ($unstagedAfterCheck.Count -gt 0) {
             throw 'Markdown changed during validation; retry after the save finishes.'
         }
         $staged = @(Invoke-Git -Arguments (@('diff', '--cached', '--name-only', '--') + $script:MarkdownPathspecs))
@@ -245,6 +294,7 @@ if ($SelfTest) {
 }
 
 if ($Check) {
+    Test-GitContext
     Test-PublicVault
     Test-StagedVault
     Test-OutgoingVault
@@ -257,8 +307,8 @@ if (-not $Watch) {
     exit 0
 }
 
-$watchMutex = [System.Threading.Mutex]::new($false, 'Local\RELICDeveloperVaultWatcher')
-if (-not $watchMutex.WaitOne(0)) {
+$watchMutex = [System.Threading.Mutex]::new($false, 'Global\RELICDeveloperVaultWatcher')
+if (-not (Enter-Mutex -Mutex $watchMutex -TimeoutMilliseconds 0)) {
     $watchMutex.Dispose()
     exit 0
 }
