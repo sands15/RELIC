@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Toss Trading Bot
-last_reviewed: 2026-08-28
+last_reviewed: 2026-08-29
 tags:
   - dev/project
   - project/toss-trading-bot
@@ -22,6 +22,7 @@ tags:
 - 2026-08-28: MacBook을 상시 노드로 쓰되 LLM 뉴스 요약을 거래 권한이 없는 별도 Discord 출력 파이프라인으로 분리하는 설계를 확정했다.
 - 2026-08-28: 장전 가격 계획 기반 단타는 롱 1종목·1주·하루 1회와 체결 후 broker OCO로 한정하고, 기존 주문 안전 결함이 해결될 때까지 shadow-only로 두기로 했다.
 - 2026-08-28: 1단계 shadow 장전 계획기를 구현해 현금·비용·위험·호가를 함께 검증하고, 계좌·거래일당 최초 계획 한 건만 불변 저장하도록 했다. 실주문 실행은 계속 차단했다.
+- 2026-08-29: 설정 오타·주문 페이지 검증·알림 유실·예외정보 노출 경계를 보강하고 transactional notification outbox와 재시작 재전송 검증을 추가했다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 
 ## 재사용 가능한 배움
 
