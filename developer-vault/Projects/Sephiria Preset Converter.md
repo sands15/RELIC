@@ -23,8 +23,8 @@ tags:
 ## 대표 이정표
 
 - 2026-08-09 — Manifest V3 확장과 페이지 parser·preset codec roundtrip 기반을 구현했다. [[Daily/2026-08-09|기록]]
+- 2026-08-14 — 110개 build parse와 저장 preset 역검증으로 mapping을 교정하고 v1.0.3을 패키징했다. [[Daily/2026-08-14|기록]]
 
 ## 다음 체크포인트
 
 - wiki나 게임 형식이 바뀌면 익명 fixture와 mapping generator를 전용 Git 저장소에서 다시 검증한 뒤 새 버전을 배포한다.
-

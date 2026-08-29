@@ -35,7 +35,7 @@ tags:
 - 5월: [[Daily/2026-05-16|runtime 재구성·Voyager 연동]] · [[Daily/2026-05-29|Markdown memory vault]] · [[Daily/2026-05-30|runtime boot·장치 역할·입력 제어]]
 - 6월: [[Daily/2026-06-01|RELIC 정적 포트폴리오·Pages 배포]] · [[Daily/2026-06-09|memory graph·안전한 tool routing]] · [[Daily/2026-06-11|Turtle 전략·상태·backtest 기반]] · [[Daily/2026-06-12|read-only broker·paper loop]] · [[Daily/2026-06-14|momentum shadow·위험 한도]] · [[Daily/2026-06-15|TTS barge-in·거래 pilot 안전 경계]] · [[Daily/2026-06-23|runtime 분해·거래 monitoring]]
 - 7월: [[Daily/2026-07-12|거래 데이터·전략 안전 gate]] · [[Daily/2026-07-14|비정본 strategy·ops prototype]] · [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-23|Arcane Library 데이터팩·검증기]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
-- 8월: [[Daily/2026-08-01|Arcane recall·state repair]] · [[Daily/2026-08-09|Sephiria Optimizer·Preset Converter 기반]] · [[Daily/2026-08-11|Bambu support profile 자동화]] · [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]]
+- 8월: [[Daily/2026-08-01|Arcane recall·state repair]] · [[Daily/2026-08-09|Sephiria Optimizer·Preset Converter 기반]] · [[Daily/2026-08-11|Bambu support profile 자동화]] · [[Daily/2026-08-14|Preset Converter v1.0.3]] · [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]]
 
 검증 가능한 개발 결과가 있는 날짜와 주만 소급했으며, 빈 날이나 단순 대화·명령은 기록하지 않았다.
 
