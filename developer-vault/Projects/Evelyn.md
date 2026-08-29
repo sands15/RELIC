@@ -22,6 +22,7 @@ tags:
 
 - 2026-04-16 — 저장소 기준선을 만들고 Discord 음성 응답을 OmniVoice 스트리밍 TTS로 연결했으며 봇 실행기와 모델 서버 흐름을 분리했다. 당시 live E2E를 재검증한 기록은 아니다. [[Daily/2026-04-16|기록]]
 - 2026-04-22 — 음성 작업을 세션·턴에 결박하고 stale 작업 취소, partial·committed STT, 화자 gate와 interruptible TTS 기반을 구현했다. [[Daily/2026-04-22|기록]]
+- 2026-04-25 — 자연어 판단과 외부 행동을 나누는 제약형 autonomy router와 Mineflayer 실행 bridge를 구현했다. 실제 Minecraft E2E 근거는 아니다. [[Daily/2026-04-25|기록]]
 - 2026-07-15 — 복구·보안·회귀 기준선을 고정하고 실제 Control Page 요청 경계와 950개 회귀를 검증했다. Discord 음성·Minecraft E2E는 범위 밖이다. [[Daily/2026-07-15|기록]]
 - 2026-07-18 — `main.py`의 상태·판정·실행 책임을 typed owner로 분리하고 8,793줄을 2,402줄로 축소한 뒤 1,289개 회귀를 통과했다. 외부 runtime은 재시작하지 않았다. [[Daily/2026-07-18|기록]]
 - 2026-07-29 — Voice P0 검증 프레임워크와 기억 provenance·삭제 계약의 초기 기반을 구현했다. 실제 음성 E2E 성공 근거는 아니다. [[Daily/2026-07-29|기록]]
