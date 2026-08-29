@@ -27,7 +27,7 @@ tags:
 ## 2026년 4월부터의 개발 이력
 
 - 4월: [[Daily/2026-04-16|Evelyn 코드 기준선·OmniVoice 스트리밍]] · [[Daily/2026-04-20|계층형 기억·후속 검색]] · [[Daily/2026-04-22|음성 턴 수명주기·취소 경계]] · [[Daily/2026-04-25|제약형 autonomy·Mineflayer bridge]]
-- 5월: [[Daily/2026-05-16|runtime 재구성·Voyager 연동]] · [[Daily/2026-05-29|Markdown memory vault]]
+- 5월: [[Daily/2026-05-16|runtime 재구성·Voyager 연동]] · [[Daily/2026-05-29|Markdown memory vault]] · [[Daily/2026-05-30|runtime boot·장치 역할·입력 제어]]
 - 7월: [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
 - 8월: [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]]
 
