@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Toss Trading Bot
-last_reviewed: 2026-08-29
+last_reviewed: 2026-08-30
 tags:
   - dev/project
   - project/toss-trading-bot
@@ -37,6 +37,7 @@ tags:
 - 2026-08-29: 계좌·현금·보유·수수료·시세·세션·주문 상태는 Toss API에서 매번 조회하고, 사용자가 정할 값은 선정 방식·투입/손실 한도·승인/비상청산 권한으로 축소했다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md`에 둔다.
 - 2026-08-29: 자동 종목 선정과 현금비율 기반 sizing, 시스템 계획 후 단일 승인을 선택했다. OCO 보호 실패 시 기존 보유가 아니라 당일 해당 계획으로 취득해 남아 있는 전 수량만 자동 비상청산하기로 했다.
 - 2026-08-29: 계획 승인은 private Discord bot의 버튼·hash 이중 확인으로 받되 채널 보기·메시지 전송 외 Discord 권한과 Toss 자격증명·주문 권한을 주지 않는 제한형 control path로 설계했다.
+- 2026-08-30: 잠긴 장전 계획의 한 종목만 `trade:us`·`orderbook:us`로 구독하는 read-only shadow stream을 구현했다. OAuth·현재가·호가 조회 외 broker 요청과 계좌·주문 채널은 0건이며 전체 회귀 `483 passed`; 실제 Mac/Toss 외부 smoke와 장중 soak는 아직 남았다. 상세 근거는 프로젝트 `src/turtle_bot/toss_stream.py`, `tests/test_toss_stream.py`, `docs/toss-api-contract.md`, `docs/development-log.md`에 둔다.
 
 ## 재사용 가능한 배움
 
@@ -47,6 +48,7 @@ tags:
 - 자동매매 계획의 cash sizing은 주문금액만 나누지 말고 예상 왕복비용까지 먼저 예약해야 하며, 계획을 DB unique INSERT로 잠그면 재시작·동시 프로세스의 당일 재가격을 막을 수 있다.
 - 외부 알림은 거래 상태와 따로 보내지 말고 transactional outbox에 함께 기록해야 재시작 시 유실을 막을 수 있다. 원격 멱등키가 없으면 정확히 한 번이 아니라 at-least-once임도 운영 문서에 명시한다.
 - AI data-diode는 별도 프로세스라는 이름만으로 성립하지 않는다. 거래 package를 import하지 않는 실행 경로, allowlist context, 별도 DB/webhook, 거래 secret 환경 거부를 함께 검증해야 한다.
+- sequence나 cursor가 없는 시장 데이터는 REST baseline과 WebSocket 재연결만으로 gap-free 상태를 증명할 수 없으므로, 신선도·수신시각·계획 만료를 모두 통과한 shadow 관측값도 live 진입 권한과 분리한다.
 
 ## 다음 체크포인트
 
