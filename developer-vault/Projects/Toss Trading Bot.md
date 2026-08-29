@@ -21,6 +21,7 @@ tags:
 - 2026-06-11: Turtle 전략을 domain·indicator로 분리하고 API-free runtime, SQLite 상태 저장소와 보수적 backtest engine 및 테스트를 구현했다. [[Daily/2026-06-11|기록]]
 - 2026-06-12: Toss read-only adapter·position reconciliation과 paper intent loop, calendar gate, 보고·AI summary·운영 dashboard 기반을 구현했다. [[Daily/2026-06-12|기록]]
 - 2026-06-14: momentum shadow·point-in-time backtest와 exposure cap·cash reserve를 구현했다. backtest 수치는 live 성과로 보지 않는다. [[Daily/2026-06-14|기록]]
+- 2026-06-15: 제한형 live execution·order·safety 모듈과 운영 safety UX·거래 상태 알림을 구현했다. 실제 주문 성공 근거는 아니다. [[Daily/2026-06-15|기록]]
 - 2026-08-28: GitHub 기준선과 더 앞선 로컬 작업 트리의 분기를 확인하고, 프로젝트에 live 전환 차단 조건과 단순화 후보를 남겼다.
 - 2026-08-28: MacBook을 상시 노드로 쓰되 LLM 뉴스 요약을 거래 권한이 없는 별도 Discord 출력 파이프라인으로 분리하는 설계를 확정했다.
 - 2026-08-28: 장전 가격 계획 기반 단타는 롱 1종목·1주·하루 1회와 체결 후 broker OCO로 한정하고, 기존 주문 안전 결함이 해결될 때까지 shadow-only로 두기로 했다.
