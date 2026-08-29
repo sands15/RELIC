@@ -40,6 +40,7 @@ tags:
 - 2026-08-30: 잠긴 장전 계획의 한 종목만 `trade:us`·`orderbook:us`로 구독하는 read-only shadow stream을 구현했다. OAuth·현재가·호가 조회 외 broker 요청과 계좌·주문 채널은 0건이며 전체 회귀 `483 passed`; 실제 Mac/Toss 외부 smoke와 장중 soak는 아직 남았다. 상세 근거는 프로젝트 `src/turtle_bot/toss_stream.py`, `tests/test_toss_stream.py`, `docs/toss-api-contract.md`, `docs/development-log.md`에 둔다.
 - 2026-08-30: Toss 미국 실시간 거래대금 랭킹을 후보 소스로만 쓰고 거래 가능 보통주·경고·완료 봉·현재가·호가·최종 계좌/현금을 strict 재검증해 한 종목을 잠그는 자동 selector를 shadow-only로 구현했다. 전체 회귀 `496 passed`; 공식 REST의 미국 halt/LULD 부재와 broker·시장·로컬 DB 간 원자 snapshot 부재 때문에 live 승격은 계속 차단하며 실제 Mac/Toss shadow smoke도 남았다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/toss-api-contract.md`에 둔다.
 - 2026-08-30: 남은 live 경계를 단일 `intraday_live` runtime과 한 run 상태표로 제한하고, 10분 create 멱등 창·누적 fill·REST 권위·BUY→OCO 보호 공백·role별 entry kill을 설계에 고정했다. 같은 UID 승인, 상태변경 dashboard, 수동 주문이 섞이는 계좌는 live 권한으로 쓰지 않으며 authoritative halt source와 외부 deadman까지 준비되기 전에는 NO-GO다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md`, `docs/toss-api-contract.md`, `docs/macos-operations.md`에 둔다.
+- 2026-08-30: 실제 주문·실계좌 시험을 별도 미래 단계로 완전히 분리하고, 현재 완료 목표를 `NON_LIVE_IMPLEMENTATION_COMPLETE / LIVE_NO_GO`로 고정했다. 한 tick 한 mutation, immutable request reservation, writer/sync fence, restart-first reconciliation, fake broker crash matrix, strict shadow transport tripwire와 다섯 개 Mac shadow job까지 구현 명세를 확정했다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md` 13절과 `docs/development-log.md`에 둔다.
 
 ## 재사용 가능한 배움
 
@@ -53,7 +54,8 @@ tags:
 - sequence나 cursor가 없는 시장 데이터는 REST baseline과 WebSocket 재연결만으로 gap-free 상태를 증명할 수 없으므로, 신선도·수신시각·계획 만료를 모두 통과한 shadow 관측값도 live 진입 권한과 분리한다.
 - broker 멱등키에는 유효 시간이 있으므로 canonical 요청을 먼저 영속화하고, 그 시간 안에는 exact identity recovery만 허용하며 시간이 지난 UNKNOWN은 자동 재제출하지 않는다.
 - 자동매매 kill switch는 process 종료나 모든 주문 차단이 아니라 신규 진입만 durable하게 막아야 하며, 이미 생긴 포지션의 취소·보호·청산은 ownership 검증 아래 계속돼야 한다.
+- 실거래를 하지 않는 구현 완료와 live 준비 완료는 서로 다른 상태다. 실제 endpoint가 연결되지 않았음을 config, read-only transport, process manifest, no-egress test의 독립된 여러 층으로 증명하고 결과 label에도 `LIVE_NO_GO`를 남겨야 한다.
 
 ## 다음 체크포인트
 
-- live flag는 닫은 채 canonical state migration·writer fence·immutable request reservation부터 구현한다. 그 다음 공식 주문 adapter 교정, startup REST reconciliation, 승인 consumer, fill→OCO→전량 exit fault test를 순서대로 통과시키고 exact-SHA Mac shadow soak와 1주 pilot을 별도 승인한다.
+- live flag는 닫은 채 v4 state migration·writer/sync fence·immutable request reservation부터 구현한다. 그 다음 strict adapter parser, startup reconciliation, synthetic 승인 consumer, fill→OCO→전량 exit fault test, exact-SHA Mac shadow soak까지만 완료한다. 실제 1주 pilot은 이 체크포인트에 포함하지 않고 별도 승인으로만 연다.
