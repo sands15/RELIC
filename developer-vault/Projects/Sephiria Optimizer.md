@@ -23,8 +23,8 @@ tags:
 ## 대표 이정표
 
 - 2026-08-09 — snapshot plugin과 별도 optimizer companion, 설치·검증 기반을 구현했다. [[Daily/2026-08-09|기록]]
+- 2026-08-21 — 밀집 가방 탐색·안전한 다단계 적용과 installer/companion 복구를 구현하고 v0.4.1 release blocker를 제거했다. [[Daily/2026-08-21|기록]]
 
 ## 다음 체크포인트
 
 - 다시 배포할 때는 전용 Git 저장소와 재현 가능한 build를 만들고, 지원 게임 버전별 회귀와 rollback 절차를 함께 고정한다.
-
