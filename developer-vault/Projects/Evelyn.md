@@ -29,6 +29,7 @@ tags:
 - 2026-05-30 — memory vault 가독성과 관리 기능을 보강하고 runtime boot progress, GPU 역할 및 음성 입력원 제어 경계를 구현했다. [[Daily/2026-05-30|기록]]
 - 2026-06-09 — memory graph UI와 등록된 tool만 실행하는 fail-closed Control Page routing 및 경계 테스트를 구현했다. [[Daily/2026-06-09|기록]]
 - 2026-06-15 — local TTS barge-in·speaker verification과 음성 turn orchestration 검증 경로를 구현했다. 실제 장치 E2E 근거는 아니다. [[Daily/2026-06-15|기록]]
+- 2026-06-23 — `main.py`에서 Control Page·Discord·memory·voice 상태를 분리하고 main LLM·voice delivery runtime을 추출했다. 최종 분해 이정표는 7월 18일이다. [[Daily/2026-06-23|기록]]
 - 2026-07-15 — 복구·보안·회귀 기준선을 고정하고 실제 Control Page 요청 경계와 950개 회귀를 검증했다. Discord 음성·Minecraft E2E는 범위 밖이다. [[Daily/2026-07-15|기록]]
 - 2026-07-18 — `main.py`의 상태·판정·실행 책임을 typed owner로 분리하고 8,793줄을 2,402줄로 축소한 뒤 1,289개 회귀를 통과했다. 외부 runtime은 재시작하지 않았다. [[Daily/2026-07-18|기록]]
 - 2026-07-29 — Voice P0 검증 프레임워크와 기억 provenance·삭제 계약의 초기 기반을 구현했다. 실제 음성 E2E 성공 근거는 아니다. [[Daily/2026-07-29|기록]]
