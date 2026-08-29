@@ -2,7 +2,7 @@
 type: home
 scope: personal-development
 visibility: public
-last_reviewed: 2026-08-28
+last_reviewed: 2026-08-29
 tags:
   - dev/home
 ---
