@@ -27,6 +27,7 @@ tags:
 - 2026-05-16 — runtime package와 gateway·skill 경계를 재구성하고 Evelyn 소유의 Voyager adapter 및 재개·완료 bookkeeping을 구현했다. vendoring된 원본 코드는 성과에서 제외했다. [[Daily/2026-05-16|기록]]
 - 2026-05-29 — Markdown memory vault와 관리 API·UI, 음성 파이프라인 연결 및 테스트 기반을 구현했다. 실제 기억 내용은 기록에서 제외했다. [[Daily/2026-05-29|기록]]
 - 2026-05-30 — memory vault 가독성과 관리 기능을 보강하고 runtime boot progress, GPU 역할 및 음성 입력원 제어 경계를 구현했다. [[Daily/2026-05-30|기록]]
+- 2026-06-09 — memory graph UI와 등록된 tool만 실행하는 fail-closed Control Page routing 및 경계 테스트를 구현했다. [[Daily/2026-06-09|기록]]
 - 2026-07-15 — 복구·보안·회귀 기준선을 고정하고 실제 Control Page 요청 경계와 950개 회귀를 검증했다. Discord 음성·Minecraft E2E는 범위 밖이다. [[Daily/2026-07-15|기록]]
 - 2026-07-18 — `main.py`의 상태·판정·실행 책임을 typed owner로 분리하고 8,793줄을 2,402줄로 축소한 뒤 1,289개 회귀를 통과했다. 외부 runtime은 재시작하지 않았다. [[Daily/2026-07-18|기록]]
 - 2026-07-29 — Voice P0 검증 프레임워크와 기억 provenance·삭제 계약의 초기 기반을 구현했다. 실제 음성 E2E 성공 근거는 아니다. [[Daily/2026-07-29|기록]]
