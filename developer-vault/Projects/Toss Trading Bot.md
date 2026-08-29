@@ -38,6 +38,7 @@ tags:
 - 2026-08-29: 자동 종목 선정과 현금비율 기반 sizing, 시스템 계획 후 단일 승인을 선택했다. OCO 보호 실패 시 기존 보유가 아니라 당일 해당 계획으로 취득해 남아 있는 전 수량만 자동 비상청산하기로 했다.
 - 2026-08-29: 계획 승인은 private Discord bot의 버튼·hash 이중 확인으로 받되 채널 보기·메시지 전송 외 Discord 권한과 Toss 자격증명·주문 권한을 주지 않는 제한형 control path로 설계했다.
 - 2026-08-30: 잠긴 장전 계획의 한 종목만 `trade:us`·`orderbook:us`로 구독하는 read-only shadow stream을 구현했다. OAuth·현재가·호가 조회 외 broker 요청과 계좌·주문 채널은 0건이며 전체 회귀 `483 passed`; 실제 Mac/Toss 외부 smoke와 장중 soak는 아직 남았다. 상세 근거는 프로젝트 `src/turtle_bot/toss_stream.py`, `tests/test_toss_stream.py`, `docs/toss-api-contract.md`, `docs/development-log.md`에 둔다.
+- 2026-08-30: Toss 미국 실시간 거래대금 랭킹을 후보 소스로만 쓰고 거래 가능 보통주·경고·완료 봉·현재가·호가·최종 계좌/현금을 strict 재검증해 한 종목을 잠그는 자동 selector를 shadow-only로 구현했다. 전체 회귀 `496 passed`; 공식 REST의 미국 halt/LULD 부재와 broker·시장·로컬 DB 간 원자 snapshot 부재 때문에 live 승격은 계속 차단하며 실제 Mac/Toss shadow smoke도 남았다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/toss-api-contract.md`에 둔다.
 
 ## 재사용 가능한 배움
 
