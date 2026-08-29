@@ -21,6 +21,7 @@ tags:
 ## 대표 이정표
 
 - 2026-04-16 — 저장소 기준선을 만들고 Discord 음성 응답을 OmniVoice 스트리밍 TTS로 연결했으며 봇 실행기와 모델 서버 흐름을 분리했다. 당시 live E2E를 재검증한 기록은 아니다. [[Daily/2026-04-16|기록]]
+- 2026-04-20 — 기억을 room·person·session 범위로 나누고 미완 질문과 약속을 후속 검색으로 이어가는 기반을 구현했다. 실제 대화·기억 내용은 기록하지 않았다. [[Daily/2026-04-20|기록]]
 - 2026-04-22 — 음성 작업을 세션·턴에 결박하고 stale 작업 취소, partial·committed STT, 화자 gate와 interruptible TTS 기반을 구현했다. [[Daily/2026-04-22|기록]]
 - 2026-04-25 — 자연어 판단과 외부 행동을 나누는 제약형 autonomy router와 Mineflayer 실행 bridge를 구현했다. 실제 Minecraft E2E 근거는 아니다. [[Daily/2026-04-25|기록]]
 - 2026-05-16 — runtime package와 gateway·skill 경계를 재구성하고 Evelyn 소유의 Voyager adapter 및 재개·완료 bookkeeping을 구현했다. vendoring된 원본 코드는 성과에서 제외했다. [[Daily/2026-05-16|기록]]
