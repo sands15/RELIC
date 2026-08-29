@@ -24,6 +24,7 @@ tags:
 
 - 2026-08-09 — snapshot plugin과 별도 optimizer companion, 설치·검증 기반을 구현했다. [[Daily/2026-08-09|기록]]
 - 2026-08-21 — 밀집 가방 탐색·안전한 다단계 적용과 installer/companion 복구를 구현하고 v0.4.1 release blocker를 제거했다. [[Daily/2026-08-21|기록]]
+- 2026-08-24 — canonical search, safe·max-damage 모드와 bounded retry를 v0.4.3으로 패키징하고 companion·plugin·installer·archive 검증을 통과했다. [[Daily/2026-08-24|기록]]
 
 ## 다음 체크포인트
 
