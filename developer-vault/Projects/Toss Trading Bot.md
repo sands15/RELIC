@@ -33,6 +33,7 @@ tags:
 - 2026-08-29: 설정 오타·주문 페이지 검증·알림 유실·예외정보 노출 경계를 보강하고 transactional notification outbox와 재시작 재전송 검증을 추가했다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 - 2026-08-29: 잠긴 단타 계획의 한 종목만 받는 독립 news worker를 구현하고 Finnhub·local LLM·뉴스 Discord를 거래 import/DB/secret에서 분리했다. 전체 회귀는 `372 passed`이며 실제 외부 서비스와 Mac 가동은 미검증이다. [[Daily/2026-08-29|기록]]
 - 2026-08-29: Mac의 공개키 원격 접속은 검증했지만 정본 불일치, 전원 유지, live fail-safe, 상태 DB 무결성 문제가 확인돼 배포·외부 smoke test를 보류했다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다. [[Daily/2026-08-29|기록]]
+- 2026-08-29: AC 전원의 단기 SSH heartbeat·재접속 표본은 통과했지만 idle·장시간·재부팅 시험을 운영 gate로 남겼다. 단타 live 최소안은 기존 원장을 재사용하는 stream/runtime 두 모듈과 실행상태 표 하나로 제한했다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/intraday-bracket-design.md`에 둔다.
 
 ## 재사용 가능한 배움
 
