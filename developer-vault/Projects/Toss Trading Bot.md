@@ -32,6 +32,7 @@ tags:
 - 2026-08-28: 1단계 shadow 장전 계획기를 구현해 현금·비용·위험·호가를 함께 검증하고, 계좌·거래일당 최초 계획 한 건만 불변 저장하도록 했다. 실주문 실행은 계속 차단했다.
 - 2026-08-29: 설정 오타·주문 페이지 검증·알림 유실·예외정보 노출 경계를 보강하고 transactional notification outbox와 재시작 재전송 검증을 추가했다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 - 2026-08-29: 잠긴 단타 계획의 한 종목만 받는 독립 news worker를 구현하고 Finnhub·local LLM·뉴스 Discord를 거래 import/DB/secret에서 분리했다. 전체 회귀는 `372 passed`이며 실제 외부 서비스와 Mac 가동은 미검증이다. [[Daily/2026-08-29|기록]]
+- 2026-08-29: Mac의 공개키 원격 접속은 검증했지만 정본 불일치, 전원 유지, live fail-safe, 상태 DB 무결성 문제가 확인돼 배포·외부 smoke test를 보류했다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다. [[Daily/2026-08-29|기록]]
 
 ## 재사용 가능한 배움
 
@@ -45,4 +46,4 @@ tags:
 
 ## 다음 체크포인트
 
-- Mac 전용 가상환경과 canonical import 경로를 고정하고 Finnhub·뉴스 Discord·local LLM one-shot을 먼저 smoke test한다. 이후 실제 미국장 5세션의 뉴스 품질·중복·전력과 장전 계획을 관찰한 뒤, P0 주문 정합성·WebSocket resync·BUY→OCO 보호 상태기계를 순서대로 검증한다.
+- Mac의 상시 전원과 절전 차단을 고정하고 live 기본값을 fail-safe로 되돌린 뒤 손상 상태 DB를 복제본에서 복구 검증한다. 그 다음 clean canonical checkout에서 두 작업트리를 수동 통합하고, exact import와 전체 회귀를 통과한 격리형 뉴스 one-shot만 smoke test한다.
