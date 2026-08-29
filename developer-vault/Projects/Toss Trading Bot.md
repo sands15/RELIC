@@ -36,6 +36,7 @@ tags:
 - 2026-08-29: AC 전원의 단기 SSH heartbeat·재접속 표본은 통과했지만 idle·장시간·재부팅 시험을 운영 gate로 남겼다. 단타 live 최소안은 기존 원장을 재사용하는 stream/runtime 두 모듈과 실행상태 표 하나로 제한했다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/intraday-bracket-design.md`에 둔다.
 - 2026-08-29: 계좌·현금·보유·수수료·시세·세션·주문 상태는 Toss API에서 매번 조회하고, 사용자가 정할 값은 선정 방식·투입/손실 한도·승인/비상청산 권한으로 축소했다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md`에 둔다.
 - 2026-08-29: 자동 종목 선정과 현금비율 기반 sizing, 시스템 계획 후 단일 승인을 선택했다. OCO 보호 실패 시 기존 보유가 아니라 당일 해당 계획으로 취득해 남아 있는 전 수량만 자동 비상청산하기로 했다.
+- 2026-08-29: 계획 승인은 private Discord bot의 버튼·hash 이중 확인으로 받되 채널 보기·메시지 전송 외 Discord 권한과 Toss 자격증명·주문 권한을 주지 않는 제한형 control path로 설계했다.
 
 ## 재사용 가능한 배움
 
