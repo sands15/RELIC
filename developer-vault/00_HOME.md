@@ -18,6 +18,7 @@ tags:
 - [[Projects/Evelyn]]
 - [[Projects/Arcane Library Map]]
 - [[Projects/Bambu Support Profile Automation]]
+- [[Projects/How to Fish Boss HP Console]]
 - [[Projects/RELIC]]
 - [[Projects/Sephiria Optimizer]]
 - [[Projects/Sephiria Preset Converter]]
