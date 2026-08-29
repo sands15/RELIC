@@ -22,8 +22,8 @@ tags:
 ## 대표 이정표
 
 - 2026-07-23 — 데이터팩·리소스팩의 gameplay 함수와 package·validation 기반을 구현했다. [[Daily/2026-07-23|기록]]
+- 2026-08-01 — recall transaction, 손상 record·model reference repair와 carried/HUD 상태 복구 코드를 구현했다. [[Daily/2026-08-01|기록]]
 
 ## 다음 체크포인트
 
 - 다시 개발할 때는 source와 validator를 전용 Git 저장소로 옮기고 배포 ZIP이 그 revision에서 재현됨을 확인한다.
-
