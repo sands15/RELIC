@@ -24,8 +24,9 @@ tags:
 - `Daily/` — 의미 있는 결과가 생긴 날의 기록
 - `Reviews/` — Codex가 매주 일요일 작성하는 주간 회고
 
-## 2026년 7월부터의 개발 이력
+## 2026년 4월부터의 개발 이력
 
+- 4월: [[Daily/2026-04-16|Evelyn 코드 기준선·OmniVoice 스트리밍]]
 - 7월: [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
 - 8월: [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]]
 
