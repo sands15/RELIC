@@ -25,6 +25,7 @@ tags:
 - 2026-06-23: 미확정 주문 monitoring과 Toss candle pagination 계약·테스트를 구현했다. 실제 거래 데이터는 기록하지 않았다. [[Daily/2026-06-23|기록]]
 - 2026-06-24: multi-user gateway 설정 요청을 signed CSRF token으로 보호하고 정상·변조·누락 경계를 테스트했다. [[Daily/2026-06-24|기록]]
 - 2026-07-12: 데이터 신선도, sector·correlation exposure와 OOS 전략 성능을 live 진입 전 gate로 구현했다. 공개 release 전의 로컬 커밋 이력이다. [[Daily/2026-07-12|기록]]
+- 2026-07-14: strategy shadow·market-close·retention·research alert prototype이 512개 테스트를 통과한 감사 기록을 남겼다. 비정본 작업 트리이므로 배포 완료로 보지 않는다. [[Daily/2026-07-14|기록]]
 - 2026-08-28: GitHub 기준선과 더 앞선 로컬 작업 트리의 분기를 확인하고, 프로젝트에 live 전환 차단 조건과 단순화 후보를 남겼다.
 - 2026-08-28: MacBook을 상시 노드로 쓰되 LLM 뉴스 요약을 거래 권한이 없는 별도 Discord 출력 파이프라인으로 분리하는 설계를 확정했다.
 - 2026-08-28: 장전 가격 계획 기반 단타는 롱 1종목·1주·하루 1회와 체결 후 broker OCO로 한정하고, 기존 주문 안전 결함이 해결될 때까지 shadow-only로 두기로 했다.
