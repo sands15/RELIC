@@ -41,6 +41,7 @@ tags:
 - 2026-08-30: Toss 미국 실시간 거래대금 랭킹을 후보 소스로만 쓰고 거래 가능 보통주·경고·완료 봉·현재가·호가·최종 계좌/현금을 strict 재검증해 한 종목을 잠그는 자동 selector를 shadow-only로 구현했다. 전체 회귀 `496 passed`; 공식 REST의 미국 halt/LULD 부재와 broker·시장·로컬 DB 간 원자 snapshot 부재 때문에 live 승격은 계속 차단하며 실제 Mac/Toss shadow smoke도 남았다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/toss-api-contract.md`에 둔다.
 - 2026-08-30: 남은 live 경계를 단일 `intraday_live` runtime과 한 run 상태표로 제한하고, 10분 create 멱등 창·누적 fill·REST 권위·BUY→OCO 보호 공백·role별 entry kill을 설계에 고정했다. 같은 UID 승인, 상태변경 dashboard, 수동 주문이 섞이는 계좌는 live 권한으로 쓰지 않으며 authoritative halt source와 외부 deadman까지 준비되기 전에는 NO-GO다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md`, `docs/toss-api-contract.md`, `docs/macos-operations.md`에 둔다.
 - 2026-08-30: 실제 주문·실계좌 시험을 별도 미래 단계로 완전히 분리하고, 현재 완료 목표를 `NON_LIVE_IMPLEMENTATION_COMPLETE / LIVE_NO_GO`로 고정했다. 한 tick 한 mutation, immutable request reservation, writer/sync fence, restart-first reconciliation, 조건주문 불명 결과의 자동 재호출 금지, exact-origin/no-redirect shadow 경계, process-level no-egress 시험과 다섯 개 Mac shadow job까지 구현 명세를 확정했다. 상세 근거는 프로젝트 `docs/intraday-bracket-design.md` 13절과 `docs/development-log.md`에 둔다.
+- 2026-08-30: fake broker 기반 단타 lifecycle core, 승인 v2 consumer, SQLite v5 fence·만료·one-shot reservation, exact OCO/전량 비상청산과 재시작 fail-closed 회귀를 구현했다. 전체 `693 passed, 3 skipped`, Windows no-live gate `456 passed, 2 skipped`이며 결과는 `NON_LIVE_CORE_IMPLEMENTED / LIVE_NO_GO`다. production dispatch와 실제 외부 호출은 계속 닫혀 있다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/intraday-bracket-design.md`에 둔다.
 
 ## 재사용 가능한 배움
 
@@ -58,4 +59,4 @@ tags:
 
 ## 다음 체크포인트
 
-- live flag는 닫은 채 v4 state migration·writer/sync fence·immutable request reservation부터 구현한다. 그 다음 strict adapter parser, startup reconciliation, synthetic 승인 consumer, fill→OCO→전량 exit fault test, exact-SHA Mac shadow soak까지만 완료한다. 실제 1주 pilot은 이 체크포인트에 포함하지 않고 별도 승인으로만 연다.
+- live flag와 production dispatch는 닫은 채 protection/exit SLO·원자적 긴급 outbox, triggered stop-limit 전량 exit escalation, 전체 kill-point replay, authoritative halt/LULD source, production 승인 격리와 clean exact-SHA Mac no-egress 운영 증거를 순서대로 닫는다. 실제 pilot은 이 체크포인트와 분리해 별도 승인으로만 연다.
