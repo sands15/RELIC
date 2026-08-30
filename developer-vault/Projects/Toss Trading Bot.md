@@ -44,6 +44,7 @@ tags:
 - 2026-08-30: fake broker 기반 단타 lifecycle core, 승인 v2 consumer, SQLite v5 fence·만료·one-shot reservation, exact OCO/전량 비상청산과 재시작 fail-closed 회귀를 구현했다. 전체 `693 passed, 3 skipped`, Windows no-live gate `456 passed, 2 skipped`이며 결과는 `NON_LIVE_CORE_IMPLEMENTED / LIVE_NO_GO`다. production dispatch와 실제 외부 호출은 계속 닫혀 있다. 상세 근거는 프로젝트 `docs/development-log.md`와 `docs/intraday-bracket-design.md`에 둔다.
 - 2026-08-30: 미국장 실제 시세·호가를 선택 종목 한 개에만 구독하고 USD 10,000 가상 원장으로 2026-08-31~2026-09-30을 관측하는 paper simulation을 구현했다. exact-SHA Mac release와 개인 planner/stream manifest를 검증했으며 Windows non-live gate `521 passed, 2 skipped`, Mac gate `523 passed`다. 실주문 경로는 계속 차단하고 실제 관측 시작은 로컬 Keychain 잠금 해제 뒤로 남겼다. [[Daily/2026-08-30|기록]]
 - 2026-08-31: zsh의 unbraced parameter 뒤 colon이 modifier로 해석돼 Keychain account를 변형하던 LaunchAgent 실패를 braced parameter로 수정하고 회귀 검사를 추가했다. exact-SHA `8bc17c199bdcc9125db7d0f063945e048b8e12c7`를 Mac에서 검증해 한 달 USD 10,000 paper simulation을 시작했으며, 선택된 한 종목의 공개 시세·호가만 읽고 실주문 경로는 계속 닫았다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
+- 2026-08-31: 거래 DB를 열지 않는 redacted status artifact와 exact-context Discord `/현황`을 같은 Mac shadow release에 배포했다. guild command 등록과 non-live gate는 검증했으며 실제 사용자 slash interaction은 남겼다. [[Daily/2026-08-31|기록]]
 
 ## 재사용 가능한 배움
 
