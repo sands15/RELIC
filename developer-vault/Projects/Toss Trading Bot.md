@@ -46,6 +46,7 @@ tags:
 - 2026-08-31: zsh의 unbraced parameter 뒤 colon이 modifier로 해석돼 Keychain account를 변형하던 LaunchAgent 실패를 braced parameter로 수정하고 회귀 검사를 추가했다. exact-SHA `8bc17c199bdcc9125db7d0f063945e048b8e12c7`를 Mac에서 검증해 한 달 USD 10,000 paper simulation을 시작했으며, 선택된 한 종목의 공개 시세·호가만 읽고 실주문 경로는 계속 닫았다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 - 2026-08-31: 거래 DB를 열지 않는 redacted status artifact와 exact-context Discord `/현황`을 같은 Mac shadow release에 배포했다. guild command 등록과 non-live gate는 검증했으며 실제 사용자 slash interaction은 남겼다. [[Daily/2026-08-31|기록]]
 - 2026-08-31: 사용자가 `/현황` 호출을 확인했고, 자동선정 후보 없음과 시세 결측을 분리해 마지막 유효 시도의 정상 무후보만 관망 coverage로 남기는 status v2를 배포했다. zero-plan은 계속 미완료이며 Mac topology는 3/5라 live와 exact-five 완료를 주장하지 않는다. [[Daily/2026-08-31|기록]]
+- 2026-08-31: Mac 장전 실행에서 OAuth gzip 오류가 실제 `401 invalid_client`를 가리던 문제를 진단했다. gzip을 strict 처리하고 성공한 token을 loop에서 재사용하며 invalid client의 반복 network 재시도를 막은 release를 검증했지만, 자격증명 재발급 전에는 planner를 plan 0건 상태로 정지했다. 다음 병렬 실험은 새 cohort에서 서로 다른 두 종목·가상현금 50:50·한 WebSocket·분리 ledger로만 시작한다. [[Daily/2026-08-31|기록]]
 
 ## 재사용 가능한 배움
 
@@ -62,6 +63,7 @@ tags:
 - 실거래를 하지 않는 구현 완료와 live 준비 완료는 서로 다른 상태다. 실제 endpoint가 연결되지 않았음을 config, read-only transport, process manifest, no-egress test의 독립된 여러 층으로 증명하고 결과 label에도 `LIVE_NO_GO`를 남겨야 한다.
 - POSIX owner-only 파일 검증은 production writer뿐 아니라 테스트 fixture의 mode까지 명시해야 Windows와 Mac의 보안 동작 차이를 릴리스 게이트가 정확히 재현한다.
 - 실험 coverage는 프로세스가 실행됐다는 사실만으로 채우지 않는다. 전략상 관망, 공식 휴장, 데이터 품질 실패를 별도 상태로 유지해야 결과의 표본 수와 운영 누락을 함께 해석할 수 있다.
+- HTTP 오류 본문도 Content-Encoding을 먼저 처리해야 원래 status를 보존할 수 있다. OAuth client는 process loop에서 재사용하고 terminal `invalid_client`는 credential 교체·process 재시작 전까지 network 재시도하지 않는다.
 
 ## 다음 체크포인트
 
