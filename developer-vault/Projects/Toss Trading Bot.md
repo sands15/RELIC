@@ -45,6 +45,7 @@ tags:
 - 2026-08-30: 미국장 실제 시세·호가를 선택 종목 한 개에만 구독하고 USD 10,000 가상 원장으로 2026-08-31~2026-09-30을 관측하는 paper simulation을 구현했다. exact-SHA Mac release와 개인 planner/stream manifest를 검증했으며 Windows non-live gate `521 passed, 2 skipped`, Mac gate `523 passed`다. 실주문 경로는 계속 차단하고 실제 관측 시작은 로컬 Keychain 잠금 해제 뒤로 남겼다. [[Daily/2026-08-30|기록]]
 - 2026-08-31: zsh의 unbraced parameter 뒤 colon이 modifier로 해석돼 Keychain account를 변형하던 LaunchAgent 실패를 braced parameter로 수정하고 회귀 검사를 추가했다. exact-SHA `8bc17c199bdcc9125db7d0f063945e048b8e12c7`를 Mac에서 검증해 한 달 USD 10,000 paper simulation을 시작했으며, 선택된 한 종목의 공개 시세·호가만 읽고 실주문 경로는 계속 닫았다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 - 2026-08-31: 거래 DB를 열지 않는 redacted status artifact와 exact-context Discord `/현황`을 같은 Mac shadow release에 배포했다. guild command 등록과 non-live gate는 검증했으며 실제 사용자 slash interaction은 남겼다. [[Daily/2026-08-31|기록]]
+- 2026-08-31: 사용자가 `/현황` 호출을 확인했고, 자동선정 후보 없음과 시세 결측을 분리해 마지막 유효 시도의 정상 무후보만 관망 coverage로 남기는 status v2를 배포했다. zero-plan은 계속 미완료이며 Mac topology는 3/5라 live와 exact-five 완료를 주장하지 않는다. [[Daily/2026-08-31|기록]]
 
 ## 재사용 가능한 배움
 
@@ -60,6 +61,7 @@ tags:
 - 자동매매 kill switch는 process 종료나 모든 주문 차단이 아니라 신규 진입만 durable하게 막아야 하며, 이미 생긴 포지션의 취소·보호·청산은 ownership 검증 아래 계속돼야 한다.
 - 실거래를 하지 않는 구현 완료와 live 준비 완료는 서로 다른 상태다. 실제 endpoint가 연결되지 않았음을 config, read-only transport, process manifest, no-egress test의 독립된 여러 층으로 증명하고 결과 label에도 `LIVE_NO_GO`를 남겨야 한다.
 - POSIX owner-only 파일 검증은 production writer뿐 아니라 테스트 fixture의 mode까지 명시해야 Windows와 Mac의 보안 동작 차이를 릴리스 게이트가 정확히 재현한다.
+- 실험 coverage는 프로세스가 실행됐다는 사실만으로 채우지 않는다. 전략상 관망, 공식 휴장, 데이터 품질 실패를 별도 상태로 유지해야 결과의 표본 수와 운영 누락을 함께 해석할 수 있다.
 
 ## 다음 체크포인트
 
