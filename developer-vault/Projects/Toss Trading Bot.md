@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Toss Trading Bot
-last_reviewed: 2026-08-31
+last_reviewed: 2026-09-01
 tags:
   - dev/project
   - project/toss-trading-bot
@@ -46,7 +46,8 @@ tags:
 - 2026-08-31: zsh의 unbraced parameter 뒤 colon이 modifier로 해석돼 Keychain account를 변형하던 LaunchAgent 실패를 braced parameter로 수정하고 회귀 검사를 추가했다. exact-SHA `8bc17c199bdcc9125db7d0f063945e048b8e12c7`를 Mac에서 검증해 한 달 USD 10,000 paper simulation을 시작했으며, 선택된 한 종목의 공개 시세·호가만 읽고 실주문 경로는 계속 닫았다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다.
 - 2026-08-31: 거래 DB를 열지 않는 redacted status artifact와 exact-context Discord `/현황`을 같은 Mac shadow release에 배포했다. guild command 등록과 non-live gate는 검증했으며 실제 사용자 slash interaction은 남겼다. [[Daily/2026-08-31|기록]]
 - 2026-08-31: 사용자가 `/현황` 호출을 확인했고, 자동선정 후보 없음과 시세 결측을 분리해 마지막 유효 시도의 정상 무후보만 관망 coverage로 남기는 status v2를 배포했다. zero-plan은 계속 미완료이며 Mac topology는 3/5라 live와 exact-five 완료를 주장하지 않는다. [[Daily/2026-08-31|기록]]
-- 2026-08-31: Mac 장전 실행에서 OAuth gzip 오류가 실제 `401 invalid_client`를 가리던 문제를 진단했다. gzip을 strict 처리하고 성공한 token을 loop에서 재사용하며 invalid client의 반복 network 재시도를 막은 release를 검증했지만, 자격증명 재발급 전에는 planner를 plan 0건 상태로 정지했다. 다음 병렬 실험은 새 cohort에서 서로 다른 두 종목·가상현금 50:50·한 WebSocket·분리 ledger로만 시작한다. [[Daily/2026-08-31|기록]]
+- 2026-08-31: Mac 장전 실행에서 OAuth gzip 오류가 실제 `401 invalid_client`를 가리던 문제를 진단했다. gzip을 strict 처리하고 성공한 token을 loop에서 재사용하며 invalid client의 반복 network 재시도를 막은 release를 검증했지만, 인증 차단 해소 전에는 planner를 plan 0건 상태로 정지했다. 다음 병렬 실험은 새 cohort에서 서로 다른 두 종목·가상현금 50:50·한 WebSocket·분리 ledger로만 시작한다. [[Daily/2026-08-31|기록]]
+- 2026-09-01: 새 experiment 전용 고정 A/B paper cohort, 실제 계획 종목만 쓰는 news/stream, 레인별·합산 status를 구현했다. 장 종료 backup은 generation-fenced restore set, retention은 durable 삭제 ledger, watchdog은 alert별 durable ack로 보강했다. DB inode/schema/FK 선검증과 crash-safe log journal·raw companion까지 추가했으며 Mac 배포와 외부 smoke, 실주문은 하지 않고 기존 인증 차단을 유지했다. [[Daily/2026-09-01|기록]]
 
 ## 재사용 가능한 배움
 
