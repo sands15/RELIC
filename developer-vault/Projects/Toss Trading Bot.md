@@ -48,7 +48,7 @@ tags:
 - 2026-08-31: 사용자가 `/현황` 호출을 확인했고, 자동선정 후보 없음과 시세 결측을 분리해 마지막 유효 시도의 정상 무후보만 관망 coverage로 남기는 status v2를 배포했다. zero-plan은 계속 미완료이며 Mac topology는 3/5라 live와 exact-five 완료를 주장하지 않는다. [[Daily/2026-08-31|기록]]
 - 2026-08-31: Mac 장전 실행에서 OAuth gzip 오류가 실제 `401 invalid_client`를 가리던 문제를 진단했다. gzip을 strict 처리하고 성공한 token을 loop에서 재사용하며 invalid client의 반복 network 재시도를 막은 release를 검증했지만, 인증 차단 해소 전에는 planner를 plan 0건 상태로 정지했다. 다음 병렬 실험은 새 cohort에서 서로 다른 두 종목·가상현금 50:50·한 WebSocket·분리 ledger로만 시작한다. [[Daily/2026-08-31|기록]]
 - 2026-09-01: 새 experiment 전용 고정 A/B paper cohort, 실제 계획 종목만 쓰는 news/stream, 레인별·합산 status를 구현했다. 장 종료 backup은 generation-fenced restore set, retention은 durable 삭제 ledger, watchdog은 alert별 durable ack로 보강했다. DB inode/schema/FK 선검증과 crash-safe log journal·raw companion까지 추가했으며 Mac 배포와 외부 smoke, 실주문은 하지 않고 기존 인증 차단을 유지했다. [[Daily/2026-09-01|기록]]
-- 2026-09-01: Mac을 Codex SSH 실행 호스트로 등록하고 장문 대화의 pagination 제한은 요약된 새 원격 세션으로 우회했다. clean 관리형 worktree가 작업 브랜치 exact SHA와 일치함을 검증했으며, 원격 명령 실행에는 로그인 셸 PATH의 `codex`와 `codex-code-mode-host`가 모두 필요함을 확인했다. 기존 Mac checkout과 실거래 상태는 변경하지 않았다.
+- 2026-09-01: Mac을 Codex SSH 실행 호스트로 등록하고 장문 대화의 pagination 제한은 요약된 새 원격 세션으로 우회했다. clean 관리형 worktree가 작업 브랜치 exact SHA와 일치함을 검증했으며, 원격 명령 실행에는 로그인 셸 PATH의 `codex`와 `codex-code-mode-host`가 모두 필요함을 확인했다. 같은 작업을 Mac 앱이 열어 `active writer`를 보유하면 다른 호스트의 전송·재개가 차단되므로 앱만 종료하고 Mac·Tailscale·SSH는 유지한 상태에서 재개한다. 기존 Mac checkout과 실거래 상태는 변경하지 않았다.
 
 ## 재사용 가능한 배움
 
