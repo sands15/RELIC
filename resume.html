@@ -13,6 +13,7 @@
       :root {
         --navy: #12104e;
         --gold: #d7972c;
+        --gold-ink: #946200;
         --ink: #191921;
         --muted: #666678;
         --line: #dadae6;
@@ -118,7 +119,7 @@
       }
 
       .meta {
-        color: var(--gold);
+        color: var(--gold-ink);
         font-size: 8.6pt;
         font-weight: 800;
       }
@@ -197,7 +198,7 @@
 
       <p class="summary">
         AI 모델 자체보다 입력, 판단, 응답, 실행이 이어지는 전체 시스템에 관심이 있습니다.
-        Voice AI, LLM application, AI agent 흐름을 직접 연결하며 실제로 동작하는 AI 서비스를 만드는 방향으로 학습하고 있습니다.
+        Voice AI, local LLM, 장기 기억과 제한된 agent 실행을 직접 연결하며 실제로 동작하는 로컬 AI 서비스를 만들고 있습니다.
       </p>
 
       <div class="layout">
@@ -242,24 +243,24 @@
           <section class="section">
             <h2>Experience</h2>
             <div class="item experience">
-              <h3>AI Bot Development</h3>
+              <h3>Local-First Assistant</h3>
               <ul>
-                <li>Evelyn 음성 AI 비서의 대화 흐름 설계와 개선</li>
-                <li>음성 입력, LLM 응답, TTS 출력 흐름 연결</li>
+                <li>Evelyn의 대화, 음성, 기억, 도구 실행 흐름 설계</li>
+                <li>소유권, 승인, 복구와 사후 검증 경계 구현</li>
               </ul>
             </div>
             <div class="item experience">
               <h3>Voice AI Pipeline</h3>
               <ul>
                 <li>STT, LLM routing, TTS, playback 단계 분리</li>
-                <li>turn_trace 기반 latency baseline 정리</li>
+                <li>content-free trace로 latency와 cleanup 근거 관리</li>
               </ul>
             </div>
             <div class="item experience">
               <h3>Documentation</h3>
               <ul>
-                <li>README와 portfolio 문서 구조 관리</li>
-                <li>성능 수치와 프로젝트 설명 정리</li>
+                <li>project docs와 public portfolio 역할 분리</li>
+                <li>source, live, production 검증 근거 분리</li>
               </ul>
             </div>
           </section>
@@ -270,55 +271,55 @@
 
           <article class="project item">
             <div class="project-head">
-              <h3>Evelyn Voice AI Assistant</h3>
+              <h3>Evelyn Local-First Assistant</h3>
               <span class="meta">2026.04 - Present</span>
             </div>
-            <p>Discord 기반 한국어 음성 AI 캐릭터 프로젝트입니다.</p>
+            <p>Windows-first, local-first 개인 AI 비서 런타임입니다.</p>
             <ul>
-              <li>STT, LLM, TTS, memory 흐름을 연결하고 개선</li>
-              <li>음성 턴 43개 기준으로 지연 구간과 개선 기준선 정리</li>
-              <li>실시간 음성 입출력, LLM routing, 캐릭터 응답 흐름 점검</li>
+              <li>Control Page, 로컬 음성, 선택형 Discord와 local model 연결</li>
+              <li>owner-scoped Markdown memory와 evidence-bound task 구현</li>
+              <li>5,109 tests, 18 skipped, failures/errors 0; live E2E 별도 관리</li>
             </ul>
-            <p class="tags">Python · Discord Bot · STT / TTS · LLM Routing</p>
+            <p class="tags">Python · Docker · Local LLM · STT / TTS · Markdown</p>
           </article>
 
           <article class="project item">
             <div class="project-head">
-              <h3>Voice AI Pipeline</h3>
+              <h3>Evelyn Voice Reliability</h3>
               <span class="meta">2026.05 - Present</span>
             </div>
-            <p>STT, LLM routing, TTS, playback을 연결한 음성 파이프라인 실험입니다.</p>
+            <p>음성 경로의 latency와 실패·복구 경계를 검증한 작업입니다.</p>
             <ul>
-              <li>음성 입력부터 재생까지 이어지는 단계별 latency log 기록</li>
-              <li>cached audio와 문장 단위 TTS로 체감 지연 개선 방향 정리</li>
+              <li>Qwen3-ASR, local LLM, OmniVoice의 단계별 상태·지연 계측</li>
+              <li>single playback owner, cancellation, streaming TTS 회귀 검증</li>
             </ul>
-            <p class="tags">STT · LLM Routing · TTS · Playback · Latency Log</p>
+            <p class="tags">Voice Pipeline · Latency Trace · Cancellation · Playback</p>
           </article>
 
           <article class="project item">
             <div class="project-head">
-              <h3>Obsidian LLM Memory</h3>
+              <h3>Evelyn Markdown Memory</h3>
               <span class="meta">2026.06 - Present</span>
             </div>
-            <p>LLM 기억력을 높이기 위한 Obsidian식 노트 구조 실험입니다.</p>
+            <p>Markdown 기반 로컬 장기기억 기능입니다.</p>
             <ul>
-              <li>프로젝트와 작업 기록을 분리하고 관련 기억을 링크로 연결</li>
-              <li>장기 기억과 일일 기록을 나누어 반복 작업 맥락을 빠르게 참조</li>
+              <li>사용자 확인, 소유 범위, provenance, 수정·삭제 제어 구현</li>
+              <li>격리 저장소에서 저장, 재시작 회상, 삭제 후 비회상 검증</li>
             </ul>
-            <p class="tags">Obsidian · Markdown · LLM Memory · Knowledge Base</p>
+            <p class="tags">Markdown · Long-Term Memory · Provenance · Deletion</p>
           </article>
 
           <article class="project item">
             <div class="project-head">
-              <h3>Minecraft AI Agent</h3>
+              <h3>Evelyn Minecraft Automation</h3>
               <span class="meta">2026.05 - Present</span>
             </div>
-            <p>Minecraft 환경에서 AI agent 구조를 학습한 프로젝트입니다.</p>
+            <p>Evelyn의 선택형·승인 기반 Minecraft 자동화 모듈입니다.</p>
             <ul>
-              <li>목표를 행동 단위로 분해하고 환경 상태 기반 판단 흐름 정리</li>
-              <li>planning, action, recovery 구조를 Evelyn 확장 방향과 연결</li>
+              <li>authorization, world-action lease, recovery 계약 구현</li>
+              <li>격리 shelter/restart 통과; 운영 bot은 기본 OFF</li>
             </ul>
-            <p class="tags">Minecraft · Voyager · Mineflayer · Planning</p>
+            <p class="tags">Minecraft · Mindcraft / Voyager · Mineflayer · Safety</p>
           </article>
         </section>
       </div>

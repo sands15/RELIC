@@ -14,35 +14,11 @@
       href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <script>
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-
-      window.addEventListener("beforeunload", () => {
-        window.scrollTo(0, 0);
-      });
-
-      const keepPageAtTopOnEntry = (event) => {
-        const [navigation] = performance.getEntriesByType("navigation");
-        const shouldResetScroll =
-          event?.persisted || !location.hash || navigation?.type === "reload";
-
-        if (shouldResetScroll) {
-          const resetScroll = () => window.scrollTo(0, 0);
-          requestAnimationFrame(resetScroll);
-          setTimeout(resetScroll, 0);
-          setTimeout(resetScroll, 120);
-        }
-      };
-
-      window.addEventListener("pageshow", keepPageAtTopOnEntry);
-      window.addEventListener("load", keepPageAtTopOnEntry);
-    </script>
     <style>
       :root {
         --navy: #12104e;
         --gold: #edb352;
+        --gold-ink: #9a6b00;
         --ink: #191921;
         --muted: #6a6a77;
         --line: #dedee8;
@@ -56,10 +32,6 @@
 
       * {
         box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
       }
 
       body {
@@ -296,7 +268,7 @@
         position: relative;
         z-index: 1;
         margin: 0;
-        color: var(--gold);
+        color: var(--gold-ink);
         font-family: "Black Han Sans", Impact, sans-serif;
         font-size: clamp(2.25rem, 7vw, 4.3rem);
         font-weight: 400;
@@ -449,7 +421,7 @@
       }
 
       .education-main dt {
-        color: var(--gold);
+        color: var(--gold-ink);
         font-weight: 900;
       }
 
@@ -663,7 +635,7 @@
       }
 
       .project-detail__label {
-        color: var(--gold);
+        color: var(--gold-ink);
         font-size: 0.82rem;
         font-weight: 900;
         text-transform: uppercase;
@@ -743,7 +715,7 @@
       }
 
       .metric b {
-        color: var(--gold);
+        color: var(--gold-ink);
         font-size: 1.26rem;
         line-height: 1.1;
         white-space: nowrap;
@@ -938,7 +910,7 @@
 
       .contact b {
         display: block;
-        color: var(--gold);
+        color: var(--gold-ink);
         font-size: 0.9rem;
       }
 
@@ -1385,7 +1357,7 @@
                   <span class="browser-card__dot"></span>
                 </div>
                 <div class="browser-card__screen">
-                  <span class="screen-kicker">VOICE AI ASSISTANT</span>
+                  <span class="screen-kicker">LOCAL-FIRST ASSISTANT</span>
                   <p class="screen-title">EVELYN</p>
                   <div class="screen-lines">
                     <span></span><span></span><span></span>
@@ -1395,53 +1367,54 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>Evelyn Voice AI Assistant</h3>
+                <h3>Evelyn Local-First Assistant Runtime</h3>
                 <span>2026.04 - Present</span>
               </div>
               <div class="project-detail">
                 <div class="project-detail__item">
                   <b class="project-detail__label">Summary</b>
-                  <p>Discord 기반 한국어 음성 AI 캐릭터 프로젝트입니다.</p>
+                  <p>Control Page, 로컬 음성, 선택형 Discord, 로컬 모델과 장기 기억을 연결한 Windows-first 개인 AI 비서 런타임입니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Role</b>
-                  <p>STT, LLM, TTS, memory 흐름을 연결하고 개선했습니다.</p>
+                  <p>대화·음성·기억·복구·승인 경계를 로컬 우선 구조로 설계하고 구현했습니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Key Features</b>
                   <ul>
-                    <li>실시간 음성 입출력</li>
-                    <li>LLM routing과 캐릭터 응답</li>
-                    <li>turn_trace 기반 지연 로그 점검</li>
+                    <li>로컬 Control Page와 음성·선택형 Discord 입력</li>
+                    <li>owner-scoped Markdown memory와 삭제·복구 계약</li>
+                    <li>승인·근거·사후 검증에 묶인 task와 agent 실행</li>
                   </ul>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 체감 지연을 다시 측정했습니다.</p>
+                  <p>2026-09-03 현재 source/offline 전체 회귀 5,109 tests, 18 skipped, failures/errors 0을 기록했습니다.</p>
                 </div>
               </div>
-              <p class="metric-title">Performance Baseline</p>
-              <div class="metrics" aria-label="Evelyn latency metrics">
+              <p class="metric-title">Current Source Verification</p>
+              <div class="metrics" aria-label="Evelyn source verification metrics">
                 <div class="metric">
-                  <b>31ms</b>
-                  <span>평균 첫 토큰</span>
+                  <b>5,109</b>
+                  <span>Tests</span>
                 </div>
                 <div class="metric">
-                  <b>618ms</b>
-                  <span>평균 첫 PCM</span>
+                  <b>18</b>
+                  <span>Skipped</span>
                 </div>
                 <div class="metric">
-                  <b>1.18s</b>
-                  <span>STT 후 TTS 출력</span>
+                  <b>0</b>
+                  <span>Failures / Errors</span>
                 </div>
               </div>
               <p class="metric-note">
-                첫 토큰은 EXAONE streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
-                STT 후 TTS 출력은 STT가 끝난 뒤 Main LLM 응답이 완료되고 TTS 첫 PCM이 나올 때까지입니다.
+                현재 소스와 자동화 검사의 상태입니다. 이 검증은 외부 서비스를 시작하지 않았으며,
+                실제 Discord·마이크·스피커 전체 E2E나 production 완료를 뜻하지 않습니다.
               </p>
               <div class="tag-row">
+                <span class="tag">Local-First</span>
                 <span class="tag">Python</span>
-                <span class="tag">Discord Bot</span>
+                <span class="tag">Docker</span>
                 <span class="tag">STT / TTS</span>
                 <span class="tag">LLM Routing</span>
               </div>
@@ -1461,8 +1434,8 @@
                   <span class="browser-card__dot"></span>
                 </div>
                 <div class="browser-card__screen">
-                  <span class="screen-kicker">LLM MEMORY</span>
-                  <p class="screen-title">OBSIDIAN</p>
+                  <span class="screen-kicker">OWNER-SCOPED MEMORY</span>
+                  <p class="screen-title">MARKDOWN</p>
                   <div class="screen-lines">
                     <span></span><span></span><span></span>
                   </div>
@@ -1471,36 +1444,36 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>Obsidian LLM Memory</h3>
+                <h3>Evelyn Markdown Memory</h3>
                 <span>2026.06 - Present</span>
               </div>
               <div class="project-detail">
                 <div class="project-detail__item">
                   <b class="project-detail__label">Summary</b>
-                  <p>LLM 기억력을 높이기 위한 Obsidian식 노트 구조 실험입니다.</p>
+                  <p>명시적으로 확인된 기억을 출처와 사용자 범위에 묶어 저장하는 로컬 Markdown vault입니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Role</b>
-                  <p>기억을 노트, 링크, 요약 단위로 나누는 구조를 설계했습니다.</p>
+                  <p>runtime memory와 developer docs vault를 분리하고 저장·회상·수정·삭제 계보를 구현했습니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Key Features</b>
                   <ul>
-                    <li>프로젝트와 작업 기록 분리</li>
-                    <li>관련 기억 링크 연결</li>
-                    <li>장기 기억과 일일 기록 분리</li>
+                    <li>owner-scoped recall과 provenance 검사</li>
+                    <li>수정 및 two-stage deletion</li>
+                    <li>unsafe automatic derived recall fail-closed</li>
                   </ul>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>반복 작업에서 필요한 맥락을 빠르게 찾는 방향을 정리했습니다.</p>
+                  <p>격리 저장소에서 저장 → 새 프로세스 회상 → 삭제 → 새 프로세스 비회상을 검증했습니다.</p>
                 </div>
               </div>
               <div class="tag-row">
-                <span class="tag">Obsidian</span>
-                <span class="tag">LLM Memory</span>
                 <span class="tag">Markdown</span>
-                <span class="tag">Knowledge Base</span>
+                <span class="tag">Obsidian</span>
+                <span class="tag">Provenance</span>
+                <span class="tag">Privacy</span>
               </div>
             </div>
           </article>
@@ -1530,23 +1503,23 @@
               <div class="project-detail">
                 <div class="project-detail__item">
                   <b class="project-detail__label">Summary</b>
-                  <p>STT, LLM routing, TTS, playback을 연결한 음성 파이프라인입니다.</p>
+                  <p>Discord 음성과 Windows 로컬 마이크를 Qwen3-ASR, local LLM, OmniVoice, playback으로 연결한 음성 경로입니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Role</b>
-                  <p>단계별 지연과 실패 지점을 기록하고 개선 방향을 점검했습니다.</p>
+                  <p>입력 소유권·동의·취소·재시작 경계와 content-free latency 계측을 구현했습니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Key Features</b>
                   <ul>
-                    <li>음성 입력부터 재생까지 연결</li>
-                    <li>단계별 latency log 기록</li>
-                    <li>cached audio와 문장 단위 TTS</li>
+                    <li>session admission과 capture consent</li>
+                    <li>single playback owner와 barge-in</li>
+                    <li>streaming TTS와 cleanup gates</li>
                   </ul>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>체감 지연을 나누어 보고 우선 개선 구간을 정리했습니다.</p>
+                  <p>Revised STT GPU1 old/new 2+20은 통과했습니다. Private 50-item 및 실제 device/Gateway E2E는 대기 중입니다.</p>
                 </div>
               </div>
               <div class="tag-row">
@@ -1568,7 +1541,7 @@
                   <span class="browser-card__dot"></span>
                 </div>
                 <div class="browser-card__screen">
-                  <span class="screen-kicker">AGENT STUDY</span>
+                  <span class="screen-kicker">SAFE AGENT RUNTIME</span>
                   <p class="screen-title">MINECRAFT</p>
                   <div class="screen-lines">
                     <span></span><span></span><span></span>
@@ -1578,29 +1551,29 @@
             </div>
             <div class="project__body">
               <div class="project__meta">
-                <h3>Minecraft AI Agent</h3>
+                <h3>Evelyn Minecraft Automation</h3>
                 <span>2026.05 - Present</span>
               </div>
               <div class="project-detail">
                 <div class="project-detail__item">
                   <b class="project-detail__label">Summary</b>
-                  <p>Minecraft 환경에서 AI agent 구조를 학습한 프로젝트입니다.</p>
+                  <p>명시적 승인과 단일 world-action lease 아래에서 동작하는 선택형 Minecraft 자동화입니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Role</b>
-                  <p>상태 정보를 바탕으로 계획과 실행 흐름을 정리했습니다.</p>
+                  <p>readiness·authorization·recovery·world-effect 검증 계약을 구현했습니다.</p>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Key Features</b>
                   <ul>
-                    <li>목표를 행동 단위로 분해</li>
-                    <li>환경 상태 기반 판단</li>
-                    <li>실행 결과 feedback 연결</li>
+                    <li>process-local authorization grants</li>
+                    <li>single-owner world-action lease</li>
+                    <li>postcondition evidence와 restart non-recovery</li>
                   </ul>
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>AI agent의 계획, 실행, 회복 구조를 실제 예시로 이해했습니다.</p>
+                  <p>격리 fresh-world shelter/restart 시나리오는 통과했습니다. 운영 bot과 정상 Discord·voice E2E는 OFF/미검증입니다.</p>
                 </div>
               </div>
               <div class="tag-row">
@@ -1622,35 +1595,35 @@
 
         <div class="content-grid">
           <div class="content-card">
-            <h3>Personal AI Bot Development</h3>
-            <p>Evelyn 음성 AI 비서의 대화 흐름을 직접 설계하고 개선했습니다.</p>
+            <h3>Local-First Assistant Development</h3>
+            <p>Evelyn의 대화·음성·기억·도구 실행 흐름을 직접 설계하고 구현했습니다.</p>
             <ul>
-              <li>음성 입력, LLM 응답, TTS 출력 흐름 연결</li>
-              <li>캐릭터 응답과 memory 흐름 점검</li>
+              <li>Control Page, 로컬 음성, 선택형 Discord 입력 연결</li>
+              <li>승인·근거·사후 검증에 묶인 task 실행</li>
             </ul>
           </div>
           <div class="content-card">
             <h3>Voice AI Pipeline</h3>
-            <p>음성 대화의 지연 구간을 나누어 측정하고 개선 방향을 정리했습니다.</p>
+            <p>음성 대화의 지연·취소·복구 경계를 나누어 계측하고 검증했습니다.</p>
             <ul>
               <li>STT, LLM routing, TTS, playback 단계 분리</li>
-              <li>turn_trace 기반 latency baseline 정리</li>
+              <li>content-free trace와 고정 하네스 기반 근거 관리</li>
             </ul>
           </div>
           <div class="content-card">
-            <h3>AI Agent Structure</h3>
-            <p>목표를 행동으로 바꾸는 agent 흐름을 프로젝트에 연결해 실험했습니다.</p>
+            <h3>Safe Agent Execution</h3>
+            <p>외부 행동을 명시적 권한과 검증 가능한 결과에 결박했습니다.</p>
             <ul>
-              <li>planning, action, recovery 구조 학습</li>
-              <li>Minecraft agent 사례를 Evelyn 확장 방향과 연결</li>
+              <li>process-local authorization과 action lease 구현</li>
+              <li>Minecraft 격리 시나리오로 recovery·world-effect 확인</li>
             </ul>
           </div>
           <div class="content-card">
             <h3>Technical Documentation</h3>
-            <p>실험 결과와 개선 기준을 문서화해 다음 작업으로 이어지게 정리했습니다.</p>
+            <p>구현 상태와 검증 범위를 분리해 다음 작업으로 이어지게 기록했습니다.</p>
             <ul>
-              <li>README와 portfolio 문서 구조 관리</li>
-              <li>성능 수치와 프로젝트 설명 정리</li>
+              <li>project docs와 public portfolio 역할 분리</li>
+              <li>source/offline·controlled-live·production 근거 분리</li>
             </ul>
           </div>
         </div>

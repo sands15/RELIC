@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Evelyn Voice AI Assistant 프로젝트 스토리"
+      content="Evelyn local-first assistant runtime 프로젝트 스토리"
     />
     <title>Evelyn Story | RELIC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,6 +18,7 @@
       :root {
         --navy: #12104e;
         --gold: #edb352;
+        --gold-ink: #9a6b00;
         --ink: #191921;
         --muted: #6a6a77;
         --line: #dedee8;
@@ -29,10 +30,6 @@
 
       * {
         box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
       }
 
       body {
@@ -168,7 +165,7 @@
 
       .section-title p {
         margin: 0;
-        color: var(--gold);
+        color: var(--gold-ink);
         font-family: "Black Han Sans", Impact, sans-serif;
         font-size: clamp(2.1rem, 5vw, 3.8rem);
         line-height: 1;
@@ -221,9 +218,11 @@
         grid-template-columns: repeat(7, minmax(0, 1fr));
         gap: 8px;
         margin-top: 22px;
+        padding: 0;
+        list-style: none;
       }
 
-      .flow span {
+      .flow li {
         min-height: 52px;
         display: grid;
         place-items: center;
@@ -254,7 +253,7 @@
 
       .metric b {
         display: block;
-        color: var(--gold);
+        color: var(--gold-ink);
         font-size: 1.5rem;
         line-height: 1.1;
       }
@@ -338,10 +337,10 @@
     <header class="hero">
       <div class="hero__inner">
         <p class="kicker">Project Story</p>
-        <h1>Evelyn Voice AI Assistant</h1>
+        <h1>Evelyn Local-First Assistant Runtime</h1>
         <p class="hero__copy">
-          한국어 음성 대화 캐릭터를 목표로, STT, LLM, TTS, memory, playback을
-          하나의 흐름으로 연결한 개인 AI assistant 프로젝트입니다.
+          Control Page, 로컬 음성, 선택형 Discord, 로컬 모델, 장기 기억과 제한된
+          도구 실행을 하나의 안전한 흐름으로 연결한 Windows-first 개인 AI 비서입니다.
         </p>
         <div class="actions">
           <a class="button button--solid" href="https://github.com/sands15/Evelyn_Bot">GitHub</a>
@@ -358,13 +357,13 @@
         <div class="story-card">
           <h2>왜 만들었나</h2>
           <p>
-            단순히 텍스트로 답하는 챗봇보다, 실제로 말을 듣고 목소리로 반응하는
-            캐릭터형 AI를 만들고 싶었습니다. Evelyn은 모델 하나를 테스트하는 프로젝트가 아니라,
-            사용자의 입력부터 응답 재생까지 이어지는 전체 시스템을 직접 연결해보는 실험입니다.
+            텍스트 답변이나 음성 모델 하나를 넘어, 사용자의 입력을 이해하고 기억하며
+            필요한 작업까지 안전하게 이어가는 로컬 AI 비서를 만들고 싶었습니다. Evelyn은
+            입력부터 판단, 응답, 복구와 검증까지 전체 시스템을 직접 연결하는 프로젝트입니다.
           </p>
           <p>
             이 프로젝트를 통해 관심사는 더 분명해졌습니다. 좋은 AI 경험은 모델 성능만으로
-            만들어지지 않고, 입력 처리, 라우팅, 기억, 음성 출력, 지연 관리가 함께 맞물려야 합니다.
+            만들어지지 않고, 입력 처리, 소유권, 라우팅, 기억, 음성 출력, 지연과 복구가 함께 맞물려야 합니다.
           </p>
         </div>
       </section>
@@ -377,27 +376,27 @@
           <div class="story-card">
             <h2>시스템 흐름</h2>
             <p>
-              Evelyn은 음성 입력을 받아 텍스트로 바꾸고, LLM 응답을 생성한 뒤,
-              다시 음성으로 출력하는 흐름을 중심으로 구성했습니다.
+              Evelyn은 텍스트와 음성을 공통 ingress에서 받아 동의·소유권을 확인하고,
+              필요한 경로만 STT와 local model 또는 제한된 task/tool로 보낸 뒤 전달 결과와 기억을 확정합니다.
             </p>
-            <div class="flow" aria-label="Evelyn voice AI pipeline">
-              <span>Voice Input</span>
-              <span>STT</span>
-              <span>Routing</span>
-              <span>LLM</span>
-              <span>Memory</span>
-              <span>TTS</span>
-              <span>Playback</span>
-            </div>
+            <ol class="flow" aria-label="Evelyn turn processing flow">
+              <li>Text / Voice Input</li>
+              <li>Ingress / Consent</li>
+              <li>STT (Audio Only)</li>
+              <li>Route / Context</li>
+              <li>Reply / Task / Tool</li>
+              <li>Text / TTS</li>
+              <li>Completion / Memory</li>
+            </ol>
           </div>
 
           <div class="story-card">
             <h3>직접 다룬 부분</h3>
             <ul>
-              <li>STT, LLM, TTS, playback 단계가 하나의 turn으로 이어지도록 연결</li>
-              <li>고정 응답과 일반 응답을 나누는 routing 흐름 정리</li>
-              <li>캐릭터 응답과 memory 흐름을 점검하며 대화 일관성 개선</li>
-              <li>turn_trace 로그를 기준으로 지연 구간을 측정하고 개선 기준선 정리</li>
+              <li>Control Page, 로컬 음성, 선택형 Discord ingress를 공통 owner·consent 경계로 연결</li>
+              <li>짧은 응답, skill, bounded task/tool, local LLM을 조건에 따라 라우팅</li>
+              <li>확인된 Markdown 기억의 provenance·사용자 범위·수정·삭제 계보 구현</li>
+              <li>content-free trace, durable receipt와 restart recovery로 실패 경계 검증</li>
             </ul>
           </div>
         </div>
@@ -408,35 +407,35 @@
           <p>RESULT</p>
         </div>
         <div class="story-card">
-          <h2>성능 기준선</h2>
+          <h2>검증 기준선</h2>
           <p>
-            기존의 STT 완료, 첫 음성 출력, 전체 턴 기준선 대신 실제 체감 시작점인
-            첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 지연으로 다시 정리했습니다.
+            2026-09-03 현재 source/offline 전체 회귀는 5,109 tests, 18 skipped,
+            failures/errors 0입니다. 성능은 전체 음성 E2E와 분리된 고정 하네스로 측정했습니다.
           </p>
           <div class="metrics">
             <div class="metric">
-              <b>31ms</b>
-              <span>평균 첫 토큰</span>
+              <b>201.85ms</b>
+              <span>Warm First PCM p50</span>
             </div>
             <div class="metric">
-              <b>618ms</b>
-              <span>평균 첫 PCM</span>
+              <b>219.1ms</b>
+              <span>Warm First PCM p95</span>
             </div>
             <div class="metric">
-              <b>1.18s</b>
-              <span>STT 후 TTS 출력</span>
+              <b>200 / 200</b>
+              <span>Output Equivalence</span>
             </div>
           </div>
           <p class="note">
-            EXAONE은 streaming SSE의 첫 non-empty token까지, TTS는 OmniVoice streaming PCM의
-            첫 audio chunk까지를 측정했습니다. STT 후 TTS 출력은 STT가 끝난 뒤 Main LLM 응답이 완료되고
-            TTS 첫 PCM이 나올 때까지입니다.
+            2026-08-27 graph-on fixed Main→TTS-ready warm harness 결과입니다. Production은 OFF였고
+            실제 마이크, 스피커·Discord first-write와 청취를 포함한 전체 음성 E2E 결과가 아닙니다.
           </p>
           <div class="tag-row">
-            <span class="tag">Python</span>
-            <span class="tag">Discord Bot</span>
-            <span class="tag">STT / TTS</span>
-            <span class="tag">LLM Routing</span>
+            <span class="tag">Local-First</span>
+            <span class="tag">Python / Docker</span>
+            <span class="tag">Discord + Local Voice</span>
+            <span class="tag">Markdown Memory</span>
+            <span class="tag">Bounded Task</span>
           </div>
         </div>
       </section>
@@ -449,18 +448,18 @@
           <div class="story-card">
             <h2>배운 점</h2>
             <p>
-              Evelyn을 만들면서 AI 서비스의 품질은 답변 내용뿐 아니라 응답까지 도달하는
-              전체 흐름에서 결정된다는 것을 배웠습니다. 특히 음성 AI에서는 작은 지연도
-              사용자 경험에 크게 느껴지기 때문에, 로그를 남기고 병목을 나누어 보는 과정이 중요했습니다.
+              Evelyn을 만들면서 AI 서비스의 품질은 답변 내용뿐 아니라 소유권, 실패 복구,
+              개인정보 경계와 결과 검증을 포함한 전체 흐름에서 결정된다는 것을 배웠습니다.
+              Source test, 제한된 live 검증, production 완료를 분리해 기록하는 것도 구현만큼 중요했습니다.
             </p>
           </div>
 
           <div class="story-card">
-            <h3>다음 개선 방향</h3>
+            <h3>남은 검증</h3>
             <ol>
-              <li>cached audio fast path와 문장 단위 TTS로 첫 음성 출력 지연 줄이기</li>
-              <li>Obsidian식 memory 구조를 연결해 장기 맥락 유지 개선</li>
-              <li>agent 구조를 확장해 대화뿐 아니라 행동 실행까지 이어지는 흐름 실험</li>
+              <li>Revised STT 50-item·content/order·cancel/restart gate와 실제 device/Gateway 음성 E2E</li>
+              <li>실제 Qwen 24-row 평가, Discord feedback matrix와 10-case grounded canary</li>
+              <li>Automatic memory owner/deletion lineage와 운영 Minecraft lease/world-effect E2E</li>
             </ol>
           </div>
         </div>

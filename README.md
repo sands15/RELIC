@@ -76,68 +76,68 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 
 ## 5. Projects
 
-### Evelyn Voice AI Assistant
+### Evelyn Local-First Assistant Runtime
 
 - **Period:** 2026.04 - Present
-- **Tech Stack:** Python, JavaScript, Discord Bot, STT / TTS, LLM Routing, AI Agent
+- **Tech Stack:** Python, JavaScript, Docker, STT / TTS, LLM Routing, Markdown Memory, AI Agent
 - **GitHub:** <https://github.com/sands15/Evelyn_Bot>
 - **Story:** [Evelyn Project Story](./evelyn-story.html)
-- **Summary:** Discord 기반 한국어 음성 AI 캐릭터 프로젝트
-- **Role:** STT, LLM, TTS, memory 흐름을 연결하고 개선
-- **Key Features:** 실시간 음성 입출력, LLM routing, 캐릭터 응답, turn_trace 지연 로그
-- **Results:** 첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 체감 지연을 재측정
+- **Summary:** Control Page, 로컬 음성, 선택형 Discord, 로컬 모델, 장기 기억과 제한된 도구 실행을 연결한 Windows-first 개인 AI 비서 런타임
+- **Role:** 대화·음성·기억·복구·승인 경계를 로컬 우선 구조로 설계하고 구현
+- **Key Features:** owner-scoped Markdown memory, evidence-bound task 실행, consent·cancellation·recovery 계약, 선택형 Minecraft 자동화
+- **Results:** 2026-09-03 현재 source/offline 전체 회귀 5,109 tests, 18 skipped, failures/errors 0
 
-#### Performance Baseline
+#### Verification Snapshot
 
-현재 기준선은 첫 토큰, 첫 PCM, STT 완료 후 TTS 출력까지의 10회 실측 중앙값입니다. 첫 토큰은 streaming SSE의 첫 non-empty token까지, 첫 PCM은 OmniVoice streaming PCM의 첫 audio chunk까지입니다.
+이 수치는 현재 소스와 자동화 검사의 상태이며, 실제 Discord·마이크·스피커 전체 E2E나 production 완료를 뜻하지 않습니다.
 
-- **첫 토큰:** EXAONE 31ms
-- **첫 PCM:** OmniVoice 618ms
-- **STT 후 TTS 출력:** 1.18s
+- **Tests:** 5,109
+- **Skipped:** 18
+- **Failures / Errors:** 0
 
-### Obsidian LLM Memory
+### Evelyn Markdown Memory
 
 - **Period:** 2026.06 - Present
-- **Tech Stack:** Obsidian, Markdown, LLM Memory, Knowledge Base
-- **Summary:** LLM 기억력을 높이기 위한 Obsidian식 노트 구조 실험
-- **Role:** 기억을 노트, 링크, 요약 단위로 나누는 구조 설계
-- **Key Features:** 프로젝트와 작업 기록 분리, 관련 기억 링크 연결, 장기 기억과 일일 기록 분리
-- **Results:** 반복 작업에서 필요한 맥락을 빠르게 찾는 방향 정리
+- **Tech Stack:** Markdown, Obsidian, LLM Memory, Provenance, Deletion
+- **Summary:** 명시적으로 확인된 기억을 출처와 사용자 범위에 묶어 저장하는 로컬 장기기억 기능
+- **Role:** runtime memory와 developer docs vault를 분리하고 저장·회상·수정·삭제 계보를 구현
+- **Key Features:** owner-scoped recall, two-stage deletion, provenance 검사, unsafe derived recall fail-closed
+- **Results:** 격리 저장소에서 저장 → 새 프로세스 회상 → 삭제 → 새 프로세스 비회상 검증
 
-### Voice AI Pipeline
-
-- **Period:** 2026.05 - Present
-- **Tech Stack:** Python, STT, LLM Routing, TTS, Playback, Latency Log
-- **Summary:** STT, LLM routing, TTS, playback을 연결한 음성 파이프라인
-- **Role:** 단계별 지연과 실패 지점을 기록하고 개선 방향 점검
-- **Key Features:** 음성 입력부터 재생까지 연결, 단계별 latency log, cached audio, 문장 단위 TTS
-- **Results:** 체감 지연을 나누어 보고 우선 개선 구간을 정리
-
-### Minecraft AI Agent
+### Evelyn Voice Reliability
 
 - **Period:** 2026.05 - Present
-- **Tech Stack:** Minecraft, Voyager, Mineflayer, Planning
-- **Summary:** Minecraft 환경에서 AI agent 구조를 학습한 프로젝트
-- **Role:** 상태 정보를 바탕으로 계획과 실행 흐름 정리
-- **Key Features:** 목표를 행동 단위로 분해, 환경 상태 기반 판단, 실행 결과 feedback 연결
-- **Results:** AI agent의 계획, 실행, 회복 구조를 실제 예시로 이해
+- **Tech Stack:** Python, Qwen3-ASR, LLM Routing, OmniVoice, Playback
+- **Summary:** Discord 음성과 Windows 로컬 마이크를 STT, local LLM, TTS, playback으로 연결한 음성 경로
+- **Role:** 입력 소유권·동의·취소·재시작 경계와 content-free latency 계측 구현
+- **Key Features:** session admission, single playback owner, barge-in, streaming TTS, cleanup gates
+- **Results:** revised STT GPU1 old/new 2+20 검증 통과; private 50-item 및 실제 device/Gateway E2E는 대기
+
+### Evelyn Minecraft Automation
+
+- **Period:** 2026.05 - Present
+- **Tech Stack:** Python, Minecraft, Mindcraft / Voyager, Mineflayer, Safety Contracts
+- **Summary:** 명시적 승인과 단일 world-action lease 아래에서 동작하는 선택형 Minecraft 자동화
+- **Role:** readiness·authorization·recovery·world-effect 검증 계약 구현
+- **Key Features:** process-local grants, action lease, postcondition evidence, restart non-recovery
+- **Results:** 격리 fresh-world shelter/restart 시나리오 통과; 운영 bot과 정상 Discord·voice E2E는 OFF/미검증
 
 ---
 
 ## 6. Experience
 
-- **Personal AI Bot Development:** Evelyn 음성 AI 비서의 대화 흐름 설계와 개선
-  - 음성 입력, LLM 응답, TTS 출력 흐름 연결
-  - 캐릭터 응답과 memory 흐름 점검
-- **Voice AI Pipeline:** 음성 대화의 지연 구간 측정과 개선 방향 정리
+- **Local-First Assistant Development:** Evelyn의 대화·음성·기억·도구 실행 흐름 설계와 구현
+  - Control Page, 로컬 음성, 선택형 Discord 입력을 공통 소유권 경계로 연결
+  - 승인·근거·사후 검증에 묶인 task 및 agent 실행 구현
+- **Voice Reliability:** 음성 대화의 지연·취소·복구 경계 계측과 검증
   - STT, LLM routing, TTS, playback 단계 분리
-  - `turn_trace` 기반 latency baseline 정리
-- **AI Agent Structure:** 목표를 행동으로 바꾸는 agent 흐름 실험
-  - planning, action, recovery 구조 학습
-  - Minecraft agent 사례를 Evelyn 확장 방향과 연결
-- **Technical Documentation:** 실험 결과와 개선 기준 문서화
-  - README와 portfolio 문서 구조 관리
-  - 성능 수치와 프로젝트 설명 정리
+  - content-free trace와 고정 하네스로 성능·cleanup 근거 관리
+- **Safe Agent Execution:** 외부 행동을 명시적 권한과 검증 가능한 결과에 결박
+  - process-local authorization과 action lease 구현
+  - Minecraft 격리 시나리오로 recovery·world-effect 확인
+- **Technical Documentation:** 구현·source/offline·controlled-live·production 근거 분리
+  - 프로젝트 문서와 공개 portfolio 역할 분리
+  - 현재 상태와 미검증 범위를 함께 기록
 
 ---
 
