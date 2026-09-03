@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-08-29
+last_reviewed: 2026-09-03
 tags:
   - dev/project
   - project/evelyn
@@ -40,6 +40,9 @@ tags:
 - 2026-08-21 — 제한된 읽기와 1회성 정확 승인에 묶인 LLM 작업 루프를 구현하고 로컬 read/create E2E를 확인했다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-21)
 - 2026-08-27 — 통제된 Main→TTS-ready 하네스에서 graph-on 지연 개선과 출력 동등성을 검증했다. 전체 음성 SLO 완료 근거는 아니다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-27)
 - 2026-08-28 — 기본 OFF private archive의 단독 writer·보존·접근·삭제 경계를 구현하고 source/offline 회귀를 통과시켰다. 운영 완료는 아니다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-28)
+- 2026-09-01 — P1 task contract·기본 OFF private archive·사람 교정 기반 guidance를 복구 가능한 checkpoint로 고정하고 clean clone에서 source/offline 전체 회귀를 재현했다. live 서비스·장치 검증은 아니다. [[Daily/2026-09-01|기록]]
+- 2026-09-02 — 선택형 archive는 암호화 preflight에서 생성 전 fail-close했고, 복구 ledger 보존과 격리된 Markdown 기억의 저장·재시작 회상·삭제 후 비회상을 검증했다. 자동 파생 기억은 owner binding 부재로 fail-closed를 유지한다. [[Daily/2026-09-02|기록]]
+- 2026-09-03 — 현재 소스·검증·운영 경계를 다시 대조해 최상위 README를 최신화하고 CI와 같은 전체 source/offline 회귀를 통과시켰다. 외부 서비스나 장치는 시작하지 않았다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-09-03)
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
 
@@ -61,4 +64,5 @@ tags:
 
 ## 다음 개인 체크포인트
 
-- 일주일 동안 의미 있는 작업만 기록한 뒤, 기록이 반복 조사와 회고 시간을 실제로 줄였는지 검토한다.
+- 기존 Markdown 기억을 기준으로 유지한다. 자동 파생 기억은 owner별 source binding과 exact turn purge를 함께 검증할 때만 다시 연다.
+- exact private archive·BitLocker·Discord/Qwen live 검증은 필요와 별도 승인이 명시될 때만 진행한다.
