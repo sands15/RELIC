@@ -45,6 +45,7 @@ tags:
 - 2026-09-03 — 현재 소스·검증·운영 경계를 다시 대조해 최상위 README와 공개 RELIC 포트폴리오·HTML CV·PDF CV를 최신화했다. 공개 성능 표기는 2026-08-27 Attempt 7의 Gemma 4 12B + OmniVoice 통제 하네스와 source/offline 회귀로 정정하고 legacy 모델·수치는 제거했다. 외부 서비스나 장치는 시작하지 않았고 공개 전 검사를 거쳐 GitHub `main`에 비강제 fast-forward로 동기화했다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-09-03)
 - 2026-09-03 — 개인 Local Voice의 300ms soft endpoint와 추가 500ms reopen 설계를 동결했다. 취소를 rollback으로 취급하지 않고 side-effect-free 준비와 exact 승격을 분리했으며 구현·테스트·live 검증은 후속 범위다. [[Daily/2026-09-03|기록]]
 - 2026-09-03 — 단기 제품 목표를 단일 PC의 로컬 방송 MVP로 전환했다. 기존 Control Page·Live2D·Local TTS를 재사용한 비공개 OBS 녹화를 첫 checkpoint로 두고, 마이크·플랫폼 연동·공개 송출은 후속 검증과 별도 승인 범위로 분리했다. [[Daily/2026-09-03|기록]]
+- 2026-09-03 — 기본 OFF의 context-free local chatter와 사용자 선점·별도 speaker 권한을 구현하고 source/offline 전체 회귀를 통과했다. 실제 청취·상황 적합성·방송 준비는 검증하지 않았다. [[Daily/2026-09-03|기록]]
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
 
@@ -66,7 +67,7 @@ tags:
 
 ## 다음 개인 체크포인트
 
-- Control Page 텍스트 3턴의 Live2D·TTS 출력을 비공개 OBS 녹화로 먼저 검증하고, 공개 송출 전 read-only overlay·privacy 경계·캐릭터와 복제 음성 사용권을 확인한다.
+- 별도 승인된 private local chatter 청취를 먼저 검증한 뒤 Control Page·Live2D·TTS의 비공개 OBS 녹화로 진행한다. 공개 전에는 read-only overlay·privacy 경계·캐릭터와 복제 음성 사용권을 확인한다.
 - 기존 Markdown 기억을 기준으로 유지한다. 자동 파생 기억은 owner별 source binding과 exact turn purge를 함께 검증할 때만 다시 연다.
 - Local Voice soft endpoint는 capture/ASR와 prepare/promote/abort를 함께 구현·회귀한 뒤 별도 승인된 microphone에서만 활성화한다.
 - exact private archive·BitLocker·Discord/Qwen live 검증은 필요와 별도 승인이 명시될 때만 진행한다.
