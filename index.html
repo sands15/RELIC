@@ -1389,27 +1389,52 @@
                 </div>
                 <div class="project-detail__item">
                   <b class="project-detail__label">Results</b>
-                  <p>2026-09-03 현재 source/offline 전체 회귀 5,109 tests, 18 skipped, failures/errors 0을 기록했습니다.</p>
+                  <p>날짜와 범위를 분리한 latency 실측을 보존하며, 2026-09-03 source/offline 전체 회귀는 5,109 tests, 18 skipped, failures/errors 0입니다.</p>
                 </div>
               </div>
-              <p class="metric-title">Current Source Verification</p>
-              <div class="metrics" aria-label="Evelyn source verification metrics">
+              <p class="metric-title">Historical Baseline · 2026-06-02 RELIC Record</p>
+              <div class="metrics" aria-label="Evelyn archived latency measurements">
                 <div class="metric">
-                  <b>5,109</b>
-                  <span>Tests</span>
+                  <b>31ms</b>
+                  <span>EXAONE 첫 토큰</span>
+                  <small>10회 중앙값</small>
                 </div>
                 <div class="metric">
-                  <b>18</b>
-                  <span>Skipped</span>
+                  <b>618ms</b>
+                  <span>OmniVoice 첫 PCM</span>
+                  <small>10회 중앙값</small>
                 </div>
                 <div class="metric">
-                  <b>0</b>
-                  <span>Failures / Errors</span>
+                  <b>1.18s</b>
+                  <span>STT 후 TTS 첫 PCM</span>
+                  <small>10회 중앙값</small>
                 </div>
               </div>
               <p class="metric-note">
-                현재 소스와 자동화 검사의 상태입니다. 이 검증은 외부 서비스를 시작하지 않았으며,
-                실제 Discord·마이크·스피커 전체 E2E나 production 완료를 뜻하지 않습니다.
+                첫 토큰은 streaming SSE 첫 non-empty token, 첫 PCM은 streaming audio 첫 chunk 기준입니다.
+                별도 43-turn trace와 다른 표본이며 원시 artifact·환경 조건이 현재 없어 historical 기록으로만 보존합니다.
+              </p>
+              <p class="metric-title">Controlled Harness · 2026-08-27</p>
+              <div class="metrics" aria-label="Evelyn controlled Main to TTS ready measurements">
+                <div class="metric">
+                  <b>201.85ms</b>
+                  <span>Warm First PCM p50</span>
+                  <small>graph-off 238.7ms · n=200</small>
+                </div>
+                <div class="metric">
+                  <b>219.1ms</b>
+                  <span>Warm First PCM p95</span>
+                  <small>graph-off 260.7ms · n=200</small>
+                </div>
+                <div class="metric">
+                  <b>200 / 200</b>
+                  <span>Output Equivalence</span>
+                  <small>fingerprint / length match</small>
+                </div>
+              </div>
+              <p class="metric-note">
+                조건별 warm n=200인 graph-on fixed Main→TTS-ready harness 결과입니다. 200/200은 출력 fingerprint·문자 길이 일치이며,
+                production은 OFF였고 마이크, STT, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다.
               </p>
               <div class="tag-row">
                 <span class="tag">Local-First</span>

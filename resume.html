@@ -278,7 +278,7 @@
             <ul>
               <li>Control Page, 로컬 음성, 선택형 Discord와 local model 연결</li>
               <li>owner-scoped Markdown memory와 evidence-bound task 구현</li>
-              <li>5,109 tests, 18 skipped, failures/errors 0; live E2E 별도 관리</li>
+              <li>43 voice-turn trace와 5,109 tests; live E2E 별도 관리</li>
             </ul>
             <p class="tags">Python · Docker · Local LLM · STT / TTS · Markdown</p>
           </article>
@@ -290,8 +290,8 @@
             </div>
             <p>음성 경로의 latency와 실패·복구 경계를 검증한 작업입니다.</p>
             <ul>
-              <li>Qwen3-ASR, local LLM, OmniVoice의 단계별 상태·지연 계측</li>
-              <li>single playback owner, cancellation, streaming TTS 회귀 검증</li>
+              <li>2026.06 RELIC 기록(n=10 중앙값): 첫 토큰 31ms, 첫 PCM 618ms, post-STT 1.18s</li>
+              <li>2026.08 fixed harness(n=200): p50/p95 201.85/219.1ms, 출력 일치 200/200</li>
             </ul>
             <p class="tags">Voice Pipeline · Latency Trace · Cancellation · Playback</p>
           </article>
