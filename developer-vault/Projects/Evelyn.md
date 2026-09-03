@@ -46,6 +46,7 @@ tags:
 - 2026-09-03 — 개인 Local Voice의 300ms soft endpoint와 추가 500ms reopen 설계를 동결했다. 취소를 rollback으로 취급하지 않고 side-effect-free 준비와 exact 승격을 분리했으며 구현·테스트·live 검증은 후속 범위다. [[Daily/2026-09-03|기록]]
 - 2026-09-03 — 단기 제품 목표를 단일 PC의 로컬 방송 MVP로 전환했다. 기존 Control Page·Live2D·Local TTS를 재사용한 비공개 OBS 녹화를 첫 checkpoint로 두고, 마이크·플랫폼 연동·공개 송출은 후속 검증과 별도 승인 범위로 분리했다. [[Daily/2026-09-03|기록]]
 - 2026-09-03 — 기본 OFF의 context-free local chatter와 사용자 선점·별도 speaker 권한을 구현하고 source/offline 전체 회귀를 통과했다. 실제 청취·상황 적합성·방송 준비는 검증하지 않았다. [[Daily/2026-09-03|기록]]
+- 2026-09-03 — 기존 Background Vision Watch scene을 local Control Page에만 안전하게 전달하도록 복구하고 source/offline 회귀를 통과했다. 실제 화면 품질과 chatter 상황 인식은 검증하지 않았다. [[Daily/2026-09-03|기록]]
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
 
@@ -67,7 +68,7 @@ tags:
 
 ## 다음 개인 체크포인트
 
-- 별도 승인된 private local chatter 청취를 먼저 검증한 뒤 Control Page·Live2D·TTS의 비공개 OBS 녹화로 진행한다. 공개 전에는 read-only overlay·privacy 경계·캐릭터와 복제 음성 사용권을 확인한다.
+- 별도 승인된 실제 화면에서 watcher→local Control Page scene 품질과 갱신을 확인한다. chatter에는 writer owner와 local-private privacy를 고정한 뒤 연결하고, private 청취 뒤 Control Page·Live2D·TTS의 비공개 OBS 녹화로 진행한다. 공개 전에는 read-only overlay·privacy 경계·캐릭터와 복제 음성 사용권을 확인한다.
 - 기존 Markdown 기억을 기준으로 유지한다. 자동 파생 기억은 owner별 source binding과 exact turn purge를 함께 검증할 때만 다시 연다.
 - Local Voice soft endpoint는 capture/ASR와 prepare/promote/abort를 함께 구현·회귀한 뒤 별도 승인된 microphone에서만 활성화한다.
 - exact private archive·BitLocker·Discord/Qwen live 검증은 필요와 별도 승인이 명시될 때만 진행한다.
