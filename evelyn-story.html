@@ -406,66 +406,45 @@
         <div class="section-title">
           <p>RESULT</p>
         </div>
-        <div class="story-card">
-          <h2>검증 기준선</h2>
-          <p>
-            2026-09-03 현재 source/offline 전체 회귀는 5,109 tests, 18 skipped,
-            failures/errors 0입니다. 성능 수치는 날짜·표본·경로가 다른 측정을 덮어쓰지 않고 분리해 보존합니다.
-          </p>
-        </div>
-        <div class="story-card">
-          <h3>2026-06-02 RELIC 기록 · 측정 당시 기준선</h3>
-          <div class="metrics">
-            <div class="metric">
-              <b>31ms</b>
-              <span>EXAONE 첫 토큰</span>
-              <small>10회 중앙값</small>
-            </div>
-            <div class="metric">
-              <b>618ms</b>
-              <span>OmniVoice 첫 PCM</span>
-              <small>10회 중앙값</small>
-            </div>
-            <div class="metric">
-              <b>1.18s</b>
-              <span>STT 후 TTS 첫 PCM</span>
-              <small>10회 중앙값</small>
-            </div>
+        <div>
+          <div class="story-card">
+            <h2>검증 기준선</h2>
+            <p>
+              2026-09-03 현재 source/offline 전체 회귀는 5,109 tests, 18 skipped,
+              failures/errors 0입니다. 아래에는 가장 최근에 완료된 통제 latency 측정만 표시합니다.
+            </p>
           </div>
-          <p class="note">
-            첫 토큰은 streaming SSE 첫 non-empty token, 첫 PCM은 streaming audio 첫 chunk 기준입니다.
-            별도 43-turn trace와 다른 표본이며 원시 artifact·환경 조건이 현재 없어 historical 기록으로만 보존합니다.
-          </p>
-        </div>
-        <div class="story-card">
-          <h3>2026-08-27 · 통제된 Main→TTS-ready 하네스</h3>
+          <div class="story-card">
+          <h3>2026-08-27 Attempt 7 · 최신 Bot API→Main→OmniVoice first-PCM 측정</h3>
           <div class="metrics">
             <div class="metric">
               <b>201.85ms</b>
-              <span>Warm First PCM p50</span>
-              <small>graph-off 238.7ms · n=200</small>
+              <span>Warm Answer First PCM p50</span>
+              <small>graph-off 238.7ms · -36.85ms</small>
             </div>
             <div class="metric">
               <b>219.1ms</b>
-              <span>Warm First PCM p95</span>
-              <small>graph-off 260.7ms · n=200</small>
+              <span>Warm Answer First PCM p95</span>
+              <small>graph-off 260.7ms · -41.6ms</small>
             </div>
             <div class="metric">
-              <b>200 / 200</b>
-              <span>Output Equivalence</span>
-              <small>fingerprint / length match</small>
+              <b>239.8ms</b>
+              <span>Warm Answer First PCM p99</span>
+              <small>graph-off 290.1ms · -50.3ms</small>
             </div>
           </div>
-          <p class="note">
-            조건별 warm n=200인 graph-on fixed harness 결과입니다. 200/200은 출력 fingerprint·문자 길이 일치이며,
-            production은 OFF였고 마이크, STT, 스피커·Discord first-write와 실제 청취를 포함하지 않습니다.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Local-First</span>
-            <span class="tag">Python / Docker</span>
-            <span class="tag">Discord + Local Voice</span>
-            <span class="tag">Markdown Memory</span>
-            <span class="tag">Bounded Task</span>
+            <p class="note">
+              llama.cpp Gemma 4 12B IQ4_XS + OmniVoice FlashInfer 0.6.15, GPU0의 fixed Bot API→Main→OmniVoice first-PCM 결과입니다.
+              단일 고정 한국어 1문장 prompt와 concurrency 1에서 graph-off/on 각각 warm n=200, readiness 뒤 first-admitted 각 n=30의 p95 515.3→467.0ms, ABBA macro-block 20의 paired p95 delta 95% CI [-45.7, -26.7]ms였습니다.
+              출력 fingerprint·문자 길이는 200/200 일치했지만 semantic·청취 품질 평가는 아닙니다. Production은 OFF였으며 마이크·STT, Control Page proxy/browser, Vision·Minecraft, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Local-First</span>
+              <span class="tag">Python / Docker</span>
+              <span class="tag">Gemma 4 + OmniVoice</span>
+              <span class="tag">Markdown Memory</span>
+              <span class="tag">Bounded Task</span>
+            </div>
           </div>
         </div>
       </section>

@@ -87,23 +87,19 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 - **Key Features:** owner-scoped Markdown memory, evidence-bound task 실행, consent·cancellation·recovery 계약, 선택형 Minecraft 자동화
 - **Results:** 2026-09-03 현재 source/offline 전체 회귀 5,109 tests, 18 skipped, failures/errors 0
 
-#### Measured Latency History
+#### Latest Controlled Measurement
 
-**2026-06-02 RELIC 기록 · 10회 실측 중앙값**
+**2026-08-27 Attempt 7 · llama.cpp Gemma 4 12B IQ4_XS + OmniVoice FlashInfer 0.6.15 · GPU0**
 
-- **첫 토큰:** EXAONE streaming SSE 첫 non-empty token까지 31ms
-- **첫 PCM:** OmniVoice streaming PCM 첫 audio chunk까지 618ms
-- **STT 후 TTS 첫 PCM:** STT 종료 후 Main 응답 완료와 TTS 첫 PCM까지 1.18s
+고정된 Bot API→Main→OmniVoice first-PCM 하네스에서 graph-off/on을 각각 warm n=200으로 측정했습니다.
 
-별도의 RELIC 이력에는 로컬 `turn_trace` voice turn 43개도 기록돼 있으며, 위 10회 실측과는 다른 표본입니다. 당시 원시 artifact와 hardware·warmup 조건은 현재 보존되지 않아, 이 값은 historical component/post-STT 기준선으로만 유지하고 현재 runtime이나 전체 음성 E2E와 직접 비교하지 않습니다.
+- **Warm answer-first-PCM p50:** 238.7ms → **201.85ms** (-36.85ms)
+- **Warm answer-first-PCM p95:** 260.7ms → **219.1ms** (-41.6ms)
+- **Warm answer-first-PCM p99:** 290.1ms → **239.8ms** (-50.3ms)
+- **Readiness 뒤 first-admitted p95:** 515.3ms → **467.0ms** (조건별 n=30, process-cold 아님)
+- **검증:** ABBA macro-block 20, paired p95 delta 95% CI [-45.7, -26.7]ms, 출력 fingerprint·문자 길이 일치 200 / 200, 오류·harness quality·안전·cache gate failure 0
 
-**2026-08-27 통제 하네스 · fixed Main→TTS-ready · 조건별 n=200**
-
-- **Warm first PCM p50:** graph-off 238.7ms → graph-on 201.85ms
-- **Warm first PCM p95:** graph-off 260.7ms → graph-on 219.1ms
-- **Output equivalence:** fingerprint·문자 길이 일치 200 / 200
-
-Production은 OFF였고 마이크, STT, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다.
+단일 고정 한국어 1문장 prompt와 concurrency 1 조건입니다. 200 / 200은 reply와 TTS 입력의 fingerprint·문자 길이 일치이며 semantic·청취 품질 평가는 아닙니다. Production은 OFF였고 마이크·STT, Control Page proxy/browser, Vision·Minecraft, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다. 따라서 전체 음성 E2E 지연이 아니라 고정된 post-STT core 경로의 결과입니다.
 
 #### Source Verification Snapshot
 
