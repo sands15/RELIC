@@ -99,8 +99,6 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 - **Readiness 뒤 first-admitted p95:** 515.3ms → **467.0ms** (조건별 n=30, process-cold 아님)
 - **검증:** ABBA macro-block 20, paired p95 delta 95% CI [-45.7, -26.7]ms, 출력 fingerprint·문자 길이 일치 200 / 200, 오류·harness quality·안전·cache gate failure 0
 
-단일 고정 한국어 1문장 prompt와 concurrency 1 조건입니다. 200 / 200은 reply와 TTS 입력의 fingerprint·문자 길이 일치이며 semantic·청취 품질 평가는 아닙니다. Production은 OFF였고 마이크·STT, Control Page proxy/browser, Vision·Minecraft, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다. 따라서 전체 음성 E2E 지연이 아니라 고정된 post-STT core 경로의 결과입니다.
-
 #### Source Verification Snapshot
 
 2026-09-03 현재 5,109 tests, 18 skipped, failures/errors 0입니다. 이 수치는 현재 소스와 자동화 검사의 상태이며 실제 Discord·마이크·스피커 전체 E2E나 production 완료를 뜻하지 않습니다.

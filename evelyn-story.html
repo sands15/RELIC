@@ -433,11 +433,6 @@
               <small>graph-off 290.1ms · -50.3ms</small>
             </div>
           </div>
-            <p class="note">
-              llama.cpp Gemma 4 12B IQ4_XS + OmniVoice FlashInfer 0.6.15, GPU0의 fixed Bot API→Main→OmniVoice first-PCM 결과입니다.
-              단일 고정 한국어 1문장 prompt와 concurrency 1에서 graph-off/on 각각 warm n=200, readiness 뒤 first-admitted 각 n=30의 p95 515.3→467.0ms, ABBA macro-block 20의 paired p95 delta 95% CI [-45.7, -26.7]ms였습니다.
-              출력 fingerprint·문자 길이는 200/200 일치했지만 semantic·청취 품질 평가는 아닙니다. Production은 OFF였으며 마이크·STT, Control Page proxy/browser, Vision·Minecraft, 스피커·Discord first-write와 실제 청취는 포함하지 않았습니다.
-            </p>
             <div class="tag-row">
               <span class="tag">Local-First</span>
               <span class="tag">Python / Docker</span>
