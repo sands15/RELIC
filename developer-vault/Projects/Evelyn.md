@@ -42,7 +42,7 @@ tags:
 - 2026-08-28 — 기본 OFF private archive의 단독 writer·보존·접근·삭제 경계를 구현하고 source/offline 회귀를 통과시켰다. 운영 완료는 아니다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-08-28)
 - 2026-09-01 — P1 task contract·기본 OFF private archive·사람 교정 기반 guidance를 복구 가능한 checkpoint로 고정하고 clean clone에서 source/offline 전체 회귀를 재현했다. live 서비스·장치 검증은 아니다. [[Daily/2026-09-01|기록]]
 - 2026-09-02 — 선택형 archive는 암호화 preflight에서 생성 전 fail-close했고, 복구 ledger 보존과 격리된 Markdown 기억의 저장·재시작 회상·삭제 후 비회상을 검증했다. 자동 파생 기억은 owner binding 부재로 fail-closed를 유지한다. [[Daily/2026-09-02|기록]]
-- 2026-09-03 — 현재 소스·검증·운영 경계를 다시 대조해 최상위 README와 공개 RELIC 포트폴리오·HTML CV·PDF CV를 최신화했다. 기존 latency 실측은 삭제하지 않고 2026-06 측정 당시 기준선과 2026-08 통제 하네스로 분리했으며, CI와 같은 전체 source/offline 회귀도 통과시켰다. 외부 서비스나 장치는 시작하지 않았고 공개 전 이력 검사를 거쳐 GitHub `main`에 비강제 fast-forward로 동기화했다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-09-03)
+- 2026-09-03 — 현재 소스·검증·운영 경계를 다시 대조해 최상위 README와 공개 RELIC 포트폴리오·HTML CV·PDF CV를 최신화했다. 기존 latency 실측 공개 기록은 삭제하지 않고 2026-06 historical 기록과 2026-08 통제 하네스로 분리했으며, CI와 같은 전체 source/offline 회귀도 통과시켰다. 외부 서비스나 장치는 시작하지 않았고 공개 전 이력 검사를 거쳐 GitHub `main`에 비강제 fast-forward로 동기화했다. [근거](obsidian://open?vault=docs&file=worklog%2F2026-09-03)
 - 2026-09-03 — 개인 Local Voice의 300ms soft endpoint와 추가 500ms reopen 설계를 동결했다. 취소를 rollback으로 취급하지 않고 side-effect-free 준비와 exact 승격을 분리했으며 구현·테스트·live 검증은 후속 범위다. [[Daily/2026-09-03|기록]]
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
