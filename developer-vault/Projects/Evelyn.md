@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-09-03
+last_reviewed: 2026-09-04
 tags:
   - dev/project
   - project/evelyn
@@ -47,6 +47,7 @@ tags:
 - 2026-09-03 — 단기 제품 목표를 단일 PC의 로컬 방송 MVP로 전환했다. 기존 Control Page·Live2D·Local TTS를 재사용한 비공개 OBS 녹화를 첫 checkpoint로 두고, 마이크·플랫폼 연동·공개 송출은 후속 검증과 별도 승인 범위로 분리했다. [[Daily/2026-09-03|기록]]
 - 2026-09-03 — 기본 OFF의 context-free local chatter와 사용자 선점·별도 speaker 권한을 구현하고 source/offline 전체 회귀를 통과했다. 실제 청취·상황 적합성·방송 준비는 검증하지 않았다. [[Daily/2026-09-03|기록]]
 - 2026-09-03 — 기존 Background Vision Watch scene을 local Control Page에만 안전하게 전달하도록 복구하고 source/offline 회귀를 통과했다. 실제 화면 품질과 chatter 상황 인식은 검증하지 않았다. [[Daily/2026-09-03|기록]]
+- 2026-09-04 — 기존 Mineflayer pathfinder의 command·stuck·fallback·terrain 보정과 이동 품질 gate를 source/offline으로 구현했다. Docker image와 Minecraft live terrain은 검증하지 않았다. [[Daily/2026-09-04|기록]]
 
 일일 기록은 이 노트의 백링크에서 찾고, 이 목록에는 대표 이정표만 유지한다.
 
@@ -68,6 +69,10 @@ tags:
 
 ## 다음 개인 체크포인트
 
+- 단기 제품 목표는 Minecraft 공동 탐험이다. P1-7의 동행·분담·생존 후 재합류 설계와 사용자 구조
+  부담을 포함한 수용 기준을 검토한다. 구현·live 실행은 별도 승인 대상이다. [[Daily/2026-09-04|기록]]
+- Mindcraft의 공유 canonical image와 격리 lifecycle gate를 통과했다. 전체 식량/action/fault gate를
+  별도로 닫고, P1-6 terrain live는 별도 승인된 disposable world에서 검증한다. [[Daily/2026-09-04|기록]]
 - 별도 승인된 실제 화면에서 watcher→local Control Page scene 품질과 갱신을 확인한다. chatter에는 writer owner와 local-private privacy를 고정한 뒤 연결하고, private 청취 뒤 Control Page·Live2D·TTS의 비공개 OBS 녹화로 진행한다. 공개 전에는 read-only overlay·privacy 경계·캐릭터와 복제 음성 사용권을 확인한다.
 - 기존 Markdown 기억을 기준으로 유지한다. 자동 파생 기억은 owner별 source binding과 exact turn purge를 함께 검증할 때만 다시 연다.
 - Local Voice soft endpoint는 capture/ASR와 prepare/promote/abort를 함께 구현·회귀한 뒤 별도 승인된 microphone에서만 활성화한다.
