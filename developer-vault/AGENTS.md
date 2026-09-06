@@ -12,6 +12,7 @@ This vault is the user's cross-project personal development record. Project repo
 - Promote an item to `Learnings/` or `Decisions/` only when it is durable beyond one task.
 - Reference the project source instead of copying project state or evidence.
 - Skip trivial questions, commands, retries, temporary errors, and work that produced no durable change.
+- Publish review or decision notes only after user confirmation. Markdown with `status: draft` or `confirmed: false` remains local-only and must not be linked from a published note.
 
 ## Privacy
 
