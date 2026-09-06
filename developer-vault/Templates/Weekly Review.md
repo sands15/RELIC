@@ -2,6 +2,7 @@
 type: weekly-review
 week: "{{date:GGGG-[W]WW}}"
 reviewed: "{{date:YYYY-MM-DD}}"
+status: draft
 visibility: public
 tags:
   - dev/review
@@ -24,6 +25,22 @@ tags:
 - 정확한 원본 링크가 있는 결과 수:
 - 뒤늦게 발견한 누락:
 - 기록 시간과 재탐색 절감 효과:
+
+## 협업 회의
+
+### Codex의 개선 약속
+
+- 근거를 바탕으로 합의한 행동
+
+### 사용자에게 필요한 지시·결정
+
+- 다음 작업에서 명확히 할 입력이나 선택
+
+### 유지·중단·변경 합의
+
+- 유지:
+- 중단:
+- 변경:
 
 ## 승격 또는 정리
 
