@@ -121,6 +121,52 @@ function Test-AllowedTrackedPath {
     )
 }
 
+function Test-UnconfirmedMarkdown {
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Content
+    )
+
+    $normalized = $Path.Replace('\', '/')
+    if ($normalized.StartsWith('developer-vault/Templates/', [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $false
+    }
+
+    $frontmatterMatch = [regex]::Match($Content, '(?s)\A---\r?\n(?<frontmatter>.*?)\r?\n---(?:\r?\n|$)')
+    if (-not $frontmatterMatch.Success) {
+        return $false
+    }
+
+    $frontmatter = $frontmatterMatch.Groups['frontmatter'].Value
+    return $frontmatter -match '(?im)^status:\s*draft\s*$' -or
+        $frontmatter -match '(?im)^confirmed:\s*false\s*$'
+}
+
+function Get-UnconfirmedMarkdownPaths {
+    foreach ($file in @(Get-ChildItem -LiteralPath $script:VaultRoot -Recurse -File -Filter '*.md')) {
+        if ($file.FullName -match '[\\/]\.(?:obsidian|trash)[\\/]') { continue }
+
+        $relative = 'developer-vault/' + $file.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
+        $content = [string](Get-Content -LiteralPath $file.FullName -Raw)
+        if (Test-UnconfirmedMarkdown -Path $relative -Content $content) {
+            $relative
+        }
+    }
+}
+
+function Get-SyncMarkdownPathspecs {
+    param([string[]]$UnconfirmedPaths = @(Get-UnconfirmedMarkdownPaths))
+
+    $pathspecs = [System.Collections.Generic.List[string]]::new()
+    foreach ($pathspec in $script:MarkdownPathspecs) {
+        $pathspecs.Add($pathspec)
+    }
+    foreach ($path in $UnconfirmedPaths) {
+        $pathspecs.Add(":(top,exclude,literal)$path")
+    }
+    return [string[]]$pathspecs
+}
+
 function Test-PublicVault {
     $errors = [System.Collections.Generic.List[string]]::new()
     $required = @('00_HOME.md', 'AGENTS.md', 'Projects\Evelyn.md', 'Templates\Daily.md')
@@ -133,10 +179,24 @@ function Test-PublicVault {
 
     $obsidianRoot = (Join-Path $script:VaultRoot '.obsidian') + '\'
     $trashRoot = (Join-Path $script:VaultRoot '.trash') + '\'
-    $markdownFiles = @(Get-ChildItem -LiteralPath $script:VaultRoot -Recurse -File -Filter '*.md' | Where-Object {
+    $allMarkdownFiles = @(Get-ChildItem -LiteralPath $script:VaultRoot -Recurse -File -Filter '*.md' | Where-Object {
         -not $_.FullName.StartsWith($obsidianRoot, [System.StringComparison]::OrdinalIgnoreCase) -and
         -not $_.FullName.StartsWith($trashRoot, [System.StringComparison]::OrdinalIgnoreCase)
     })
+    $markdownFiles = @($allMarkdownFiles | Where-Object {
+        $relative = 'developer-vault/' + $_.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
+        $content = [string](Get-Content -LiteralPath $_.FullName -Raw)
+        -not (Test-UnconfirmedMarkdown -Path $relative -Content $content)
+    })
+
+    foreach ($file in $allMarkdownFiles) {
+        $relative = $file.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
+        $content = [string](Get-Content -LiteralPath $file.FullName -Raw)
+        $blockedRule = Get-BlockedRule -Text $content
+        if ($blockedRule) {
+            $errors.Add("${relative}: blocked $blockedRule")
+        }
+    }
     $noteKeys = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
     foreach ($file in $markdownFiles) {
         $relative = $file.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
@@ -150,11 +210,6 @@ function Test-PublicVault {
         if ($relative -ne 'AGENTS.md' -and $content -notmatch '(?m)^visibility:\s*public\s*$') {
             $errors.Add("${relative}: missing visibility public")
         }
-        $blockedRule = Get-BlockedRule -Text $content
-        if ($blockedRule) {
-            $errors.Add("${relative}: blocked $blockedRule")
-        }
-
         foreach ($match in [regex]::Matches($content, '\[\[([^\]|#]+)')) {
             $target = $match.Groups[1].Value.Trim().Replace('\', '/')
             if ($target.EndsWith('.md', [System.StringComparison]::OrdinalIgnoreCase)) {
@@ -189,6 +244,9 @@ function Test-StagedVault {
             throw "Staged path is outside the public allowlist: $path"
         }
         $content = (@(Invoke-Git -Arguments @('show', ":$path")) -join "`n")
+        if (Test-UnconfirmedMarkdown -Path $path -Content $content) {
+            throw "Staged Markdown is not confirmed: $path"
+        }
         $blockedRule = Get-BlockedRule -Text $content
         if ($blockedRule) {
             throw "Staged file has blocked ${blockedRule}: $path"
@@ -209,16 +267,17 @@ function Test-OutgoingVault {
                 throw "Outgoing commit $commit contains a blocked path: $path"
             }
 
-            $objectName = "${commit}:$path"
-            & git -C $script:RepoRoot cat-file -e $objectName 2>$null
-            if ($LASTEXITCODE -ne 0) { continue }
-
             $treeEntry = @(Invoke-Git -Arguments @('ls-tree', $commit, '--', $path))
-            if ($treeEntry.Count -gt 0 -and $treeEntry[0] -match '^120000\s') {
+            if ($treeEntry.Count -eq 0) { continue }
+            if ($treeEntry[0] -match '^120000\s') {
                 throw "Outgoing commit $commit contains a symlink: $path"
             }
 
+            $objectName = "${commit}:$path"
             $content = (@(Invoke-Git -Arguments @('show', $objectName)) -join "`n")
+            if (Test-UnconfirmedMarkdown -Path $path -Content $content) {
+                throw "Outgoing commit $commit contains unconfirmed Markdown: $path"
+            }
             $blockedRule = Get-BlockedRule -Text $content
             if ($blockedRule) {
                 throw "Outgoing commit $commit has blocked $blockedRule in $path"
@@ -228,17 +287,25 @@ function Test-OutgoingVault {
 }
 
 function Get-VaultStatus {
-    return @(Invoke-Git -Arguments (@('-c', 'core.quotepath=false', 'status', '--porcelain=v1', '--untracked-files=all', '--') + $script:MarkdownPathspecs))
+    param([string[]]$Pathspecs = @(Get-SyncMarkdownPathspecs))
+
+    return @(Invoke-Git -Arguments (@('-c', 'core.quotepath=false', 'status', '--porcelain=v1', '--untracked-files=all', '--') + $Pathspecs))
 }
 
 function Get-MarkdownFingerprint {
-    $markdownStatus = @(@(Get-VaultStatus) | Where-Object { $_ -match '\.md"?$' })
+    $unconfirmedPaths = @(Get-UnconfirmedMarkdownPaths)
+    $pathspecs = @(Get-SyncMarkdownPathspecs -UnconfirmedPaths $unconfirmedPaths)
+    $markdownStatus = @(@(Get-VaultStatus -Pathspecs $pathspecs) | Where-Object { $_ -match '\.md"?$' })
     if ($markdownStatus.Count -eq 0) { return $null }
 
+    $unconfirmed = [System.Collections.Generic.HashSet[string]]::new($unconfirmedPaths, [System.StringComparer]::OrdinalIgnoreCase)
     $stamps = @(Get-ChildItem -LiteralPath $script:VaultRoot -Recurse -File -Filter '*.md' | Where-Object {
         $_.FullName -notmatch '[\\/]\.obsidian[\\/]' -and $_.FullName -notmatch '[\\/]\.trash[\\/]'
     } | ForEach-Object {
-        "$($_.FullName.Substring($script:VaultRoot.Length + 1))|$($_.Length)|$($_.LastWriteTimeUtc.Ticks)"
+        $relative = 'developer-vault/' + $_.FullName.Substring($script:VaultRoot.Length + 1).Replace('\', '/')
+        if (-not $unconfirmed.Contains($relative)) {
+            "$relative|$($_.Length)|$($_.LastWriteTimeUtc.Ticks)"
+        }
     })
     return ((@($markdownStatus | Sort-Object) + @($stamps | Sort-Object)) -join "`n")
 }
@@ -255,18 +322,18 @@ function Invoke-VaultSync {
     try {
         Test-GitContext
         Test-PublicVault
-        [void](Invoke-Git -Arguments (@('add', '-A', '--') + $script:MarkdownPathspecs))
+        $pathspecs = @(Get-SyncMarkdownPathspecs)
+        [void](Invoke-Git -Arguments (@('add', '-A', '--') + $pathspecs))
         Test-PublicVault
         Test-StagedVault
-        $pathspecs = $script:MarkdownPathspecs
         $unstagedAfterCheck = @(Invoke-Git -Arguments (@('diff', '--name-only', '--') + $pathspecs))
         if ($unstagedAfterCheck.Count -gt 0) {
             throw 'Markdown changed during validation; retry after the save finishes.'
         }
-        $staged = @(Invoke-Git -Arguments (@('diff', '--cached', '--name-only', '--') + $script:MarkdownPathspecs))
+        $staged = @(Invoke-Git -Arguments (@('diff', '--cached', '--name-only', '--') + $pathspecs))
         if ($staged.Count -gt 0) {
             $message = "docs: sync developer vault ($Reason) $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-            [void](Invoke-Git -Arguments (@('commit', '--only', '-m', $message, '--') + $script:MarkdownPathspecs))
+            [void](Invoke-Git -Arguments (@('commit', '--only', '-m', $message, '--') + $pathspecs))
         }
 
         $aheadOutput = @(Invoke-Git -Arguments @('rev-list', '--count', '@{upstream}..HEAD'))
@@ -283,6 +350,24 @@ function Invoke-VaultSync {
 }
 
 if ($SelfTest) {
+    $draftFrontmatter = "---`nstatus: draft`nvisibility: public`n---`n"
+    $unconfirmedFrontmatter = "---`nstatus: complete`nconfirmed: false`nvisibility: public`n---`n"
+    $confirmedFrontmatter = "---`nstatus: complete`nconfirmed: true`nvisibility: public`n---`n"
+    if (-not (Test-UnconfirmedMarkdown -Path 'developer-vault/Reviews/draft.md' -Content $draftFrontmatter)) {
+        throw 'Draft Markdown was not identified as unconfirmed.'
+    }
+    if (-not (Test-UnconfirmedMarkdown -Path 'developer-vault/Reviews/unconfirmed.md' -Content $unconfirmedFrontmatter)) {
+        throw 'Unconfirmed Markdown was not identified as unconfirmed.'
+    }
+    if (Test-UnconfirmedMarkdown -Path 'developer-vault/Reviews/confirmed.md' -Content $confirmedFrontmatter) {
+        throw 'Confirmed Markdown was identified as unconfirmed.'
+    }
+    if (Test-UnconfirmedMarkdown -Path 'developer-vault/Templates/Weekly Review.md' -Content $draftFrontmatter) {
+        throw 'A Markdown template was identified as an unconfirmed note.'
+    }
+    if (Test-UnconfirmedMarkdown -Path 'developer-vault/Reviews/prose.md' -Content "# Note`nstatus: draft`n") {
+        throw 'Draft text outside frontmatter was treated as note status.'
+    }
     if (Get-BlockedRule -Text '') {
         throw 'Empty Markdown was blocked.'
     }
