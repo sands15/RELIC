@@ -2,7 +2,7 @@
 type: home
 scope: personal-development
 visibility: public
-last_reviewed: 2026-09-06
+last_reviewed: 2026-09-07
 tags:
   - dev/home
 ---
@@ -24,7 +24,7 @@ tags:
 - [[Projects/Sephiria Preset Converter]]
 - [[Projects/Toss Trading Bot]]
 - [[Daily/2026-09-06|최근 Daily]]
-- [[Reviews/2026-W35|최근 확정 주간 회고]]
+- [[Reviews/2026-W36|최근 확정 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
 - `Daily/` — 의미 있는 결과가 생긴 날의 기록
@@ -37,7 +37,7 @@ tags:
 - 6월: [[Daily/2026-06-01|RELIC 정적 포트폴리오·Pages 배포]] · [[Daily/2026-06-09|memory graph·안전한 tool routing]] · [[Daily/2026-06-11|Turtle 전략·상태·backtest 기반]] · [[Daily/2026-06-12|read-only broker·paper loop]] · [[Daily/2026-06-14|momentum shadow·위험 한도]] · [[Daily/2026-06-15|TTS barge-in·거래 pilot 안전 경계]] · [[Daily/2026-06-23|runtime 분해·거래 monitoring]]
 - 7월: [[Daily/2026-07-12|거래 데이터·전략 안전 gate]] · [[Daily/2026-07-14|비정본 strategy·ops prototype]] · [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-23|Arcane Library 데이터팩·검증기]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
 - 8월: [[Daily/2026-08-01|Arcane recall·state repair]] · [[Daily/2026-08-09|Sephiria Optimizer·Preset Converter 기반]] · [[Daily/2026-08-11|Bambu support profile 자동화]] · [[Daily/2026-08-14|Preset Converter v1.0.3]] · [[Daily/2026-08-21|Optimizer v0.4.1 안전 적용]] · [[Daily/2026-08-24|Arcane final·Optimizer v0.4.3]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]] · [[Daily/2026-08-30|Mac paper simulation release]] · [[Daily/2026-08-31|Discord paper status 조회]] · [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]]
-- 9월: [[Daily/2026-09-01|Evelyn P1 기준선·기억 경계]] · [[Daily/2026-09-02|live 보안 preflight·복구 근거 보존]] · [[Daily/2026-09-03|Local Voice soft endpoint 설계]] · [[Daily/2026-09-04|Mindcraft source/offline 보완]] · [[Daily/2026-09-05|음성 비교·Docker·Main 성격]] · [[Daily/2026-09-06|실행 정책·행동 전환 진단]]
+- 9월: [[Daily/2026-09-01|Evelyn P1 기준선·기억 경계]] · [[Daily/2026-09-02|live 보안 preflight·복구 근거 보존]] · [[Daily/2026-09-03|Local Voice soft endpoint 설계]] · [[Daily/2026-09-04|Mindcraft source/offline 보완]] · [[Daily/2026-09-05|음성 비교·Docker·Main 성격]] · [[Daily/2026-09-06|실행 정책·행동 전환 진단]] · [[Reviews/2026-W36|W36]]
 
 검증 가능한 개발 결과가 있는 날짜와 주만 소급했으며, 빈 날이나 단순 대화·명령은 기록하지 않았다.
 
@@ -54,7 +54,7 @@ tags:
 - 이 Vault는 [sands15/RELIC](https://github.com/sands15/RELIC)의 `developer-vault/`에 공개된다.
 - 저장한 노트는 공개 정보로 취급하며 로컬 절대 경로와 비공개 자료를 적지 않는다.
 - 새 Markdown은 저장 후 자동 push하고, 매일 한 번 누락된 변경을 다시 확인한다.
-- 매주 일요일 16:00 KST에 Codex가 주간 회고를 작성한다.
+- 매주 일요일 16:00 KST에 Codex가 주간 개발 회의를 시작하고, 사용자 최종 확인 뒤 회고를 공개한다.
 
 ## 기록하지 않는 것
 
