@@ -3,6 +3,7 @@ type: weekly-review
 week: "{{date:GGGG-[W]WW}}"
 reviewed: "{{date:YYYY-MM-DD}}"
 status: draft
+confirmed: false
 visibility: public
 tags:
   - dev/review
@@ -49,3 +50,7 @@ tags:
 ## 다음 주 개인 초점
 
 - 가장 중요한 한 가지
+
+## 다음 주 공동 실험
+
+- 실험과 성공 기준
