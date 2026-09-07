@@ -23,7 +23,7 @@ tags:
 - [[Projects/Sephiria Optimizer]]
 - [[Projects/Sephiria Preset Converter]]
 - [[Projects/Toss Trading Bot]]
-- [[Daily/2026-09-06|최근 Daily]]
+- [[Daily/2026-09-07|최근 Daily]]
 - [[Reviews/2026-W36|최근 확정 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
