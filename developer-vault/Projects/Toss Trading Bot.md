@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Toss Trading Bot
-last_reviewed: 2026-09-01
+last_reviewed: 2026-09-08
 tags:
   - dev/project
   - project/toss-trading-bot
@@ -49,6 +49,7 @@ tags:
 - 2026-08-31: Mac 장전 실행에서 OAuth gzip 오류가 실제 `401 invalid_client`를 가리던 문제를 진단했다. gzip을 strict 처리하고 성공한 token을 loop에서 재사용하며 invalid client의 반복 network 재시도를 막은 release를 검증했지만, 인증 차단 해소 전에는 planner를 plan 0건 상태로 정지했다. 다음 병렬 실험은 새 cohort에서 서로 다른 두 종목·가상현금 50:50·한 WebSocket·분리 ledger로만 시작한다. [[Daily/2026-08-31|기록]]
 - 2026-09-01: 새 experiment 전용 고정 A/B paper cohort, 실제 계획 종목만 쓰는 news/stream, 레인별·합산 status를 구현했다. 장 종료 backup은 generation-fenced restore set, retention은 durable 삭제 ledger, watchdog은 alert별 durable ack로 보강했다. DB inode/schema/FK 선검증과 crash-safe log journal·raw companion까지 추가했으며 Mac 배포와 외부 smoke, 실주문은 하지 않고 기존 인증 차단을 유지했다. [[Daily/2026-09-01|기록]]
 - 2026-09-01: Mac을 Codex SSH 실행 호스트로 등록하고 장문 대화의 pagination 제한은 요약된 새 원격 세션으로 우회했다. clean 관리형 worktree가 작업 브랜치 exact SHA와 일치함을 검증했으며, 원격 명령 실행에는 로그인 셸 PATH의 `codex`와 `codex-code-mode-host`가 모두 필요함을 확인했다. 기존 Mac checkout과 실거래 상태는 변경하지 않았다.
+- 2026-09-08: 이름만 exact SHA였던 Mac release의 광범위한 CRLF 변형과 깨진 stream wrapper를 Git blob manifest로 찾아 별도 staging에서 복구했다. network-denied gate를 통과하고 원자 rollback 가능 경계를 보존한 release로 planner·Discord shadow를 재가동했으며, 시장 관측은 Toss 공인 IP 허용목록과 별도 stream client가 준비될 때까지 fail-closed다. 상세 근거는 프로젝트 `docs/development-log.md`에 둔다. [[Daily/2026-09-08|기록]]
 
 ## 재사용 가능한 배움
 
@@ -68,7 +69,9 @@ tags:
 - HTTP 오류 본문도 Content-Encoding을 먼저 처리해야 원래 status를 보존할 수 있다. OAuth client는 process loop에서 재사용하고 terminal `invalid_client`는 credential 교체·process 재시작 전까지 network 재시도하지 않는다.
 - Codex SSH 세션 생성 성공만으로 원격 실행 준비를 판단하지 않는다. 앱 번들의 CLI와 code-mode host를 로그인 셸 PATH에서 각각 검증하고, 관리형 worktree와 데스크톱 사이드바의 저장 프로젝트를 별개 상태로 확인한다.
 - 동일한 Codex 작업을 Mac 앱이 열어 `active writer`를 잡고 있으면 Windows/SSH의 전송·재개가 실패할 수 있으므로, 원격 재개 전에는 Mac 앱만 완전히 종료하고 Mac·Tailscale·SSH는 유지한다.
+- exact SHA 디렉터리 이름만 신뢰하지 않는다. Windows에서 Mac으로 release를 옮길 때는 tracked Git blob과 executable mode를 대조하고, shell wrapper의 LF와 실제 `zsh -n`을 cutover 전에 검증한다.
 
 ## 다음 체크포인트
 
+- Toss에 Mac의 현재 공인 egress IP를 허용하고 planner와 공유하지 않는 stream 전용 OAuth client를 Keychain에 저장한 뒤, 선택 종목 exact-topic ACK와 REST baseline을 검증한다.
 - live flag와 production dispatch는 닫은 채 protection/exit SLO·원자적 긴급 outbox, triggered stop-limit 전량 exit escalation, 전체 kill-point replay, authoritative halt/LULD source, production 승인 격리와 clean exact-SHA Mac no-egress 운영 증거를 순서대로 닫는다. 실제 pilot은 이 체크포인트와 분리해 별도 승인으로만 연다.
