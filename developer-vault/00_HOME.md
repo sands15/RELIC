@@ -2,7 +2,7 @@
 type: home
 scope: personal-development
 visibility: public
-last_reviewed: 2026-09-08
+last_reviewed: 2026-09-13
 tags:
   - dev/home
 ---
@@ -23,8 +23,8 @@ tags:
 - [[Projects/Sephiria Optimizer]]
 - [[Projects/Sephiria Preset Converter]]
 - [[Projects/Toss Trading Bot]]
-- [[Daily/2026-09-08|최근 Daily]]
-- [[Reviews/2026-W36|최근 확정 주간 회고]]
+- [[Daily/2026-09-13|최근 Daily]]
+- [[Reviews/2026-W37|최근 확정 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
 - `Daily/` — 의미 있는 결과가 생긴 날의 기록
@@ -38,6 +38,8 @@ tags:
 - 7월: [[Daily/2026-07-12|거래 데이터·전략 안전 gate]] · [[Daily/2026-07-14|비정본 strategy·ops prototype]] · [[Daily/2026-07-15|안정화·보안 기준선]] · [[Daily/2026-07-18|main.py 책임 분리]] · [[Daily/2026-07-23|Arcane Library 데이터팩·검증기]] · [[Daily/2026-07-29|Voice P0·기억 삭제 기반]] · [[Daily/2026-07-30|crash-safe 삭제·동의 경계]] · [[Daily/2026-07-31|내구적 연속성·readiness]]
 - 8월: [[Daily/2026-08-01|Arcane recall·state repair]] · [[Daily/2026-08-09|Sephiria Optimizer·Preset Converter 기반]] · [[Daily/2026-08-11|Bambu support profile 자동화]] · [[Daily/2026-08-14|Preset Converter v1.0.3]] · [[Daily/2026-08-21|Optimizer v0.4.1 안전 적용]] · [[Daily/2026-08-24|Arcane final·Optimizer v0.4.3]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]] · [[Daily/2026-08-30|Mac paper simulation release]] · [[Daily/2026-08-31|Discord paper status 조회]] · [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]]
 - 9월: [[Daily/2026-09-01|Evelyn P1 기준선·기억 경계]] · [[Daily/2026-09-02|live 보안 preflight·복구 근거 보존]] · [[Daily/2026-09-03|Local Voice soft endpoint 설계]] · [[Daily/2026-09-04|Mindcraft source/offline 보완]] · [[Daily/2026-09-05|음성 비교·Docker·Main 성격]] · [[Daily/2026-09-06|실행 정책·행동 전환 진단]] · [[Reviews/2026-W36|W36]]
+
+- 최근 확정 회의: [[Reviews/2026-W37|W37 — 의도 이해·중요한 빈칸 질문·Superpowers 유지]]
 
 검증 가능한 개발 결과가 있는 날짜와 주만 소급했으며, 빈 날이나 단순 대화·명령은 기록하지 않았다.
 
