@@ -1,2 +1,8 @@
 exclude:
+  - .wrangler
   - developer-vault
+  - docs
+  - tools
+  - tests
+  - auth
+  - papers/README.md

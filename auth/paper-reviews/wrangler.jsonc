@@ -1,0 +1,11 @@
+{
+  "name": "relic-paper-writer",
+  "main": ".build/worker.mjs",
+  "no_bundle": true,
+  "find_additional_modules": false,
+  "compatibility_date": "2026-10-04",
+  "workers_dev": true,
+  "vars": {"PUBLIC_ORIGIN": "https://relic-paper-writer.sands12.workers.dev", "GH_CLIENT_ID": "Iv23li66LRJxe6lCHnle"},
+  "assets": {"directory": ".build/public", "binding": "ASSETS", "html_handling": "none", "run_worker_first": ["/", "/auth/*", "/api/*"]},
+  "observability": {"enabled": false}
+}

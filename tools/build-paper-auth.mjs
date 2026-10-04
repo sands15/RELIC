@@ -1,0 +1,15 @@
+import {readFile,mkdir,writeFile,copyFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),out=path.join(repo,'auth/paper-reviews/.build'),publicDir=path.join(out,'public');
+await mkdir(path.join(publicDir,'assets'),{recursive:true});
+let bundle='';
+for(const filename of ['paper-review-model.js','paper-review-github.js'])bundle+='(function(){const module=undefined;\n'+await readFile(path.join(repo,'assets',filename),'utf8')+'\n})();\n';
+const entry=await readFile(path.join(repo,'auth/paper-reviews/worker.mjs'),'utf8');
+bundle+=entry.replace("import M from '../../assets/paper-review-model.js';","const M=globalThis.PaperReview;").replace("import G from '../../assets/paper-review-github.js';","const G=globalThis.PaperReviewGitHub;");
+await writeFile(path.join(out,'worker.mjs'),bundle);
+let html=await readFile(path.join(repo,'paper-review-write.html'),'utf8');
+html=html.replace(/<details id="token-auth">[\s\S]*?<\/details>/,'').replace(/href="index.html"/g,'href="https://sands15.github.io/RELIC/"').replace(/href="paper-reviews.html"/g,'href="https://sands15.github.io/RELIC/paper-reviews.html"');
+await writeFile(path.join(publicDir,'paper-review-write.html'),html);
+for(const filename of ['paper-review-model.js','paper-review-render.js','paper-reviews.js','paper-review-github.js','paper-review-session.js','paper-review-editor.js','paper-reviews.css'])await copyFile(path.join(repo,'assets',filename),path.join(publicDir,'assets',filename));
+console.log('PAPER_AUTH_BUILD_OK');

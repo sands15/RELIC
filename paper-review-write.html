@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' https://api.github.com https://sands15.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: http: data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>논문 리뷰 작성 | RELIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/paper-reviews.css">
+  <script src="assets/paper-review-model.js" defer></script><script src="assets/paper-review-render.js" defer></script><script src="assets/paper-reviews.js" defer></script><script src="assets/paper-review-github.js" defer></script><script src="assets/paper-review-session.js" defer></script><script src="assets/paper-review-editor.js" defer></script>
+</head>
+<body data-page="editor">
+  <a class="skip" href="#main">본문 바로가기</a>
+  <nav class="site-nav" aria-label="주요 메뉴"><div class="nav-inner"><a class="brand" href="index.html">RELIC</a><div class="nav-links"><a href="index.html">포트폴리오</a><a href="paper-reviews.html">논문 리뷰 목록</a></div></div></nav>
+  <main class="shell editor-shell" id="main">
+    <header class="page-heading"><div><h1 id="editor-title">논문 리뷰 작성</h1></div></header>
+    <section class="editor-panel github-auth" aria-labelledby="auth-title"><h2 id="auth-title">GitHub 로그인</h2><p id="auth-status" role="status">RELIC 소유자 계정으로 로그인하면 작성할 수 있습니다.</p><div id="auth-connect"><button id="login-github" type="button" class="button primary">GitHub으로 로그인</button>
+      <details id="token-auth"><summary>기존 토큰으로 연결</summary><label for="github-token">GitHub 토큰</label><div class="auth-input"><input id="github-token" type="password" autocomplete="off" spellcheck="false"><button id="connect-github" type="button" class="button">토큰 연결</button></div><p><a class="text-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">RELIC 전용 토큰 만들기 ↗</a>: 소유자 <strong>sands15</strong>, 저장소 <strong>RELIC만 선택</strong>, <strong>Contents: Read and write</strong>. 토큰은 이 페이지 동안만 사용합니다.</p></details>
+    </div><button id="disconnect-github" class="button small" type="button" hidden>로그아웃</button><button id="backup-auth" class="button small" type="button" hidden>작성 중인 초안 백업</button></section>
+    <div id="editor-message" class="notice" role="status" hidden></div>
+    <div class="editor-layout" hidden>
+      <div class="editor-main">
+        <div class="edit-tabs" role="tablist" aria-label="작성 및 미리보기"><button id="tab-write" role="tab" aria-controls="write-panel" aria-selected="true" type="button">작성하기</button><button id="tab-preview" role="tab" aria-controls="preview-panel" aria-selected="false" type="button">미리보기</button></div>
+        <form id="review-form" novalidate>
+          <div id="write-panel" role="tabpanel" aria-labelledby="tab-write">
+            <section class="editor-panel"><h2>리뷰 정보</h2>
+              <div class="field"><label for="title">리뷰 제목 <span aria-label="필수">*</span></label><input class="title-input" id="title" name="title" maxlength="2000" required aria-describedby="error-title"><p class="field-error" id="error-title"></p></div>
+              <div class="field"><label for="summary">한 줄 요약</label><textarea id="summary" name="summary" rows="2" maxlength="2000" aria-describedby="error-summary"></textarea><p class="field-error" id="error-summary"></p></div>
+              <div class="field-grid"><div class="field"><label for="category">카테고리</label><div class="category-input"><input id="category" name="category" list="category-options" maxlength="80" aria-describedby="category-hint error-category"><button id="add-category" class="button small" type="button">추가</button></div><datalist id="category-options"></datalist><p class="hint" id="category-hint">원하는 이름을 입력하고 추가하세요. 글이 없어도 목록에 표시됩니다.</p><p class="field-error" id="error-category"></p><p id="category-status" class="hint" role="status"></p></div><div class="field"><label for="tags">태그</label><input id="tags" name="tags" maxlength="2000" aria-describedby="tags-hint error-tags"><p class="hint" id="tags-hint">쉼표로 구분해 최대 20개를 입력합니다.</p><p class="field-error" id="error-tags"></p></div></div>
+            </section>
+            <section class="editor-panel"><h2>논문 정보</h2>
+              <div class="field"><label for="paperTitle">논문 제목 <span aria-label="필수">*</span></label><input id="paperTitle" name="paperTitle" maxlength="2000" required aria-describedby="error-paperTitle"><p class="field-error" id="error-paperTitle"></p></div>
+              <div class="field"><label for="authors">저자</label><input id="authors" name="authors" maxlength="2000" aria-describedby="error-authors"><p class="field-error" id="error-authors"></p></div>
+              <div class="field-grid"><div class="field"><label for="year">발표연도</label><input id="year" name="year" inputmode="numeric" maxlength="4" aria-describedby="error-year"><p class="field-error" id="error-year"></p></div><div class="field"><label for="venue">학회 / 저널</label><input id="venue" name="venue" maxlength="2000" aria-describedby="error-venue"><p class="field-error" id="error-venue"></p></div></div>
+              <div class="field"><label for="paperUrl">원문 / DOI 링크 <span aria-label="필수">*</span></label><input id="paperUrl" name="paperUrl" type="url" maxlength="2000" required aria-describedby="error-paperUrl"><p class="field-error" id="error-paperUrl"></p></div>
+              <div class="field"><label for="codeUrl">공개 코드 링크</label><input id="codeUrl" name="codeUrl" type="url" maxlength="2000" aria-describedby="error-codeUrl"><p class="field-error" id="error-codeUrl"></p></div>
+            </section>
+            <section class="editor-panel"><h2>리뷰 본문</h2>
+              <div class="toolbar" aria-label="본문 서식 삽입"><button type="button" data-format="heading">소제목</button><button type="button" data-format="bold"><strong>굵게</strong></button><button type="button" data-format="italic"><em>기울임</em></button><button type="button" data-format="list">목록</button><button type="button" data-format="quote">인용</button><button type="button" data-format="code">코드</button><button type="button" data-format="link">링크</button><button type="button" data-format="image">이미지</button><button type="button" data-format="table">표</button><button type="button" id="insert-template">리뷰 틀 넣기</button></div>
+              <div class="field"><label class="sr-only" for="body">리뷰 본문</label><textarea class="body-input" id="body" name="body" maxlength="200000" required aria-describedby="body-help error-body"></textarea><p class="field-error" id="error-body"></p><p class="hint" id="body-help">서식 버튼은 본문에 Markdown 표기를 넣습니다. 미리보기에서 결과를 확인하세요. 이미지에는 공개 이미지 주소를 사용합니다. 수식 표기는 텍스트로 보존됩니다.</p></div><div class="body-status"><span id="body-count">0자</span><span>원문 내용과 개인 의견을 구분해 작성하세요.</span></div>
+            </section>
+            <details class="editor-panel"><summary>대표 이미지 설정 (선택)</summary><div class="field" style="margin-top:18px"><label for="coverUrl">대표 이미지 주소</label><input id="coverUrl" name="coverUrl" type="url" maxlength="2000" aria-describedby="error-coverUrl"><p class="field-error" id="error-coverUrl"></p></div><div class="field"><label for="coverAlt">이미지 설명 / 출처</label><input id="coverAlt" name="coverAlt" maxlength="2000" aria-describedby="error-coverAlt"><p class="field-error" id="error-coverAlt"></p></div></details>
+          </div>
+          <div id="preview-panel" role="tabpanel" aria-labelledby="tab-preview" hidden><div class="preview-shell"><p class="eyebrow">미리보기 · 아직 공개되지 않은 초안</p><article id="editor-preview"></article></div></div>
+        </form>
+        <section id="publish-panel" class="publish-box" hidden aria-label="GitHub 공개 안내"><h2>공개할 파일이 준비됐습니다</h2><p>저장할 파일: <strong id="publish-filename" class="publish-file"></strong></p><ol><li>아래 버튼으로 리뷰 파일을 다운로드합니다.</li><li>GitHub에 로그인한 뒤 <strong>RELIC의 papers 폴더</strong>에 파일을 업로드합니다.</li><li>변경 내용을 확인하고 <strong>Commit changes</strong>로 반영합니다. 기존 글 수정은 같은 파일명으로 업로드하세요.</li><li>배포가 끝나면 리뷰 목록에서 확인합니다. 배포가 진행 중이면 몇 분 뒤 다시 확인하세요.</li></ol><p>업로드한 파일은 공개됩니다. 개인 메모나 비공개 자료가 포함되지 않았는지 확인하세요. 같은 글을 다른 기기에서 수정했다면 최신 파일과 변경 내용을 먼저 비교하세요.</p><div class="publish-actions"><button id="download-public" type="button" class="button primary">공개용 파일 다운로드</button> <a class="button" id="github-upload" href="https://github.com/sands15/RELIC/upload/main/papers" target="_blank" rel="noopener noreferrer">GitHub에 업로드 ↗</a> <a class="text-link" href="paper-reviews.html">목록에서 확인</a></div><p class="count-label">파일 다운로드만으로 공개되지는 않습니다. 최종 공개 권한은 GitHub 저장소 권한으로 확인됩니다.</p></section>
+      </div>
+      <aside class="editor-side" aria-label="초안 저장과 공개 준비">
+        <section><h2>저장과 공개</h2><button type="button" class="button primary" id="save-github">GitHub에 저장</button><button type="button" class="button" id="save-draft">임시저장</button><button type="button" class="button small" id="prepare-publish">파일로 공개 준비</button><p id="save-status" class="save-status" role="status" aria-live="polite">초안은 이 브라우저에만 저장됩니다.</p><div id="github-result" class="github-result" hidden><p id="github-save-status" role="status"></p><a id="github-saved-link" class="text-link" target="_blank" rel="noopener noreferrer">저장한 글 확인 ↗</a><a class="text-link" href="https://github.com/sands15/RELIC/actions/workflows/jekyll-gh-pages.yml" target="_blank" rel="noopener noreferrer">배포 진행 보기 ↗</a><button id="check-deployment" type="button" class="button small">사이트 반영 확인</button><a id="deployed-review-link" class="text-link" hidden>공개된 리뷰 보기 →</a></div></section>
+        <section><h2>내 초안</h2><label class="sr-only" for="draft-select">저장된 초안 선택</label><select id="draft-select" class="draft-select"><option value="">초안 선택</option></select><button type="button" class="button small" id="new-draft">새 리뷰 작성</button><button type="button" class="button small" id="backup-draft">초안 파일 백업</button><label for="import-draft" class="count-label">백업 / 공개 파일 가져오기</label><input type="file" id="import-draft" class="file-input" accept=".json,application/json"><p>다른 브라우저나 기기에서는 백업 파일로 이어서 작성할 수 있습니다.</p></section>
+        <section><h2>작성 순서</h2><ol><li>리뷰 제목과 논문 정보를 입력합니다.</li><li>본문을 작성하고 미리보기로 확인합니다.</li><li>GitHub에 저장합니다.</li><li>배포가 끝나면 공개 목록에 나타납니다.</li></ol><p>자동 임시저장은 입력을 멈추면 실행됩니다. 중요한 글은 파일로 백업하세요.</p><button id="load-github-latest" type="button" class="button small">GitHub 최신 글 가져오기</button><p>기존 글의 수정과 충돌하면 현재 입력을 백업한 후 최신 글을 가져오세요.</p></section>
+      </aside>
+    </div>
+    <noscript><p class="notice">작성 기능을 사용하려면 브라우저의 JavaScript를 켜 주세요.</p></noscript>
+  </main><footer class="site-footer">© 2026 RELIC. Paper reviews by 손정훈.</footer>
+</body></html>

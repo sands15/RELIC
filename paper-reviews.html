@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RELIC 논문 리뷰">
+  <title>논문 리뷰 | RELIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/paper-reviews.css">
+  <script src="assets/paper-review-model.js" defer></script><script src="assets/paper-review-render.js" defer></script><script src="assets/paper-reviews.js" defer></script>
+</head>
+<body data-page="list">
+  <a class="skip" href="#main">본문 바로가기</a>
+  <nav class="site-nav" aria-label="주요 메뉴"><div class="nav-inner"><a class="brand" href="index.html">RELIC</a><div class="nav-links"><a href="index.html">포트폴리오</a><a href="paper-reviews.html" aria-current="page">논문 리뷰</a></div><div class="nav-action"><a class="button small" href="paper-review-write.html">리뷰 작성</a></div></div></nav>
+  <main class="shell archive-shell" id="main">
+    <div class="list-layout">
+      <aside class="sidebar" aria-label="작성자와 논문 분야">
+        <div class="author-profile"><a class="author-name" href="index.html#about">손정훈</a><a class="author-link" href="https://github.com/sands15" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="author-link" href="index.html#contact">Contact ↗</a></div>
+        <h2>논문 리뷰</h2><div class="category-list" id="categories"><span class="count-label">분야 불러오는 중</span></div>
+      </aside>
+      <section aria-label="논문 리뷰 목록" class="archive-main">
+        <header class="page-heading"><div><h1>논문 리뷰</h1></div></header>
+        <div class="filters"><label class="search-wrap"><span class="sr-only">논문 리뷰 검색</span><input id="review-search" type="search" placeholder="검색" autocomplete="off"></label><label><span class="sr-only">리뷰 정렬</span><select class="sort-select" id="review-order"><option value="newest" selected>최신순</option><option value="oldest">오래된순</option></select></label></div>
+        <div class="results-bar"><span id="active-category">전체 논문 리뷰</span><span id="results-count" role="status" aria-live="polite">목록을 불러오는 중입니다.</span></div>
+        <div id="review-list" aria-busy="true"><p class="loading">리뷰를 불러오고 있습니다.</p></div>
+        <nav class="pagination" id="pagination" aria-label="리뷰 목록 페이지"></nav>
+        <noscript><p class="notice">목록을 보려면 브라우저의 JavaScript를 켜 주세요.</p></noscript>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">© 2026 RELIC. Paper reviews by 손정훈.</footer>
+</body></html>

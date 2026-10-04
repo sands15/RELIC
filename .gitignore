@@ -11,3 +11,10 @@ developer-vault/.obsidian/**
 !developer-vault/.obsidian/core-plugins.json
 !developer-vault/.obsidian/daily-notes.json
 !developer-vault/.obsidian/templates.json
+
+# Authentication build output and local secrets never belong in source or Pages.
+/.wrangler/
+auth/paper-reviews/.build/
+auth/paper-reviews/.wrangler/
+auth/paper-reviews/.dev.vars*
+auth/paper-reviews/.env*

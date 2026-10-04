@@ -35,8 +35,12 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Build paper review catalog
+        run: python3 tools/build-paper-reviews.py --source papers --output _site/papers/index.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
   # Deployment job
   deploy:
