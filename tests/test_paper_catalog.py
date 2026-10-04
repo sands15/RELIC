@@ -48,6 +48,17 @@ class CatalogTests(unittest.TestCase):
             self.module.build(root/'papers',root/'index.json')
             self.assertEqual(json.loads((root/'index.json').read_text()),[])
 
+    def test_source_catalog_can_be_regenerated_before_static_site_copy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); out=root/'index.json'; out.write_text('[]',encoding='utf-8')
+            first=root/'a.json'; original=json.dumps(fixture('a')); first.write_text(original,encoding='utf-8')
+            self.module.build(root,out)
+            (root/'b.json').write_text(json.dumps(fixture('b',publishedAt='2026-09-01T00:00:00.000Z',updatedAt='2026-09-01T00:00:00.000Z')),encoding='utf-8')
+            self.module.build(root,out)
+            self.assertEqual([r['id'] for r in json.loads(out.read_text(encoding='utf-8'))],['b','a'])
+            self.assertEqual(first.read_text(encoding='utf-8'),original)
+            self.assertFalse(out.with_name('index.json.tmp').exists())
+
     def test_review_cannot_silently_occupy_reserved_catalog_path(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp); (root/'index.json').write_text(json.dumps(fixture('index')),encoding='utf-8')

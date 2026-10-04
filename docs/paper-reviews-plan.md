@@ -92,7 +92,7 @@ PC에서는 분야 탐색과 글 목록을 함께 배치하고, 모바일에서�
 
 일반 HTML/CSS/JavaScript, Python 및 Node 표준 기능을 사용한다. 선택한 Workers 작성·인증 구현을 추가하며 로컬 신규 패키지는 설치하지 않는다. 별도 설계/계획 파일을 추가하지 않는다.
 
-1. 읽기 경로: `index.html`의 진입 링크, `paper-reviews.html`, `paper-review.html?id=<고정 주소>`, `assets/paper-reviews.js`, `assets/paper-reviews.css`. 공개 원본은 `papers/<고정 주소>.json`이며 `tools/build-paper-reviews.py`가 배포 중 `_site/papers/index.json`을 생성한다. `.github/workflows/jekyll-gh-pages.yml`의 기존 Jekyll 공개 과정을 재사용한다. 원본과 목록을 이중 관리하지 않는다.
+1. 읽기 경로: `index.html`의 진입 링크, `paper-reviews.html`, `paper-review.html?id=<고정 주소>`, `assets/paper-reviews.js`, `assets/paper-reviews.css`. 공개 원본은 `papers/<고정 주소>.json`이며 `tools/build-paper-reviews.py`가 배포 작업본의 `papers/index.json`을 먼저 생성하고 Jekyll이 `_site/papers/index.json`으로 복사한다. 생성 목록을 저장소에 다시 commit하지 않는다. `.github/workflows/jekyll-gh-pages.yml`의 기존 Jekyll 공개 과정을 재사용한다. 원본과 목록을 이중 관리하지 않는다.
 2. 작성 경로: `paper-review-write.html`, `assets/paper-review-editor.js`, `assets/paper-review-model.js`, `assets/paper-review-render.js`. 공개 원본과 같은 필드를 사용해 임시저장, 복원, 검증, 미리보기, 공개 파일 생성, 기존 글 수정 입력을 연결한다. 초안은 리뷰별 브라우저 저장 키를 사용해 다른 글과 분리하며 저장 시 이전 버전을 비교한다. 원문 HTML과 위험 URL은 실행하지 않는다. 지원 서식은 소제목, 강조, 목록, 인용, 코드, 링크, 이미지/캡션, 표이며 수식은 텍스트로 보존한다.
 3. 통합 확인: 기존 포트폴리오 보존, 원본과 표시 결과의 대응, 목록·상세·작성 이동, 모바일 배치, 저장 오류 및 입력 보호를 검증한다. 구현하지 않은 읽기·작성·공개 단계를 완료로 표시하지 않는다. 초안 저장은 Web Locks의 같은 주소 잠금 안에서 읽기·버전 비교·쓰기를 수행한다. 한 화면의 중복 저장은 하나의 작업으로 합치며 최신 입력 저장 후 초안을 전환한다. 안전한 잠금을 제공하지 않는 환경은 파일 백업을 안내한다.
 
@@ -180,7 +180,13 @@ Windows의 공식 로컬 Workers 실행에서 미설정 ready 503, 작성 HTML 2
 
 2026-10-05 KST 사용자는 연결 작업을 계속 맡기겠다고 요청했다. 공식 서버 Secret 이름 조회에서 `GH_CLIENT_SECRET` 미설정을 확인했고, 사용 가능한 GitHub connector에는 앱 비밀키 발급 기능이 없었다. 브라우저 도구의 새 인증정보 인계 규칙을 유지하며 사용자에게 발급 버튼만 안내했다. 비밀값은 조회하지 않았다.
 
-기존 공개 승인 범위 안에서 독립적인 목록·상세·작성 페이지, RELIC 메뉴 링크, 검토한 인증 소스와 해당 검사/빌더만 main에 반영한다. 연결 주소는 빈 상태이며 실제 로그인 활성화는 서버 ready 후 별도 checkpoint로 남긴다. 변경되지 않은 최종 소스에 Node 41/41 및 Python 5/5 검사를 다시 실행해 PASS를 확인했다. 관련 없는 dirty 파일·초안·Vault draft·도구 캐시는 commit 대상에서 제외한다. 코드 commit/push, 실제 Pages build/deploy 및 운영 메뉴 확인은 아직 PENDING이다.
+기존 공개 승인 범위 안에서 독립적인 목록·상세·작성 페이지, RELIC 메뉴 링크, 검토한 인증 소스와 해당 검사/빌더만 main에 반영했다. 연결 주소는 빈 상태이며 실제 로그인 활성화는 서버 ready 후 별도 checkpoint로 남긴다. 변경되지 않은 최종 소스에 Node 41/41 및 Python 5/5 검사를 다시 실행해 PASS를 확인했다. 표준 빌드·생성 Worker 문법·빈 공개 목록·diff 검사와 `PUBLIC_VAULT_CHECK_OK`도 통과했다.
+
+소스 commit `41ce794fbf4ffb148435c9ea84fbb54d7fbfdccc`의 명시한 31개 파일만 main에 commit/push 완료했다. 관련 없는 dirty 파일·초안·Vault draft·도구 캐시는 제외했다. 실제 Pages workflow run `37212587546`에서 Jekyll은 PASS였지만 다음 목록 단계가 `_site/papers/index.json.tmp` PermissionError로 FAIL했다. Docker 기반 Jekyll 출력 뒤 호스트 Python이 같은 폴더에 쓰는 경계가 원인이다. 목록을 먼저 호스트가 작업본 source에 생성한 후 Jekyll이 공개 출력으로 복사하도록 순서를 수리한다. 공개 필드 검증·최신순·원본 글·원자 교체를 유지한다.
+
+GitHub Pages의 실제 Source는 `Deploy from a branch/main/root`였다. 이 별도 경로의 run `37212587168`은 성공했으나 사용자 정의 목록 빌더를 실행하지 않으므로 실제 글을 저장하면 목록이 갱신되지 않을 수 있다. 실제 UI에서 Source를 GitHub Actions로 저장해 승인된 기존 `.github/workflows/jekyll-gh-pages.yml`의 목록 생성과 사이트 배포를 같은 경로로 묶었다. 새 서비스·권한·도메인을 추가하지 않고 기존 Jekyll/Pages와 공개 주소를 유지했다.
+
+Python source=output 재생성 회귀 포함 6/6 PASS, diff PASS. 같은 읽기 전용 검토자의 별도 CLI 반례에서 최신순·원본 글·불량 글 실패 시 기존 목록 바이트와 임시파일 부재를 확인했고, 생성→Jekyll→업로드와 실패 시 배포 차단·기존 권한/제외 경로를 확인했다. 중요 잔여 발견은 없었다. 실제 수정 workflow와 운영 결과 확인 전까지 전체 공개 반영 수용은 OPEN이다. branch 경로의 공개 메뉴→빈 목록·기본 최신순 및 목록/상세/작성/Story/PDF 200, 인증 소스 URL 404는 확인했다. 인증 활성화·실제 OAuth·글 쓰기는 아직 완료하지 않았다.
 
 ### 실제 Workers 작성·인증 서버 배포 checkpoint
 
