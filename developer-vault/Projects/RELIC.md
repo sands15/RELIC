@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: RELIC
-last_reviewed: 2026-08-29
+last_reviewed: 2026-10-04
 tags:
   - dev/project
   - project/relic
@@ -18,6 +18,14 @@ tags:
 - [GitHub 저장소](https://github.com/sands15/RELIC)
 - 포트폴리오 진입점: `index.html`
 - Vault 동기화 도구: `tools/Sync-DeveloperVault.ps1`
+- Vault 활용·기록 흐름과 검증 원본: `docs/developer-vault-workflow-plan.md`
+
+## 작업 전 회수
+
+- 기록 소유권·공개 범위는 아래 확정 결정을 확인한다. 검증 수준과 검사 정답 문제에는
+  [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]]를 적용한다.
+- 현재 동기화 상태·검증은 프로젝트 원본에서 확인한다. 아래 이정표는 당시 결과이며 현재 실행 상태를 보장하지 않는다.
+- 이 색인의 검토일은 탐색 연결의 검토일이다. 포트폴리오 변경이나 사용자 체감 검증 날짜로 사용하지 않는다.
 
 ## 대표 이정표
 

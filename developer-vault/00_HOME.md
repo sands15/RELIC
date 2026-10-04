@@ -23,7 +23,7 @@ tags:
 - [[Projects/Sephiria Optimizer]]
 - [[Projects/Sephiria Preset Converter]]
 - [[Projects/Toss Trading Bot]]
-- [[Daily/2026-09-13|최근 Daily]]
+- [[Daily/2026-10-04|최근 Daily]]
 - [[Reviews/2026-W40|최근 확정 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
@@ -45,17 +45,32 @@ tags:
 
 ## 기록 흐름
 
-1. 의미 있는 결과가 생긴 날에만 `Daily/`에 짧게 기록한다.
-2. 다른 프로젝트에서도 재사용할 수 있는 배움만 `Learnings/`로 분리한다.
-3. 오래 유지할 개인 작업 원칙만 `Decisions/`에 기록한다.
-4. 프로젝트 상세를 복사하지 않고 해당 프로젝트의 원본 문서에 연결한다.
-5. 같은 통찰을 Learning과 Decision 양쪽에 중복 승격하지 않는다.
+1. 작업 전에 해당 `Projects/` 색인에서 관련 배움·확정 회고를 찾아 읽는다. 현재 상태는 프로젝트 원본에서 확인한다.
+2. 이전 기록이 바꾼 판단·보존 조건·검사를 프로젝트의 기존 작업 기록에 연결한다. 읽기만 했으면 적용으로 세지 않는다.
+3. 검증된 checkpoint가 생기면 전체 작업이 끝나기 전이라도 발생일의 `Daily/`에 짧게 기록한다.
+4. 결과·적용한 배움·정확한 원본 절·검증 한계만 남긴다. 같은 원본 항목은 갱신하고 독립 결과는 보존한다.
+5. 다른 작업에서도 재사용될 배움이나 확정 결정만 기존 `Learnings/`·`Decisions/`에 연결한다. 중복 승격하지 않는다.
+
+## 작업 문제별 읽을 기록
+
+| 이번 작업의 문제 | 먼저 확인할 기존 기록 |
+| --- | --- |
+| 검사 정답·완료 주장·보존 조건 | [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]] |
+| 외부 행동·취소·중복 실행 | [[Learnings/External effects need exact ownership and receipts]] |
+| 긴 작업의 멈춤·응답 생존성 | [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]] |
+| 책임 분리·큰 파일 수정 | [[Learnings/Semantic boundaries over line count]] |
+| 프로젝트 문서와 개인 기록의 경계 | [[Decisions/2026-08-28-record-ownership]] |
+
+관련 항목만 읽고 적용 위치는 프로젝트 원본에 남긴다. 이 표는 모든 작업에서 전부 읽으라는 목록이 아니다.
+일일 기록과 색인의 과거 이정표를 현재 운영 상태나 아직 승인되지 않은 다음 작업으로 해석하지 않는다.
 
 ## 공개와 백업
 
 - 이 Vault는 [sands15/RELIC](https://github.com/sands15/RELIC)의 `developer-vault/`에 공개된다.
 - 저장한 노트는 공개 정보로 취급하며 로컬 절대 경로와 비공개 자료를 적지 않는다.
-- 새 Markdown은 저장 후 자동 push하고, 매일 한 번 누락된 변경을 다시 확인한다.
+- 기존 동기화는 공개 가능한 Markdown과 최신 Daily 홈 연결을 처리한다. 기록 내용 작성은 Codex의 checkpoint 작업이다.
+- `tools/Sync-DeveloperVault.ps1 -RefreshNavigation -Check`는 연결 갱신·공개 검사만 한다. 검사 통과와 실제 게시를 구분한다.
+- 미확정 초안은 로컬에 보존한다. 기존 감시 동기화와 매일 한 번의 동기화는 노트 내용을 자동 작성하지 않는다.
 - 매주 일요일 16:00 KST에 Codex가 주간 개발 회의를 시작하고, 사용자 최종 확인 뒤 회고를 공개한다.
 
 ## 기록하지 않는 것

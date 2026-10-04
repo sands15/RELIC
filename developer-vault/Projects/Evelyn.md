@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-09-04
+last_reviewed: 2026-10-04
 tags:
   - dev/project
   - project/evelyn
@@ -12,6 +12,14 @@ tags:
 # Evelyn
 
 > 개인 개발 이력의 색인이다. Evelyn의 현재 상태와 검증 근거의 원본이 아니다.
+
+## 작업 전 회수
+
+- 현재 초점·승인 범위는 아래 프로젝트 원본에서 확인한다. 이 페이지의 검토일은 색인 정리일이며 제품 검증일이 아니다.
+- 검사 정답·원인 수리·기존 동작 보존: [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]].
+- 외부 실행·취소 소유권: [[Learnings/External effects need exact ownership and receipts]].
+- 긴 I/O·프로세스 생존성: [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]].
+- 해당 작업에 필요한 기록만 읽고 실제 바뀐 판단·검사와 결과는 프로젝트의 기존 작업 기록에 연결한다.
 
 ## 프로젝트 원본
 
@@ -67,7 +75,9 @@ tags:
 - [[Decisions/2026-08-28-record-ownership]]
 - [[Decisions/2026-08-28-public-git-backup]]
 
-## 다음 개인 체크포인트
+## 2026-09-04 당시 개인 체크포인트
+
+아래는 당시 계획의 이력이다. 현재 우선순위·실행 승인으로 재사용하지 않으며 최신 프로젝트 원본을 따른다.
 
 - 단기 제품 목표는 Minecraft 공동 탐험이다. P1-7의 동행·분담·생존 후 재합류 설계와 사용자 구조
   부담을 포함한 수용 기준을 검토한다. 구현·live 실행은 별도 승인 대상이다. [[Daily/2026-09-04|기록]]
