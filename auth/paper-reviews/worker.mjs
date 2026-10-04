@@ -43,13 +43,17 @@ async function readBody(request){
   }catch{throw error('validation');}
 }
 export function createHandler({fetcher=globalThis.fetch.bind(globalThis),now=Date.now}={}){
-  const githubFetch=(url,options={})=>fetcher(url,{...options,headers:{...options.headers,'User-Agent':'RELIC-Paper-Reviews'}});
+  const githubFetch=(url,options={})=>fetcher(url,{...options,redirect:'manual',headers:{...options.headers,'User-Agent':'RELIC-Paper-Reviews'}});
   async function exchange(code,flow,env){
+    let stage='exchange-fetch';
     try{
-      const result=await fetcher('https://github.com/login/oauth/access_token',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({client_id:env.GH_CLIENT_ID,client_secret:env.GH_CLIENT_SECRET,code,code_verifier:flow.verifier,redirect_uri:env.PUBLIC_ORIGIN+'/auth/callback'}),redirect:'error',signal:AbortSignal.timeout(15000)});
-      if(!result.ok)throw error('auth');const raw=await result.text();if(raw.length>10000)throw error('auth');const token=JSON.parse(raw);
-      if(typeof token.access_token!=='string'||!token.access_token||token.access_token.length>512||/\s/.test(token.access_token)||token.token_type!=='bearer')throw error('auth');return token;
-    }catch{throw error('auth');}
+      const result=await githubFetch('https://github.com/login/oauth/access_token',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({client_id:env.GH_CLIENT_ID,client_secret:env.GH_CLIENT_SECRET,code,code_verifier:flow.verifier,redirect_uri:env.PUBLIC_ORIGIN+'/auth/callback'}),signal:AbortSignal.timeout(15000)});
+      stage='exchange-read';const raw=await result.text();if(raw.length>10000)throw error('exchange');stage=result.ok?'exchange-format':result.status>=500?'exchange-server':'exchange-http';const token=JSON.parse(raw);
+      const failures={incorrect_client_credentials:'credentials',redirect_uri_mismatch:'redirect',bad_verification_code:'code'};
+      if(token.error)throw error(failures[token.error]||'exchange');
+      if(!result.ok)throw error(stage);
+      if(typeof token.access_token!=='string'||!token.access_token||token.access_token.length>512||/\s/.test(token.access_token)||token.token_type!=='bearer')throw error('exchange');return token;
+    }catch(e){throw error(['credentials','redirect','code','exchange-server','exchange-http'].includes(e.code)?e.code:stage);}
   }
   return async function handle(request,env){
     const url=new URL(request.url),path=url.pathname;let config;
@@ -69,14 +73,17 @@ export function createHandler({fetcher=globalThis.fetch.bind(globalThis),now=Dat
         return response(null,302,[cookie(config.flow,await seal(flow,env,'oauth'),600,config.local),clears[1]],target.href);
       }
       if(path==='/auth/callback'&&request.method==='GET'){
+        let stage='flow';
         try{
           const time=now(),flow=await open(getCookie(request,config.flow),env,'oauth',time,MAX_FLOW);
+          stage='state';
           if(url.searchParams.get('error')||!url.searchParams.get('code')||flow.state!==url.searchParams.get('state'))throw error('auth');
-          const token=await exchange(url.searchParams.get('code'),flow,env),client=G.createClient(githubFetch);await client.connect(token.access_token);
+          stage='exchange';const token=await exchange(url.searchParams.get('code'),flow,env),client=G.createClient(githubFetch);
+          stage='identity';await client.connect(token.access_token);
           const expiresIn=typeof token.expires_in==='number'&&token.expires_in>0?Math.min(token.expires_in*1000,MAX_SESSION):MAX_SESSION;
           const data={origin:config.origin,issued:time,expires:time+expiresIn,token:token.access_token,csrf:nonce()};
-          return response(null,303,[cookie(config.flow,'',0,config.local),cookie(config.session,await seal(data,env,'session'),Math.floor(expiresIn/1000),config.local)],flow.returnTo);
-        }catch(e){return response(null,303,clears,'/paper-review-write.html?auth='+(e.code==='owner'?'owner':'denied'));}
+          stage='session';return response(null,303,[cookie(config.flow,'',0,config.local),cookie(config.session,await seal(data,env,'session'),Math.floor(expiresIn/1000),config.local)],flow.returnTo);
+        }catch(e){const reason=['credentials','redirect','code','exchange-server','exchange-http','exchange-fetch','exchange-read','exchange-format'].includes(e.code)?e.code:stage;return response(null,303,clears,'/paper-review-write.html?auth='+(e.code==='owner'?'owner':'denied')+'&reason='+reason);}
       }
       const session=await open(getCookie(request,config.session),env,'session',now(),MAX_SESSION);
       if(!session.token||!session.csrf)throw error('auth');

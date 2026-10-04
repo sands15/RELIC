@@ -4,13 +4,13 @@
 
 ## 최초 연결 순서
 
-작성·인증 서버는 `https://relic-paper-writer.sands12.workers.dev`에 배포했다. GitHub 앱도 RELIC 한 개에 설치했다. GitHub 비밀키 연결과 실제 로그인·공개 페이지 연결은 아직 확인 중이며 최신 근거는 `docs/paper-reviews-plan.md`에 둔다. 새 환경의 초기 설정은 아래 순서를 따른다.
+작성·인증 서버는 `https://relic-paper-writer.sands12.workers.dev`에 배포했다. GitHub 앱은 RELIC 한 개에 설치했고 서버 비밀키 설정, 실제 소유자 로그인·새로고침 유지·로그아웃을 확인했다. 공개 작성 연결 주소를 설정했으며 최종 Pages 반영 근거는 `docs/paper-reviews-plan.md`에 둔다. 이미 설정한 브라우저는 아래 최초 연결을 반복할 필요가 없다. 새 환경의 초기 설정은 아래 순서를 따른다.
 
 1. [Cloudflare 계정](https://dash.cloudflare.com/sign-up)을 만들고 Workers **Free** 요금제를 사용한다. 별도 도메인이나 유료 요금제를 선택하지 않는다.
 2. 저장소 루트에서 `node tools/build-paper-auth.mjs`로 공개 작성 파일과 서버 번들을 만든다. 공식 Workers 배포 도구에서 `auth/paper-reviews/wrangler.jsonc`를 사용한다. 빌드는 Node 표준 기능만 사용하며 설치나 배포를 수행하지 않는다. 실제 배포 도구가 없으면 공식 Wrangler 이용 범위를 먼저 확인한다.
 3. 발급된 Workers의 정확한 HTTPS 주소로 [GitHub App](https://github.com/settings/apps/new)을 등록한다. Homepage은 작성 주소, Callback URL은 `<작성 주소>/auth/callback`, Webhook은 비활성화, Repository Contents는 **Read and write**, 나머지 선택 권한은 추가하지 않는다. 사용자 토큰 만료 기본값을 유지한다. 개인 계정에만 설치할 앱으로 제한하고 설치 저장소는 **RELIC 한 개**를 선택한다. 권한 부여는 사용자가 GitHub 화면에서 직접 확인한다.
 4. Cloudflare 변수에 `PUBLIC_ORIGIN`(마지막 `/` 없는 HTTPS origin)과 `GH_CLIENT_ID`를 설정한다. **Secrets**에 `GH_CLIENT_SECRET`와 임의의 32바이트를 64자리 16진수로 만든 `SESSION_KEY`를 설정한다. 값을 대화/공개 파일/명령 인수/로그로 전달하지 않는다. 생산 설정에 `LOCAL_PREVIEW`를 넣지 않는다. 키를 교체하면 기존 로그인이 만료된다.
-5. 실제 `paper-review-auth.json`의 `writerOrigin`을 Workers origin으로 채운다. 이 공개 파일에는 주소만 넣으며 비밀정보는 넣지 않는다. 현재 값 `""`는 미연결 상태다. 설정 전에도 기존 작성 주소의 접힌 ‘기존 토큰으로 연결’ 경로는 유지된다. Workers 작성 화면에는 토큰 입력칸이 없다.
+5. 서버 ready와 실제 로그인을 확인한 뒤 `paper-review-auth.json`의 `writerOrigin`을 Workers origin으로 채운다. 이 공개 파일에는 주소만 넣으며 비밀정보는 넣지 않는다. 빈 값 `""`는 미연결 상태다. 설정 전에도 기존 작성 주소의 접힌 ‘기존 토큰으로 연결’ 경로는 유지된다. Workers 작성 화면에는 토큰 입력칸이 없다.
 6. 선택한 최종 소스를 반영하고 실제 GitHub 로그인, 재방문, 다른 계정 차단, 카테고리/글 저장과 GitHub 원본, Pages 목록·상세 내용을 확인한다. 확인용 공개 글이 필요하면 별도로 선택한다. GitHub 저장과 Pages 배포 완료는 구분한다.
 
 ## 기존 초안

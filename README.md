@@ -15,7 +15,7 @@ RELIC은 결과만 모아두는 포트폴리오가 아니라, AI와 개발을 �
 - **Description:** 아이디어를 실제로 동작하는 AI 서비스로 만드는 과정을 기록
 - **Intro Motion:** 화면 중앙의 `RELIC` 글자가 하나씩 나타난 뒤, 같은 중앙 위치의 풀스크린 Hero로 이어지는 네이비/골드 인트로
 - **Navigation:** About, Education, Skills, Projects, Experience, CV, Career, References, Contact
-- **논문 리뷰:** [별도 리뷰 목록](./paper-reviews.html)과 [작성 화면](./paper-review-write.html). 최신 리뷰순 목록, 카테고리·태그·제목 검색, 리뷰별 읽기와 작성·임시저장·미리보기를 제공한다. 작성은 GitHub 소유자 `sands15` 인증 후 가능하다. GitHub 로그인과 최대 8시간 유지의 Cloudflare Workers 구현을 준비했으며 [최초 연결](./auth/paper-reviews/README.md)은 아직 필요하다. 설정 전 기존 저장소 전용 토큰 연결도 유지한다. ‘GitHub에 저장’하면 기존 Pages 배포가 목록을 갱신한다. 기본 카테고리는 없으며 작성자가 직접 추가한다. 초안은 브라우저에만 보관되며 다른 기기에서는 파일 백업으로 가져온다. [저장 및 카테고리 안내](./papers/README.md).
+- **논문 리뷰:** [별도 리뷰 목록](./paper-reviews.html)과 [작성 화면](./paper-review-write.html). 최신 리뷰순 목록, 카테고리·태그·제목 검색, 리뷰별 읽기와 작성·임시저장·미리보기를 제공한다. GitHub 소유자 `sands15`만 작성하며 로그인은 같은 브라우저에서 최대 8시간 유지한다. [작성·인증 서비스](./auth/paper-reviews/README.md)는 Cloudflare Workers로 연결했다. ‘GitHub에 저장’하면 기존 Pages 배포가 목록을 갱신한다. 기본 카테고리는 없으며 작성자가 직접 추가한다. 초안은 브라우저에만 보관되며 다른 기기에서는 파일 백업으로 가져온다. [저장 및 카테고리 안내](./papers/README.md).
 
 ---
 

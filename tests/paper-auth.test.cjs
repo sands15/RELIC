@@ -70,6 +70,31 @@ test('unconfigured or mismatched origins fail closed without provider requests',
   assert.equal((await handler(new Request(origin+'/auth/login'),{})).status,503);
   assert.equal((await handler(new Request('https://wrong.example/auth/login'),env)).status,503);assert.equal(p.calls.length,0);
 });
+
+test('OAuth failure reports only a fixed reason without leaking provider details',async()=>{
+  const {createHandler}=await load(),p=provider();
+  for(const status of [200,400,401]){
+    const handler=createHandler({fetcher:async(url,options)=>url==='https://github.com/login/oauth/access_token'?Response.json({error:'incorrect_client_credentials',error_description:'synthetic-private-detail'},{status}):p.fetcher(url,options)});
+    const s=await signIn(handler);
+    assert.equal(s.done.headers.get('location'),'/paper-review-write.html?auth=denied&reason=credentials');
+    assert.ok(!s.done.headers.get('location').includes('synthetic-private-detail'));
+    assert.ok(s.done.headers.getSetCookie().every(value=>/Max-Age=0/.test(value)));
+  }
+});
+
+test('Workers GitHub transport never follows redirects for OAuth or repository requests',async()=>{
+  const {createHandler}=await load(),p=provider();
+  const handler=createHandler({fetcher:async(url,options)=>{
+    assert.equal(options.redirect,'manual');assert.equal(options.headers['User-Agent'],'RELIC-Paper-Reviews');
+    return p.fetcher(url,options);
+  }});
+  const s=await signIn(handler);assert.ok(s.cookie,'unsupported redirect mode must not block owner login');
+  assert.equal((await handler(new Request(origin+'/auth/session',{headers:{cookie:s.cookie}}),env)).status,200);
+  let calls=0;
+  const redirectHandler=createHandler({fetcher:async(url,options)=>{calls++;assert.equal(url,'https://github.com/login/oauth/access_token');assert.equal(options.redirect,'manual');return new Response('',{status:302,headers:{Location:'https://example.org/credential-trap'}});}});
+  const denied=await signIn(redirectHandler);assert.equal(denied.cookie,undefined);assert.equal(calls,1);
+  assert.ok(denied.done.headers.getSetCookie().every(value=>/Max-Age=0/.test(value)));
+});
 test('asset settings preserve html writer URLs and draft queries without clean-url redirects',async()=>{
   const {createHandler}=await load(),config=JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname,'../auth/paper-reviews/wrangler.jsonc'),'utf8'));
   const assets={fetch:async request=>config.assets.html_handling==='none'?new Response('<html>writer</html>'):Response.redirect(origin+'/paper-review-write',307)};
