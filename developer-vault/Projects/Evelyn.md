@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-10-05
+last_reviewed: 2026-10-11
 tags:
   - dev/project
   - project/evelyn
@@ -26,6 +26,8 @@ tags:
 - [Evelyn Project Home](obsidian://open?vault=docs&file=00_EVELYN_HOME) — `docs/00_EVELYN_HOME.md`
 - [현재 작업 문맥](obsidian://open?vault=docs&file=01_NOW) — `docs/01_NOW.md`
 - [사용자 정보 판단 데이터셋 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-05) — `docs/worklog/2026-10-05.md`의 `사용자 정보 판단 데이터셋`. 작성·오프라인 검증과 실제 학습·제품 수용을 구분한다. [[Daily/2026-10-05|일일 기록]]
+
+- [복합 정보 태그 첫 실험](obsidian://open?vault=docs&file=worklog%2F2026-10-11) — `docs/worklog/2026-10-11.md#복합-정보-요약과-laya-분류`. 입력·포맷 수리 검증과 실제29/40(72.5%) 품질 실패를 구분하며 저장·조회 연결/운영은 보류했다. [[Daily/2026-10-11|일일 기록]]
 
 ## 대표 이정표
 
