@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: RELIC
-last_reviewed: 2026-10-05
+last_reviewed: 2026-10-11
 tags:
   - dev/project
   - project/relic
@@ -25,6 +25,7 @@ tags:
 
 - 기록 소유권·공개 범위는 아래 확정 결정을 확인한다. 검증 수준과 검사 정답 문제에는
   [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]]를 적용한다.
+- 반복 중단·접근 전환·재개 판단은 [[Reviews/2026-W41]]에서 확인하고 다음 실제 승인 작업의 기존 기록에 근거를 남긴다. 대상 미선정이며 적용·효과 검증은 별도다.
 - 현재 동기화 상태·검증은 프로젝트 원본에서 확인한다. 아래 이정표는 당시 결과이며 현재 실행 상태를 보장하지 않는다.
 - 이 색인의 검토일은 탐색 연결의 검토일이다. 포트폴리오 변경이나 사용자 체감 검증 날짜로 사용하지 않는다.
 

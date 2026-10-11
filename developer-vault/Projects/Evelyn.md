@@ -17,6 +17,7 @@ tags:
 
 - 현재 초점·승인 범위는 아래 프로젝트 원본에서 확인한다. 이 페이지의 검토일은 색인 정리일이며 제품 검증일이 아니다.
 - 검사 정답·원인 수리·기존 동작 보존: [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]].
+- 반복 중단·접근 전환·재개 판단: [[Reviews/2026-W41]]. 다음 실제 승인 작업의 기존 기록에 적용·중단·전환 근거를 남긴다. 대상 미선정이며 적용·효과 검증은 별도다.
 - 외부 실행·취소 소유권: [[Learnings/External effects need exact ownership and receipts]].
 - 긴 I/O·프로세스 생존성: [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]].
 - 해당 작업에 필요한 기록만 읽고 실제 바뀐 판단·검사와 결과는 프로젝트의 기존 작업 기록에 연결한다.

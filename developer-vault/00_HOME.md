@@ -2,7 +2,7 @@
 type: home
 scope: personal-development
 visibility: public
-last_reviewed: 2026-10-04
+last_reviewed: 2026-10-11
 tags:
   - dev/home
 ---
@@ -24,7 +24,7 @@ tags:
 - [[Projects/Sephiria Preset Converter]]
 - [[Projects/Toss Trading Bot]]
 - [[Daily/2026-10-11|최근 Daily]]
-- [[Reviews/2026-W40|최근 확정 주간 회고]]
+- [[Reviews/2026-W41|최근 확정 주간 회고]]
 - [[Decisions/2026-08-28-record-ownership|기록 소유권 결정]]
 - [[Decisions/2026-08-28-public-git-backup|공개 Git 백업 결정]]
 - `Daily/` — 의미 있는 결과가 생긴 날의 기록
@@ -39,7 +39,7 @@ tags:
 - 8월: [[Daily/2026-08-01|Arcane recall·state repair]] · [[Daily/2026-08-09|Sephiria Optimizer·Preset Converter 기반]] · [[Daily/2026-08-11|Bambu support profile 자동화]] · [[Daily/2026-08-14|Preset Converter v1.0.3]] · [[Daily/2026-08-21|Optimizer v0.4.1 안전 적용]] · [[Daily/2026-08-24|Arcane final·Optimizer v0.4.3]] · [[Daily/2026-08-29|CMD형 Boss HP 모니터]] · [[Daily/2026-08-30|Mac paper simulation release]] · [[Daily/2026-08-31|Discord paper status 조회]] · [[Reviews/2026-W31|W31]] · [[Reviews/2026-W32|W32]] · [[Reviews/2026-W33|W33]] · [[Reviews/2026-W34|W34]] · [[Reviews/2026-W35|W35]]
 - 9월: [[Daily/2026-09-01|Evelyn P1 기준선·기억 경계]] · [[Daily/2026-09-02|live 보안 preflight·복구 근거 보존]] · [[Daily/2026-09-03|Local Voice soft endpoint 설계]] · [[Daily/2026-09-04|Mindcraft source/offline 보완]] · [[Daily/2026-09-05|음성 비교·Docker·Main 성격]] · [[Daily/2026-09-06|실행 정책·행동 전환 진단]] · [[Reviews/2026-W36|W36]]
 
-- 최근 확정 회의: [[Reviews/2026-W40|W40 — 원인 수리·독립 검증 기준·반복과 대기 감소·실제 작업 적용 추적]]
+- 최근 확정 회의: [[Reviews/2026-W41|W41 — 반복 중단·접근 전환·다음 실제 작업의 판단 근거 추적]]
 
 검증 가능한 개발 결과가 있는 날짜와 주만 소급했으며, 빈 날이나 단순 대화·명령은 기록하지 않았다.
 
@@ -56,6 +56,7 @@ tags:
 | 이번 작업의 문제 | 먼저 확인할 기존 기록 |
 | --- | --- |
 | 검사 정답·완료 주장·보존 조건 | [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]] |
+| 반복 중단·접근 전환·본 실험 재개 | [[Reviews/2026-W41]] |
 | 외부 행동·취소·중복 실행 | [[Learnings/External effects need exact ownership and receipts]] |
 | 긴 작업의 멈춤·응답 생존성 | [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]] |
 | 책임 분리·큰 파일 수정 | [[Learnings/Semantic boundaries over line count]] |
