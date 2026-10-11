@@ -32,6 +32,8 @@ tags:
 
 ## 대표 이정표
 
+- [원문 진단 합성 두 OS 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-11) — `docs/worklog/2026-10-11.md#raw-trace-windows-docker-synthetic-20261011`. native/공개 writer14경계·회귀69·고정 ABBA800 및 독립 검산 PASS, Docker 초기OFF 복구. 실제 모델/TTS·본인 대화/운영 수용은 별도이며 raw 기본OFF다. [[Daily/2026-10-11|일일 기록]]
+
 - 2026-04-16 — 저장소 기준선을 만들고 Discord 음성 응답을 OmniVoice 스트리밍 TTS로 연결했으며 봇 실행기와 모델 서버 흐름을 분리했다. 당시 live E2E를 재검증한 기록은 아니다. [[Daily/2026-04-16|기록]]
 - 2026-04-20 — 기억을 room·person·session 범위로 나누고 미완 질문과 약속을 후속 검색으로 이어가는 기반을 구현했다. 실제 대화·기억 내용은 기록하지 않았다. [[Daily/2026-04-20|기록]]
 - 2026-04-22 — 음성 작업을 세션·턴에 결박하고 stale 작업 취소, partial·committed STT, 화자 gate와 interruptible TTS 기반을 구현했다. [[Daily/2026-04-22|기록]]
