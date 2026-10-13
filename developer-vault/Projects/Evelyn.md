@@ -28,7 +28,7 @@ tags:
 - [현재 작업 문맥](obsidian://open?vault=docs&file=01_NOW) — `docs/01_NOW.md`
 - [사용자 정보 판단 데이터셋 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-05) — `docs/worklog/2026-10-05.md`의 `사용자 정보 판단 데이터셋`. 작성·오프라인 검증과 실제 학습·제품 수용을 구분한다. [[Daily/2026-10-05|일일 기록]]
 
-- [복합 정보 태그 개발 회귀](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-personal-tags-20261013`. 첫 특화학습의 미사용v2 22/40(55%)·85% FAIL은 보존한다. JSONL로 바꾼 같은 관측 개발40은 wire40/40·정확집합30/40(75%)로 여전히 품질 FAIL이며 저장·조회/운영은 보류한다. 다음은 남은10실패의 원문→요약→단일종류 선택 독립 분류다. 10-11 알려진4의 뒤늦은 확인은 원 발생일 source에 보완했다. [[Daily/2026-10-13|최근 일일 기록]] · [[Daily/2026-10-11|첫 실험 기록]]
+- [복합 정보 태그 개발 회귀](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-personal-tags-20261013`. 첫 특화학습의 미사용v2 22/40(55%)·85% FAIL은 보존한다. JSONL로 바꾼 같은 관측 개발40은 wire40/40·정확집합30/40(75%)로 여전히 품질 FAIL이며 저장·조회/운영은 보류한다. 다음은 동결한 기존 미사용 첫40의 독립 결과 확인과 남은 개발10실패의 원인 대조다. 첫 독립 평가 결과는 PENDING이다. 10-11 알려진4의 뒤늦은 확인은 원 발생일 source에 보완했다. [[Daily/2026-10-13|최근 일일 기록]] · [[Daily/2026-10-11|첫 실험 기록]]
 
 ## 대표 이정표
 
