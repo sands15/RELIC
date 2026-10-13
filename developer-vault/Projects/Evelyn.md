@@ -28,7 +28,7 @@ tags:
 - [현재 작업 문맥](obsidian://open?vault=docs&file=01_NOW) — `docs/01_NOW.md`
 - [사용자 정보 판단 데이터셋 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-05) — `docs/worklog/2026-10-05.md`의 `사용자 정보 판단 데이터셋`. 작성·오프라인 검증과 실제 학습·제품 수용을 구분한다. [[Daily/2026-10-05|일일 기록]]
 
-- [Laya 실제 텍스트 저장·조회 수용](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-live-activation-20261013`. 기존 원문 검증을 유지한 Laya ON, 실제 저장·재시작·문서 공급·답변/UI PASS. 후속 시작 경계 수리61회귀·정상 반영·native 응답·기존 정보 보존도 확인했다. 초기 실패1 원인은 미확정이며 현재 원격 환경에서 책상 물리음성 수용이 남았다. [[Daily/2026-10-13|검증 결과와 한계]]
+- [Laya 실제 텍스트 저장·조회 수용](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-live-activation-20261013`. 기존 원문 검증을 유지한 Laya ON, 실제 저장·재시작·문서 공급·답변/UI PASS. 후속 시작 경계 수리61회귀·정상 반영·native 응답·기존 정보 보존도 확인했다. 초기 실패1 원인은 미확정이며 현재 연결 해제 세션의 장치 가용성 때문에 실제 책상 음성 수용 목표는 BLOCKED다. [[Daily/2026-10-13|검증 결과와 한계]]
 
 - [다양한 상황600 첫 분류90%·앞선 저장조회 연결](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-expanded-evaluation-20261013` 및 `#laya-personal-tags-20261013`. 새600 최초응답540/600·JSON/보류/재시도0와 독립검산 PASS. 단일호칭68%·긴문장75.4%·과거78.9%의 약점이 남는다. 앞선 첫40 37/40·source47·실제 E4B/Laya 합성API6단계 PASS와 개발40 75%/첫실패는 보존한다. 기본OFF·추가학습/운영0이며 합성 분류가 사실성·운영 수용은 아니다. 후속 개선대상은 호칭/실명 구분과 요약 단위·문맥 보존이다. [[Daily/2026-10-13|최근 일일 기록]] · [[Daily/2026-10-11|첫 실험 기록]]
 
