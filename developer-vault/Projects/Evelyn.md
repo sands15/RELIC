@@ -28,7 +28,7 @@ tags:
 - [현재 작업 문맥](obsidian://open?vault=docs&file=01_NOW) — `docs/01_NOW.md`
 - [사용자 정보 판단 데이터셋 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-05) — `docs/worklog/2026-10-05.md`의 `사용자 정보 판단 데이터셋`. 작성·오프라인 검증과 실제 학습·제품 수용을 구분한다. [[Daily/2026-10-05|일일 기록]]
 
-- [복합 정보 태그·저장조회 연결 통과](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-personal-tags-20261013`. 첫 미사용40 정확집합37/40(92.5%)·원40회귀39/40, source 집중회귀47·실제 소유 E4B/Laya API6단계·모델회수/임시파일0·독립 검토 PASS. 개발40의30/40(75%)와 첫실패는 보존한다. Main HTTP stub이므로 실제 Main생성/실기기/운영 수용은 아니며 기본OFF·운영재시작0·추가학습0·원문 권한/600 유지. 다음 경계는 별도 운영 활성화와 실사용 수용이다. [[Daily/2026-10-13|최근 일일 기록]] · [[Daily/2026-10-11|첫 실험 기록]]
+- [다양한 상황600 첫 분류90%·앞선 저장조회 연결](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-expanded-evaluation-20261013` 및 `#laya-personal-tags-20261013`. 새600 최초응답540/600·JSON/보류/재시도0와 독립검산 PASS. 단일호칭68%·긴문장75.4%·과거78.9%의 약점이 남는다. 앞선 첫40 37/40·source47·실제 E4B/Laya 합성API6단계 PASS와 개발40 75%/첫실패는 보존한다. 기본OFF·추가학습/운영0이며 합성 분류가 사실성·운영 수용은 아니다. 후속 개선대상은 호칭/실명 구분과 요약 단위·문맥 보존이다. [[Daily/2026-10-13|최근 일일 기록]] · [[Daily/2026-10-11|첫 실험 기록]]
 
 ## 대표 이정표
 
