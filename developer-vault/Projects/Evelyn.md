@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-16
 tags:
   - dev/project
   - project/evelyn
@@ -26,7 +26,7 @@ tags:
 
 - [Evelyn Project Home](obsidian://open?vault=docs&file=00_EVELYN_HOME) — `docs/00_EVELYN_HOME.md`
 - [현재 작업 문맥](obsidian://open?vault=docs&file=01_NOW) — `docs/01_NOW.md`
-- [자체 Minecraft 확장 제어](obsidian://open?vault=docs&file=worklog%2F2026-10-14) — `docs/worklog/2026-10-14.md#minecraft-vanilla-p5-20261014`. 점프·계단·물 이동·지정대상 전투의 소스/합성 수용과 실제 계정/서버 미검증을 구분한다. 다음은 앱 접근 승인 근거 뒤 시험 서버 수용이다. [[Daily/2026-10-14|검증 결과와 한계]]
+- [자체 Minecraft 확장 제어](obsidian://open?vault=docs&file=worklog%2F2026-10-14) — `docs/worklog/2026-10-14.md#minecraft-vanilla-p5-20261014`. 점프·계단·물 이동·지정대상 전투의 소스/합성 수용과 실제 계정/서버 미검증을 구분한다. [10-16 실제 인증·프로필 조회1회](obsidian://open?vault=docs&file=worklog%2F2026-10-16)에서 현재 API 접근 허용을 확인했다. 원본은 `docs/worklog/2026-10-16.md#minecraft-api-auth-recheck-20261016`이며 심사 메일/내부 행정 상태는 미확인이다. 다음은 별도 범위의 시험 서버 수용이다. [[Daily/2026-10-14|검증 결과와 한계]]
 - [사용자 정보 판단 데이터셋 검증](obsidian://open?vault=docs&file=worklog%2F2026-10-05) — `docs/worklog/2026-10-05.md`의 `사용자 정보 판단 데이터셋`. 작성·오프라인 검증과 실제 학습·제품 수용을 구분한다. [[Daily/2026-10-05|일일 기록]]
 
 - [Laya 실제 텍스트 저장·조회 수용](obsidian://open?vault=docs&file=worklog%2F2026-10-13) — `docs/worklog/2026-10-13.md#laya-live-activation-20261013`. 원문 검증을 유지한 실제 저장·문서 공급·답변/UI와 후속 공동 표시 권한 수리172검사·정상 반영·API 재시작 대화 복원·기존 정보/설정 보존 PASS. 다른 작업의 후보 수용과 합산하지 않는다. 후속 물리 정보 저장·사용자 정상 청취를 확인하고 음성 재조회 기억 위치·재시작 환경을 수리해 운영 기동을 확인했다. 승인된 구 실행본 제거와 현재 기억/장치/서비스 보존도 통과했다. 일반 시작·최종12서비스/기억8 보존과 복구 미리보기·API 복구는 확인했다. 마지막 UI 확인은 도구 제한으로 미검증이며 선택 출력 부재로 수정 후 물리 재조회·청취와 장기 안정성은 남는다. [후속 원본](obsidian://open?vault=docs&file=worklog%2F2026-10-14) `docs/worklog/2026-10-14.md#laya-output-os-boundary-20261014`에서 Windows 끝점 부재와 관리자 실행 한계를 구별했다. [[Daily/2026-10-14|후속 진단]] 10:23 재개 뒤 파일8항목 내용 보존을 확인했으나 새3턴의 원격 환경 차단으로10:36 Goal BLOCKED다. 실제 음성은 지정 책상 출력과 총괄 실행 자원 조율 뒤 재개한다. [[Daily/2026-10-13|검증 결과와 한계]]
