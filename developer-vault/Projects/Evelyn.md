@@ -17,7 +17,7 @@ tags:
 
 - 현재 초점·승인 범위는 아래 프로젝트 원본에서 확인한다. 이 페이지의 검토일은 색인 정리일이며 제품 검증일이 아니다.
 - 검사 정답·원인 수리·기존 동작 보존: [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]].
-- 검증 보호장치의 실제 적용과 병합 게이트: [main 작업 원본](https://github.com/sands15/Evelyn_Bot/blob/main/docs/worklog/2026-10-19.md#verification-safeguards-remote), [[Daily/2026-10-19]]. 사용자 명시 승인 뒤 main `f283ba52`에 병합했고 기존92커밋은 제외했다. 자동 push CI39156368994에서 전체5,146개 실패0·오류0·기존 POSIX skip1, 보호장치35개 PASS와 자동 결과 보관, 최초 실패3묶음의 바이트 보존을 확인했다. 첫 통합 후 승인된 잔여 수리에서는 모델·가중치를 유지한 root 보안 백포트와 실제 Linux fsync1/PASS/skip0을 확인했다. 기존 유보4ID는 별도다. 첫 CI의 Linux import 경로와 예전 감사 계약2검사를 수리한 후보9d366925의 전체 CI를 확인 중이며 다음은 실제 Linux 보안33/skip0과 전체 회귀 통과 뒤 main 자동 적용이다. 실장치/운영 수용은 별도다.
+- 검증 보호장치의 실제 적용과 병합 게이트: [main 작업 원본](https://github.com/sands15/Evelyn_Bot/blob/main/docs/worklog/2026-10-19.md#verification-safeguards-remote), [[Daily/2026-10-19]]. 사용자 명시 승인 뒤 main `f283ba52`에 병합했고 기존92커밋은 제외했다. 자동 push CI39156368994에서 전체5,146개 실패0·오류0·기존 POSIX skip1, 보호장치35개 PASS와 자동 결과 보관, 최초 실패3묶음의 바이트 보존을 확인했다. 첫 통합 후 승인된 잔여 수리에서는 모델·가중치를 유지한 root 보안 백포트와 실제 Linux fsync1/PASS/skip0을 확인했다. 기존 유보4ID는 별도다. 첫 CI의 Linux import 경로와 예전 감사 계약2검사를 수리한 후보9d366925에서 실제 Linux 보안33/PASS/skip0과 POSIX1/PASS/skip0을 확인했다. 다음은 Windows 전체 회귀 통과 뒤 main 자동 적용이다. 실장치/운영 수용은 별도다.
 - 반복 중단·접근 전환·재개 판단: [[Reviews/2026-W41]]. Laya 실제 대화 작업에서 원인 경계를 구별하고 최근 대화 정답과 실제 저장 문서 공급을 분리해 검증했다. 적용 근거는 `docs/worklog/2026-10-13.md#laya-live-activation-20261013`; 작업 시간 단축·장기 사용자 경험 개선은 별도 미검증이다.
 - 외부 실행·취소 소유권: [[Learnings/External effects need exact ownership and receipts]].
 - 긴 I/O·프로세스 생존성: [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]].
