@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-10-16
+last_reviewed: 2026-10-19
 tags:
   - dev/project
   - project/evelyn
@@ -17,6 +17,7 @@ tags:
 
 - 현재 초점·승인 범위는 아래 프로젝트 원본에서 확인한다. 이 페이지의 검토일은 색인 정리일이며 제품 검증일이 아니다.
 - 검사 정답·원인 수리·기존 동작 보존: [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]].
+- 검증 보호장치의 실제 적용과 병합 보류: [분리 브랜치 원본](https://github.com/sands15/Evelyn_Bot/blob/codex/verification-safeguards/docs/worklog/2026-10-19.md#verification-safeguards-remote), [[Daily/2026-10-19]]. 실제 오답 거부·최초 실패 보존은 검증됐지만 전체 회귀5,141개에서 실패60·오류8·skip1로 main 병합은 미완료다. 다음은 원본에 분리한 기존 시작 오류·CI 환경·fixture·미확정 실패의 인과 수리 범위 확인이며 운영 성공으로 세지 않는다.
 - 반복 중단·접근 전환·재개 판단: [[Reviews/2026-W41]]. Laya 실제 대화 작업에서 원인 경계를 구별하고 최근 대화 정답과 실제 저장 문서 공급을 분리해 검증했다. 적용 근거는 `docs/worklog/2026-10-13.md#laya-live-activation-20261013`; 작업 시간 단축·장기 사용자 경험 개선은 별도 미검증이다.
 - 외부 실행·취소 소유권: [[Learnings/External effects need exact ownership and receipts]].
 - 긴 I/O·프로세스 생존성: [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]].
