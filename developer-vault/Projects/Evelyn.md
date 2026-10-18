@@ -17,7 +17,7 @@ tags:
 
 - 현재 초점·승인 범위는 아래 프로젝트 원본에서 확인한다. 이 페이지의 검토일은 색인 정리일이며 제품 검증일이 아니다.
 - 검사 정답·원인 수리·기존 동작 보존: [[Reviews/2026-W40]], [[Learnings/Evidence scope is part of the result]].
-- 검증 보호장치의 실제 적용과 병합 게이트: [분리 브랜치 원본](https://github.com/sands15/Evelyn_Bot/blob/codex/verification-safeguards/docs/worklog/2026-10-19.md#verification-safeguards-remote), [[Daily/2026-10-19]]. 최종 코드 `40b5c92f`의 hosted 기능 회귀5,146개 실패0·오류0·기존 POSIX skip1, 보호장치35개 PASS이며 최초/후속 실패 원본3묶음을 보존했다. receipt `INCOMPLETE`·보안 감사14건 FAIL 상태의 main push는 자동 안전 검토가 차단해 미완료다. 다음은 명시적 위험 수용 병합 승인 또는 추가 보안/검사 범위 결정이며 운영 수용은 별도다.
+- 검증 보호장치의 실제 적용과 병합 게이트: [작업 원본](https://github.com/sands15/Evelyn_Bot/blob/codex/verification-safeguards/docs/worklog/2026-10-19.md#verification-safeguards-remote), [[Daily/2026-10-19]]. POSIX skip1과 보안 감사14건을 미해결로 남기는 사용자 명시 승인 뒤 main `f283ba52`에 병합했고 기존92커밋은 제외했다. 기존 CI39156368994가 main push로 자동 시작됐으며 최초/후속 실패3묶음의 바이트 보존도 확인했다. 다음은 자동 CI 결과·새 receipt 확인이며 실장치/운영 수용은 별도다.
 - 반복 중단·접근 전환·재개 판단: [[Reviews/2026-W41]]. Laya 실제 대화 작업에서 원인 경계를 구별하고 최근 대화 정답과 실제 저장 문서 공급을 분리해 검증했다. 적용 근거는 `docs/worklog/2026-10-13.md#laya-live-activation-20261013`; 작업 시간 단축·장기 사용자 경험 개선은 별도 미검증이다.
 - 외부 실행·취소 소유권: [[Learnings/External effects need exact ownership and receipts]].
 - 긴 I/O·프로세스 생존성: [[Learnings/Killable owners for long-running I-O]], [[Learnings/Transport liveness must drive process health]].
