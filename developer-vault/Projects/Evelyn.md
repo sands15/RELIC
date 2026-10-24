@@ -3,7 +3,7 @@ type: project-hub
 status: active
 visibility: public
 project: Evelyn
-last_reviewed: 2026-10-19
+last_reviewed: 2026-10-25
 tags:
   - dev/project
   - project/evelyn
