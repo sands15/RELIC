@@ -99,3 +99,4 @@ tags:
 - 기존 Markdown 기억을 기준으로 유지한다. 자동 파생 기억은 owner별 source binding과 exact turn purge를 함께 검증할 때만 다시 연다.
 - Local Voice soft endpoint는 capture/ASR와 prepare/promote/abort를 함께 구현·회귀한 뒤 별도 승인된 microphone에서만 활성화한다.
 - exact private archive·BitLocker·Discord/Qwen live 검증은 필요와 별도 승인이 명시될 때만 진행한다.
+- Evelyn Mind 재설계(마음 1개·몸 여럿·이벤트 중심) draft와 독립 패키지 0~1단계는 source/offline 53검사까지다. 2단계 이후는 확장 동결 재지정과 지연 계측 결과 뒤에만 연다. [[Daily/2026-10-29|기록]]
