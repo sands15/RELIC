@@ -25,6 +25,8 @@ tags:
 
 ## 프로젝트 원본
 
+- [전체 코드 리뷰 2026-10-31] — `docs/worklog/2026-10-31.md#code-review-20261031`, 결과 `docs/EVELYN_CODE_REVIEW_2026-10-31_KR.md`, [[Daily/2026-10-31]]. 읽기 전용·수리 0·source/offline(tests/mind 359 PASS, live NOT_RUN). P1 18건의 원인 묶음(옛 Bridge 필드 소비자, 마음 텍스트 대체의 부재 몸, 기억 삭제 보장 빈틈)과 소유자 결정 대기 항목(자동 기억 회상, 부팅 마이크 ON, 브라우저 자동 교체, Control Page 마음 상태 근사)이 다음 checkpoint다.
+
 - [Docker 공식 업데이트·기존 실행 경로 수리] — `docs/worklog/2026-10-27.md#docker-image-observation-repair-20261027`, [[Daily/2026-10-27]]. clean4aa281ce·관련66검사/독립검토·4.97 정상 재기동 및 최종 준비 함수 PASS, 원ASR ON/TTS·추가ASR OFF. 보존 사실과 설정 지문 일부 미확정은 원본을 따른다. 새 재설치·실험은 시작하지 않는다.
 
 - [Evelyn Project Home](obsidian://open?vault=docs&file=00_EVELYN_HOME) — `docs/00_EVELYN_HOME.md`
